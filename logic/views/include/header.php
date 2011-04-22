@@ -12,7 +12,8 @@
 		<!--[if IE]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<?= link_tag('assets/css/global.css'); ?>
 	</head>
 	<body>
 

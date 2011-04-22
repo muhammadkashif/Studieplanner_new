@@ -1,0 +1,103 @@
+/**
+	login.css
+*/
+
+#login_header
+{
+	height: 215px;
+	background-color: #000;
+	background-image: url('../images/login_bg.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#login_header #yellow
+{
+	width: 960px;
+	height: 3px;
+	margin: 0 auto;
+	background-color: #ff0;
+}
+
+#login_header #logo
+{
+	width: 360px;
+	margin: 80px auto 0 auto;	
+}
+
+#login_form {
+	width: 480px;
+	margin: -30px auto 0 auto;
+	background-color: #fff;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 0 0 5px #888;
+}
+
+div#login_form form
+{
+	width: 300px;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+
+div#login_form label
+{
+	display: block;
+	margin-bottom: 15px;
+	font-size: 1.6em;
+}
+
+div#login_form input[type="text"], div#login_form input[type="password"]
+{
+	border-radius: 8px;
+	border: 1px solid #BBB;
+	height: 10px;
+	width: 276px;
+	padding: 12px;
+	margin-bottom: 15px;
+	font-size: 1.3em;
+}
+
+div#login_form input[type="submit"]
+{
+	height: 40px;
+	width: 80px;
+	margin: 15px 0;
+	float: right;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 1.3em;
+	background: #333 repeat-x 0 50%;
+}
+
+div#login_form input[type="submit"]:hover
+{
+	cursor: pointer;
+}
+
+
+div#login_form input[type="text"]:focus, div#login_form input[type="password"]:focus, div#login_form input[type="submit"]:focus
+{
+	border: 1px solid #777;
+	outline: none;
+}
+
+div#login_form p.error
+{
+	margin-top: 17px;
+	font-size: 1.3em;
+	line-height: 1.3em;
+	display: none;
+}
+
+.loader
+{
+	display: none;
+	float: right;
+	margin: 25px 20px 0 0;
+}
