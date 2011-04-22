@@ -78,7 +78,16 @@
 			echo form_submit($data);
 		
 		?>
-		<img src="<?= base_url(); ?>assets/images/loader.gif" class="loader"/>
+		<?php
+		
+			$img_loader = array(
+							'src'	=>		'assets/images/loader.gif',
+							'alt'	=>		'AJAX Loader',
+							'class'	=>		'loader'
+						);
+			echo img($img_loader);
+			
+		?>
 	</p><!-- submit end -->
 	
 	<div style="clear: both">&nbsp;</div>
@@ -92,17 +101,25 @@
 <!-- ajax -->
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		$("#btnLogin").click(function(e)	{
-			$("p.error").hide();
+			
+			// init vars
 			var email = $("#email").val();
 			var password = $("#password").val();
+			
+			
+			$("p.error").hide();
 			$(".loader").show();
+			
+			
 			$.ajax({
 				type: "POST",
 				url: "/login/go",
 				data: ({email: email, password: password}),
 				success: function(data){
 					$(".loader").hide();
+					
 					if( ! data['status'])
 					{
 						$("p.error").html(data['error']);
@@ -114,7 +131,8 @@
 					}
 				}
 			});
-
+			
+			// prevent submit
 			e.preventDefault();
 		});
 	});
