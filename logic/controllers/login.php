@@ -53,7 +53,7 @@ class Login extends MY_Controller
 			$session_data = array(
 									'email'			=>		$this->input->post('email'),
 									'is_logged_in'	=>		TRUE,
-								//	'role'			=>		$this->db->get_where('tblUsers', array('email'=>$this->input->post('email')))->row()->role,
+									'role'			=>		$this->db->get_where('tblUsers', array('email'=>$this->input->post('email')))->row()->role,
 									'id'			=> 		$this->db->get_where('tblUsers', array('email'=>$this->input->post('email')))->row()->id
 							);
 			$this->session->set_userdata($session_data);
