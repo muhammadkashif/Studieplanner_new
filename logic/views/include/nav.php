@@ -25,8 +25,8 @@
 				<li <? if($page_title == "Informatie") {?>class="active"<? } ?>>
 					<a href="<?= $base_url; ?>student/informatie">Informatie</a>
 				</li>
-				<li <? if($page_title == "Berichten") {?>class="active"<? } ?>>
-					<a href="<?= $base_url; ?>student/berichten">Berichten</a>
+				<li>
+					<a href="<?= $base_url; ?>logout">Logout</a>
 				</li>
 			</ul>
 		</nav>
