@@ -5,19 +5,8 @@
 header#login_header
 {
 	height: 215px;
-	background-color: #000;
-	background-image: url('../images/login_bg.png');
-	background-repeat: no-repeat;
-	background-position: center;
 }
 
-header#login_header div#yellow
-{
-	width: 960px;
-	height: 3px;
-	margin: 0 auto;
-	background-color: #ff0;
-}
 
 header#login_header div#logo
 {

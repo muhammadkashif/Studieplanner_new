@@ -1,0 +1,84 @@
+header
+{
+	height: 130px;
+	background-color: #000;
+	background-image: url('../images/login_bg.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+header div#yellow
+{
+	width: 960px;
+	height: 3px;
+	margin: 0 auto;
+	background-color: #ff0;
+}
+
+div#container_h #logo
+{
+	float: left;
+	margin-top: 50px;
+}
+
+div#container_h
+{
+	width: 850px;
+	height: 130px;
+	margin: 0 auto;
+}
+
+nav
+{
+	width: 485px;
+	float: right;
+	margin-top: 57px;
+}
+
+nav	ul li
+{
+	display: block;
+	float: left;
+	height: 19px;				/* 26 (19+7padding-top) */
+	width: 103px;
+	margin-left: 15px;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	border: 1px solid #4a4a4b;
+	padding-top: 7px;
+}
+
+nav ul li a:link, nav ul li a:visited, nav ul li a:hover, nav ul li a:active
+{
+	color: #fff;
+}
+
+
+nav ul li:hover a, nav ul li:hover
+{
+	color: #000;
+	background-color: #ff0;
+	border: 1px solid #ff0;
+}
+
+nav .active
+{
+	background-color: #ff0;
+	border: 1px solid #ff0;
+}
+
+nav .active a:link, nav .active a:visited, nav .active a:hover, nav .active a:active
+{
+	color: #000 !important;
+}
+
+/** content */
+
+div#content
+{
+	width: 850px;
+	margin: -18px auto 0 auto;
+}
