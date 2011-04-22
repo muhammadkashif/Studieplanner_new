@@ -2,7 +2,7 @@
 	login.css
 */
 
-div#login_header
+header#login_header
 {
 	height: 215px;
 	background-color: #000;
@@ -11,7 +11,7 @@ div#login_header
 	background-position: center;
 }
 
-div#login_header div#yellow
+header#login_header div#yellow
 {
 	width: 960px;
 	height: 3px;
@@ -19,7 +19,7 @@ div#login_header div#yellow
 	background-color: #ff0;
 }
 
-div#login_header div#logo
+header#login_header div#logo
 {
 	width: 360px;
 	margin: 80px auto 0 auto;	
