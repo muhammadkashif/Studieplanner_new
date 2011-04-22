@@ -1,6 +1,6 @@
 <?php
 
-class Site extends CI_Controller
+class Site extends MY_Controller
 {
 	public function index()	
 	{	
