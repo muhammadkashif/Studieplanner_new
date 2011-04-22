@@ -75,10 +75,3 @@ nav .active a:link, nav .active a:visited, nav .active a:hover, nav .active a:ac
 	color: #000 !important;
 }
 
-/** content */
-
-div#content
-{
-	width: 850px;
-	margin: -18px auto 0 auto;
-}

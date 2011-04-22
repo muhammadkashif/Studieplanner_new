@@ -14,3 +14,10 @@ a:link, a:visited, a:hover, a:active
 	text-decoration: none;
 }
 
+/** content */
+
+div#content
+{
+	width: 850px;
+	margin: -18px auto 0 auto;
+}
