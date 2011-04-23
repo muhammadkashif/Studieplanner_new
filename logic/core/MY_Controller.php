@@ -26,8 +26,9 @@
 		{
 			$this->load->view('include/nav');
 		}
-        
+
 		$this->load->view($view, $data);
+
         $this->load->view('include/footer');
     }
 }

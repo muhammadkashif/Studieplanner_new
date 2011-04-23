@@ -1,0 +1,11 @@
+div#content div#overview_days
+{
+	height: 60px;
+	background-color: #f8f8f8;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 0 0 5px #888;
+}
