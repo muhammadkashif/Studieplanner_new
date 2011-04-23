@@ -9,7 +9,7 @@ header
 
 header div#yellow
 {
-	width: 960px;
+	width: 850px;
 	height: 3px;
 	margin: 0 auto;
 	background-color: #ff0;
@@ -23,7 +23,7 @@ div#container_h #logo
 
 div#container_h
 {
-	width: 960px;
+	width: 850px;
 	height: 130px;
 	margin: 0 auto;
 }
