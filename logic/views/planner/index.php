@@ -47,6 +47,12 @@
 					}
 				});
 			});
+			
+			$("#day_list li").live("click", function()	{
+				$(".selected").removeClass("selected");
+				var day = $(this).attr('value');
+				$(this).addClass('selected');
+			});
 		});
 
 	</script>

@@ -11,6 +11,13 @@ div#overview_days
 	height: 60px;
 }
 
+.selected
+{
+	font-weight: bold;
+	color: #000!important;
+	border: 1px solid #999!important;
+}
+
 div#overview_days p.month
 {
 	float: left;
