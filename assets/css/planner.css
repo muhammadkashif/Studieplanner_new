@@ -21,12 +21,14 @@ div#overview_days p.month
 
 #days_loader
 {
-	height: 11px; 
+	height: 9px; 
 	padding: 9px 0 0 9px;
+	display: none;
 }
 
 div#overview_days ul
 {
+	display: none;
 	margin: 0 auto;
 	padding-top: 8px;
 }
@@ -65,13 +67,25 @@ div#overview_days ul li
 	margin-left: 4px;
 	padding: 5px 0 0 0;
 	text-align: center;
-	width: 20px;
+	width: 20px;	
+}
+
+div#overview_days ul li.has_event
+{
+	background-image: url('../images/has_events.png');
+	background-repeat: no-repeat;
+	background-position: 85%;
 }
 
 div#overview_days ul li.today
 {
 	background-color: #ff0;	
 	font-weight: bold;
+}
+
+div#overview_days ul li.weekend
+{
+	background-color: #eee;
 }
 
 div#overview_days .month_selector
