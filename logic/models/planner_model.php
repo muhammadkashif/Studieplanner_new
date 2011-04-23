@@ -5,14 +5,15 @@ class Planner_model extends CI_Model
 	
 	public function create_date_list($month = '', $year = '')
 	{
-		// als er argumenten aan functie zijn meegegeven: deze gebruiken
-		if( ! empty($month) && ! empty($year))
+		// als er argumenten aan functie zijn meegegeven: deze gebruiken tenzij we in DEZE MAAND zijn, dan naar else want TODAY nodig.
+		if( ! empty($month) && ! empty($year) && ($month != date('n') || $year != date('Y')))
 		{
 			$data['init'] = array(
 							'current_month'			=>		$month,
 							'current_year'	 		=>		$year,
 							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, $month, $year)
 					);
+
 		}
 		// anders huidige maand/jaar/dag
 		else

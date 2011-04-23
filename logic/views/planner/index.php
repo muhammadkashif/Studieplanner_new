@@ -1,4 +1,4 @@
-<div id="content">
+<div id="dates_content">
 	<script type="text/javascript">
 	
 		$(document).ready(function()	{
@@ -43,7 +43,7 @@
 					data: { month: current_month, year: current_year },
 					success: function(data)
 					{
-						$("#content").html(data);
+						$("#dates_content").html(data);
 					}
 				});
 			});
@@ -91,3 +91,4 @@
 		
 	</div>
 </div>
+
