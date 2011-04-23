@@ -8,17 +8,25 @@ class Planner extends MY_Controller
 		parent::__construct();
 		$this->load->model('planner_model');
 		
+		
 	}
 	
-	public function index()
+	public function index($month = '', $year = '')
 	{
 		$init = $this->init->set();
 		
 		$this->load->view('include/header', $init);
 		$this->load->view('include/nav');
 		
-		$dates = $this->planner_model->create_date_list();
-
+		if( ! empty($month) && ! empty($year))
+		{
+			$dates = $this->planner_model->create_date_list($month, $year);
+		}
+		else
+		{
+			$dates = $this->planner_model->create_date_list();
+		}
+		$this->load->view('planner/days', $dates);
 	}
 
 }
