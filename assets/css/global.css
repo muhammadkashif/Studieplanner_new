@@ -2,7 +2,7 @@
 @import url('login.css');
 @import url('nav.css');
 @import url('planner.css');
-
+@import url('grid.css');
 body
 {
 	background-color: #e6e6e6;

@@ -124,3 +124,17 @@ div#overview_days .previous img, div#overview_days .next img
 {
 	padding: 7px;
 }
+
+div#detail_content
+{
+	background-color: #f8f8f8;
+	margin: 15px auto 0 auto;
+	height: 500px;
+	width: 850px;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	-moz-box-shadow: 0 0 5px #888;
+}

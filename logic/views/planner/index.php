@@ -91,4 +91,25 @@
 		
 	</div>
 </div>
+<div id="detail_content">
+	<div class="base">
+		<div class='grid'> 
+			<p>150px</p> 
+		</div>
+		<div class='grid'> 
+			<p>150px</p> 
+		</div>
+		<div class='grid'> 
+			<p>150px</p> 
+		</div>
+		<div class='grid'> 
+			<p>150px</p> 
+		</div>
+		<div class='grid'> 
+			<p>150px</p> 
+		</div>
+		<div class="clear">&nbsp;</div>
+	</div>
+	
+</div>
 
