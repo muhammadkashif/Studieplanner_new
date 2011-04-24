@@ -21,7 +21,8 @@ class Planner extends MY_Controller
 
 		$dates = $this->planner_model->create_date_list();
 
-		$this->load->view('planner/index', $dates);
+		$this->load->view('planner/dates_content', $dates);
+		$this->load->view('planner/detail_content');
 		
 		$this->load->view('include/footer');
 
