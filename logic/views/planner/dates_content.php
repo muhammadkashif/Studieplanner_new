@@ -24,6 +24,7 @@
 						current_month--;				
 					}
 				}
+				
 				if(event.target.id == "next")
 				{
 					if(current_month == 12)
@@ -36,7 +37,7 @@
 						current_month++;
 					}
 				}
-			
+				
 				$.ajax({
 					type: "POST",
 					url: "/planner/change_dates",
