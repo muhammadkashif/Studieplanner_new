@@ -35,7 +35,7 @@ class Planner extends MY_Controller
 		$year = $this->input->post('year');
 		$dates = $this->planner_model->create_date_list($month, $year);
 		
-	    $this->load->view('planner/index', $dates);
+	    $this->load->view('planner/dates_content', $dates);
 
 	}
 }
