@@ -1,13 +1,14 @@
 <div id="dates_content">
 	<script type="text/javascript">
-
+		var current_month;
+		var current_year;
 		$(document).ready(function()	{
 
 			$("#day_list").fadeIn(600);
 
 			// init
-			var current_month = <?= $init['current_month']; ?>;
-			var current_year = <?= $init['current_year'] ?>;
+		    current_month = <?= $init['current_month']; ?>;
+		    current_year = <?= $init['current_year'] ?>;
 		
 			// previous, next month ajax call
 			$(".previous, .next").click(function(event)	{
@@ -37,7 +38,6 @@
 						current_month++;
 					}
 				}
-				
 				$.ajax({
 					type: "POST",
 					url: "/planner/change_dates",
@@ -47,21 +47,6 @@
 						$("#dates_content").html(data);
 					}
 				});
-			});
-		
-			$("#day_list li").live("click", function()	{
-				$(".selected").removeClass("selected");
-				var day = $(this).attr('value');
-				$(this).addClass('selected');
-				$.ajax({
-					type: "POST",
-					url: "/planner/change_detail",
-					data: { day: day, month: current_month, year: current_year },
-					success: function(data)
-					{
-						$("#detail_content").html(data);
-					}
-				})
 			});
 		});
 
