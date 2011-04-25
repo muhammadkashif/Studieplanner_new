@@ -95,6 +95,18 @@ div#overview_days ul li.weekend
 	background-color: #eee;
 }
 
+div#overview_days ul li.past
+{
+	border: 1px solid #eee;
+	color: #ccc;
+}
+
+div#overview_days ul li.past:hover
+{
+	border: 1px solid #ccc;
+	color: #333;
+}
+
 div#overview_days .month_selector
 {
 	background-color: #ff0;	

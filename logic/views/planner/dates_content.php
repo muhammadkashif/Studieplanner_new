@@ -81,7 +81,8 @@
 				<li class="<?php 
 								echo $date['type']; 
 								if($date['event_count'] > 0) { echo " has_event"; }
-								if($date['selected'] == true) { echo " selected"; }
+								if($date['selected'] == true) { echo " selected "; }
+								echo " " . $date['frame'];
 							?>" value="<?= $day ?>"><?= $day; ?></li>
 			<?php endforeach; ?>
 		</ul>

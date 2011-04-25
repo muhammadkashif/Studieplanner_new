@@ -5,18 +5,16 @@ class Planner_model extends CI_Model
 	
 	public function create_date_list($day = '', $month = '', $year = '')
 	{
-		// als er argumenten aan functie zijn meegegeven: deze gebruiken tenzij we in DEZE MAAND zijn, dan naar else want TODAY nodig.
+		// als er argumenten aan functie zijn meegegeven: deze gebruiken 
 		if( ! empty($month) && ! empty($year))
 		{
 			$data['init'] = array(
-							'today'					=>		'',
+							'today'					=>		$day,
 							'current_month'			=>		$month,
 							'current_year'	 		=>		$year,
 							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, $month, $year)
 							
 					);
-		//	echo $data['init']['days_in_curr_month'];
-
 		}
 		else
 		{
@@ -27,11 +25,9 @@ class Planner_model extends CI_Model
 							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, date('n'), date('Y'))
 					);
 		}
-		if( ! empty($day))
-		{
-			$data['init']['today'] = $day;
-		}
+		
 
+		// naam vd huidige maand in $init steken
 		$data['init']['curr_month_name'] = $this->get_month_info($data['init']['current_month']);
 
 		// for loop: van 1 tot einde van de maand: array maken
@@ -43,6 +39,44 @@ class Planner_model extends CI_Model
 			// naam vd dag (zon, ma, ..)
 			$data['dates'][$i]['name'] = $day_info['day_name'];
 			
+			// past or future?
+			
+			if($data['init']['current_year'] > date('Y'))
+			{
+				$data['dates'][$i]['frame'] = 'future';
+			}
+			if($data['init']['current_year'] < date('Y'))
+			{
+				$data['dates'][$i]['frame'] = 'past';
+			}
+			if($data['init']['current_year'] == date('Y'))
+			{
+				if($data['init']['current_month'] < date('n'))
+				{
+					$data['dates'][$i]['frame'] = 'past';
+				}
+				if($data['init']['current_month'] > date('n'))
+				{
+					$data['dates'][$i]['frame'] = 'future';
+				}
+				if($data['init']['current_month'] == date('n'))
+				{
+					if($i < date('j'))
+					{
+						$data['dates'][$i]['frame'] = 'past';
+					}
+					if($i > date('j'))
+					{
+						$data['dates'][$i]['frame'] = 'future';
+					}
+					if($i == date('j'))
+					{
+						$data['dates'][$i]['frame'] = 'today';
+					}
+				}
+			}
+
+			
 			// today type uitzondering
 			if( ! empty($data['init']['today']) && $i == $data['init']['today'])
 			{
@@ -52,6 +86,7 @@ class Planner_model extends CI_Model
 			{
 				$data['dates'][$i]['type'] = $day_info['day_type'];
 			}
+
 			
 			// event info ophalen vanuit get_event_info($day, $month, $year);
 			$event_info = $this->get_event_info($i, $data['init']['current_month'], $data['init']['current_year']);
