@@ -6,6 +6,7 @@ class Planner extends MY_Controller
 	{
 		
 		parent::__construct();
+		$this->load->helper('form');
 		$this->load->model('planner_model');
 
 	}
@@ -23,7 +24,7 @@ class Planner extends MY_Controller
 
 		$this->load->view('planner/dates_content', $dates);		
 		$this->load->view('planner/detail_content', $dates);
-
+		
 		$this->load->view('include/footer', $dates);
 
 	}
