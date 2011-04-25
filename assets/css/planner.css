@@ -95,6 +95,11 @@ div#overview_days ul li.weekend
 	background-color: #eee;
 }
 
+div#overview_days ul li.future:hover
+{
+	border: 1px solid #aaa;
+}
+
 div#overview_days ul li.past
 {
 	border: 1px solid #eee;
@@ -153,7 +158,7 @@ div#detail_content
 
 p.detail_header
 {
-	padding: 10px 0 15px 0;
+	padding: 15px 0;
 	font-size: 1.2em;
 	font-weight: bold;
 }
@@ -167,6 +172,11 @@ div.event
 	border-radius: 4px;
 		-moz-border-radius: 4px;
 		-webkit-border-radius: 4px;
+}
+
+div.event:hover
+{
+	background-color: #ddd;
 }
 
 div.event p.event_title
