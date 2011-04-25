@@ -17,14 +17,13 @@ class Planner extends MY_Controller
 		
 		$this->load->view('include/header', $init);
 		$this->load->view('include/nav');
-		
 		// http://stackoverflow.com/questions/5770419/codeigniter-this-load-vars
 		$dates = $this->planner_model->create_date_list();
 
 		$this->load->view('planner/dates_content', $dates);		
 		$this->load->view('planner/detail_content', $dates);
 
-		$this->load->view('include/footer');
+		$this->load->view('include/footer', $dates);
 
 	}
 
@@ -43,6 +42,7 @@ class Planner extends MY_Controller
 		$day = $this->input->post('day');
 		$month = $this->input->post('month');
 		$year = $this->input->post('year');
+		
 		$dates = $this->planner_model->create_date_list($day, $month, $year);
 
 		$this->load->view('planner/detail_content', $dates);
