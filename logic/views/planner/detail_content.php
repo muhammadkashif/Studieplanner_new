@@ -29,6 +29,10 @@
 			$("#create_event").show();
 		});
 		
+	
+	   $("#datepicker").datepicker({ altField: 'input#date', altFormat: 'yy-mm-dd' });
+	
+		
 	});
 	</script>
 	<div id="create_event">
@@ -62,6 +66,10 @@
 				echo form_textarea($data);
 			?>
 		</p><!-- description end -->
+
+
+
+		<p>Date: <input type="text" id="datepicker"></p>
 		<?php
 			echo form_close();
 		?>
