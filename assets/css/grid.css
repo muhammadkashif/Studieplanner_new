@@ -13,7 +13,7 @@
 .base {
 	margin-left: auto;
 	margin-right: auto;
-	width: 850px;
+	width: 800px;
 }
 
 
@@ -28,5 +28,5 @@
 }
 
 .base .grid {
-	width:150px;
+	width:140px;
 }

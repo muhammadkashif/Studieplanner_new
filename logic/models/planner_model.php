@@ -136,6 +136,7 @@ class Planner_model extends CI_Model
 		$date = $year . "-" . $month . "-" . $day;
 		$this->db->where('date', $date);
 		$this->db->where('user_id', $this->session->userdata('id'));	
+		$this->db->order_by('time_start', 'asc');
 		$query = $this->db->get('tblEvents');
 		
 		$event_info = array();

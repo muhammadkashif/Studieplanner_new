@@ -4,15 +4,15 @@
 
 		foreach($details as $key => $detail)
 		{
+			$header = "<p class='detail_header'>" . ucfirst($dates[$key]['name']) . ", " . $key . " " . $init['curr_month_name'] . "</p>";
 			echo "<div class='grid'>";
-			echo $key . "<br />";
+			echo $header;
 			for($i = 1; $i <= $details[$key]['event_count']; $i++)
 			{
-				echo "<div>";
-				echo $details[$key][$i]['title'];
-				echo $details[$key][$i]['description'];
+				echo "<div class='event'>";
+					echo "<p class='event_title'>" . $details[$key][$i]['title'] . "</p>";
+					echo $details[$key][$i]['description'];
 				echo "</div>";
-				echo "<br />";
 			}
 			echo "</div>";
 			
