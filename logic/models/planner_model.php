@@ -3,15 +3,17 @@
 class Planner_model extends CI_Model
 {
 	
-	public function create_date_list($month = '', $year = '')
+	public function create_date_list($day = '', $month = '', $year = '')
 	{
 		// als er argumenten aan functie zijn meegegeven: deze gebruiken tenzij we in DEZE MAAND zijn, dan naar else want TODAY nodig.
 		if( ! empty($month) && ! empty($year) && ($month != date('n') || $year != date('Y')))
 		{
 			$data['init'] = array(
+							'today'					=>		'',
 							'current_month'			=>		$month,
 							'current_year'	 		=>		$year,
 							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, $month, $year)
+							
 					);
 
 		}
@@ -24,6 +26,11 @@ class Planner_model extends CI_Model
 							'current_year'	 		=>		date('Y'),
 							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, date('n'), date('Y'))
 					);
+		}
+		
+		if( ! empty($day))
+		{
+			$data['init']['today'] = $day;
 		}
 
 		$data['init']['curr_month_name'] = $this->get_month_info($data['init']['current_month']);
@@ -53,11 +60,49 @@ class Planner_model extends CI_Model
 			$data['dates'][$i]['events'] = $event_info;
 			// aantal events
 			$data['dates'][$i]['event_count'] = count($event_info);
+			
+			// selected logic
+			if($i == $data['init']['today'])
+			{
+				$data['dates'][$i]['selected'] = true;
+				$data['init']['selected'] = $i;
+			}
+			else
+			{
+				$data['dates'][$i]['selected'] = false;
+			}
+			
+		}
+		if(isset($data['init']['selected']))
+		{
+			$detail_info = $this->get_detail_info($data['init']['selected'], $data['init']['current_month'], $data['init']['current_year'], $data['init']['days_in_curr_month']);
+			$data['details'] = $detail_info;
 		}
 		
 		return $data;
 	}
 	
+	private function get_detail_info($day, $month, $year, $end_of_month)
+	{
+	
+		if($day + 4 > $end_of_month)
+		{
+			$end_day = $end_of_month;
+		}
+		else
+		{
+			$end_day = $day + 4;
+		}
+		
+		for($i = $day; $i <= $end_day; $i++)
+		{
+			$detail_info[$day] = $this->get_event_info($day, $month, $year);
+			$detail_info[$day]['event_count'] = count($detail_info[$day]);
+			$day++;
+		}
+
+		return $detail_info;
+	}
 	
 	private function get_day_info($day, $month, $year)
 	{
@@ -90,7 +135,7 @@ class Planner_model extends CI_Model
 		// dag maand jaar samenvoegen naar mysql date formaat
 		$date = $year . "-" . $month . "-" . $day;
 		$this->db->where('date', $date);
-		$this->db->where('user_id', '1');	
+		$this->db->where('user_id', $this->session->userdata('id'));	
 		$query = $this->db->get('tblEvents');
 		
 		$event_info = array();
@@ -101,6 +146,8 @@ class Planner_model extends CI_Model
 			
 			$event_info[$i]['title'] = $row->title;
 			$event_info[$i]['description'] = $row->description;
+			$event_info[$i]['time_start'] = $row->time_start;
+			$event_info[$i]['time_end'] = $row->time_end;
 			$i++;
 		
 		}

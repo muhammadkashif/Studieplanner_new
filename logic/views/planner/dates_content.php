@@ -53,6 +53,15 @@
 				$(".selected").removeClass("selected");
 				var day = $(this).attr('value');
 				$(this).addClass('selected');
+				$.ajax({
+					type: "POST",
+					url: "/planner/change_detail",
+					data: { day: day, month: current_month, year: current_year },
+					success: function(data)
+					{
+						$("#detail_content").html(data);
+					}
+				})
 			});
 		});
 
@@ -84,7 +93,11 @@
 				}
 				?>">
 			<?php foreach($dates as $day => $date): ?>
-				<li class="<?php echo $date['type']; if($date['event_count'] > 0){ echo " has_event";}?>" value="<?= $day ?>"><?= $day; ?></li>
+				<li class="<?php 
+								echo $date['type']; 
+								if($date['event_count'] > 0) { echo " has_event"; }
+								if($date['selected'] == true) { echo " selected"; }
+							?>" value="<?= $day ?>"><?= $day; ?></li>
 			<?php endforeach; ?>
 		</ul>
 	
