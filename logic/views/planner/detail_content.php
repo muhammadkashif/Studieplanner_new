@@ -27,9 +27,22 @@
 		
 		$("p.detail_header img").click(function()	{
 			$("#create_event").show();
+			alert($("#output_date").val());
 		});
 	
-	   $("#date").datepicker({ showAnim: 'fadeIn'});
+	   $("#date").datepicker({ 
+								showAnim: 'fadeIn', 
+								dateFormat: 'dd-mm-yy',
+								dayNamesShort: ['Zon', 'Maa', 'Din', 'Woe', 'Don', 'Vrij', 'Zat'],
+								dayNamesMin:  ['Zon', 'Maa', 'Din', 'Woe', 'Don', 'Vrij', 'Zat'],
+								dayNames: ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'],
+								monthNames: ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'],
+								monthNamesShort: ['Jan','Feb','Maa','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
+								minDate: 0,
+								// altField outputs date in mySQL date format yy-m-d. datum hieruit halen, ipv .datepicker('getDate');
+								altField: '#output_date',
+								altFormat: 'yy-m-d'
+							});
 		
 	});
 	</script>
@@ -72,10 +85,12 @@
 								'id'			=>		'date',
 								'placeholder'	=>		'',
 								'value'			=>		set_value('date')
-				);
+							 );
 				
 				echo form_input($data);
 			?>
+			<input type="hidden" name="output_date" id="output_date" />
+			
 		</p><!-- date end -->
 		
 		<?php
