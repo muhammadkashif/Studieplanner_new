@@ -197,7 +197,7 @@ div.event p.event_title
 
 div#create_event
 {
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	float: left;
 	width: 500px;
@@ -253,4 +253,5 @@ div#create_event textarea
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
 	border: 1px solid #BBB;
+	margin-bottom: 15px;
 }

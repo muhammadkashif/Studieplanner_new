@@ -28,10 +28,8 @@
 		$("p.detail_header img").click(function()	{
 			$("#create_event").show();
 		});
-		
 	
-	   $("#datepicker").datepicker({ altField: 'input#date', altFormat: 'yy-mm-dd' });
-	
+	   $("#date").datepicker({ showAnim: 'fadeIn'});
 		
 	});
 	</script>
@@ -66,10 +64,20 @@
 				echo form_textarea($data);
 			?>
 		</p><!-- description end -->
-
-
-
-		<p>Date: <input type="text" id="datepicker"></p>
+		<p><!-- date start -->
+			<label for="date">Datum:</label> 
+			<?php
+				$data = array(
+								'name'			=>		'date',
+								'id'			=>		'date',
+								'placeholder'	=>		'',
+								'value'			=>		set_value('date')
+				);
+				
+				echo form_input($data);
+			?>
+		</p><!-- date end -->
+		
 		<?php
 			echo form_close();
 		?>
