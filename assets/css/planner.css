@@ -4,7 +4,6 @@ div#overview_days
 	border-radius: 8px;
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
-	
 	box-shadow: 0 0 5px #888;
 		-moz-box-shadow: 0 0 5px #888;
 		-webkit-box-shadow: 0 0 5px #888;
@@ -13,9 +12,9 @@ div#overview_days
 
 .selected
 {
-	font-weight: bold;
-	color: #000!important;
 	border: 1px solid #999!important;
+	color: #000!important;
+	font-weight: bold;
 }
 
 div#overview_days p.month
@@ -28,9 +27,9 @@ div#overview_days p.month
 
 #days_loader
 {
+	display: none;
 	height: 9px; 
 	padding: 9px 0 0 9px;
-	display: none;
 }
 
 div#overview_days ul
@@ -80,8 +79,8 @@ div#overview_days ul li
 div#overview_days ul li.has_event
 {
 	background-image: url('../images/has_events.png');
-	background-repeat: no-repeat;
 	background-position: 85%;
+	background-repeat: no-repeat;
 }
 
 div#overview_days ul li.today
@@ -145,41 +144,41 @@ div#overview_days .previous img, div#overview_days .next img
 div#detail_content
 {
 	background-color: #f8f8f8;
-	margin: 15px auto 0 auto;
-	height: 500px;
-	width: 850px;
 	border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
 	box-shadow: 0 0 5px #888;
-	-webkit-box-shadow: 0 0 5px #888;
-	-moz-box-shadow: 0 0 5px #888;
+		-moz-box-shadow: 0 0 5px #888;
+		-webkit-box-shadow: 0 0 5px #888;
+	height: 500px;
+	margin: 15px auto 0 auto;
+	width: 850px;
 }
 
 p.detail_header
 {
-	padding: 15px 0;
+	float: center;
 	font-size: 1.2em;
 	font-weight: bold;
-	float: center;
+	padding: 15px 0;
 }
 
 p.detail_header img
 {
-	float: right;
 	cursor: pointer;
+	float: right;
 }
 
 div.event
 {
-	clear: both;
-	text-align: left;
-	padding: 10px;
-	margin: 12px 0;
 	background-color: #eee;
 	border-radius: 4px;
 		-moz-border-radius: 4px;
 		-webkit-border-radius: 4px;
+	clear: both;
+	margin: 12px 0;
+	padding: 10px;
+	text-align: left;	
 }
 
 div.event:hover
@@ -192,32 +191,30 @@ div.event p.event_title
 	font-size: 1.1em;
 	font-weight: bold;
 	padding-bottom: 5px;
-	
 }
 
 div#create_event
 {
-	/*display: none;*/
-	position: absolute;
-	float: left;
-	width: 500px;
-	height: 300px;
-	margin-top: 30px;
-	margin-left: 175px;
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-radius: 8px;
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
 	box-shadow: 0 0 3px #888;
-		-webkit-box-shadow: 0 0 3px #888;
 		-moz-box-shadow: 0 0 3px #888;
+		-webkit-box-shadow: 0 0 3px #888;
+/*	display: none;	*/	
+	float: left;
+	margin-top: 30px;
+	margin-left: 175px;
+	position: absolute;
+	width: 500px;
 }
 
 div#create_event form
 {
-	width: 450px;
 	margin: 50px auto 0 auto;
+	width: 450px;
 }
 
 div#create_event label
@@ -230,28 +227,50 @@ div#create_event label
 
 div#create_event input[type="text"]
 {
+	border: 1px solid #BBB;
 	border-radius: 8px;
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
-	border: 1px solid #BBB;
-	height: 10px;
-	width: 250px;
-	padding: 12px;
-	margin-bottom: 15px;
 	font-size: 1.3em;
+	height: 10px;
+	margin-bottom: 15px;
+	padding: 12px;
+	width: 250px;
 }
-
-
 
 div#create_event textarea
 {
-	width: 250px;
-	height: 100px;
-	padding: 12px;
-	resize: none;
+	border: 1px solid #BBB;
 	border-radius: 8px;
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
-	border: 1px solid #BBB;
+	height: 100px;
 	margin-bottom: 15px;
+	padding: 12px;
+	resize: none;
+	width: 250px;
+}
+
+div#create_event p.buttons
+{
+	float: right;
+	margin-right: 25px;
+	margin-bottom: 15px;
+}
+
+div#create_event p.buttons #btnCancel
+{
+	background-color: #333;
+	border: none;
+	border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	color: #fff;
+	height: 40px;
+	width: 80px;
+}
+
+div#create_event p.buttons #btnCancel:hover
+{
+	cursor: pointer;
 }

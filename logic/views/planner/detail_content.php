@@ -27,7 +27,6 @@
 		
 		$("p.detail_header img").click(function()	{
 			$("#create_event").show();
-			alert($("#output_date").val());
 		});
 	
 	   $("#date").datepicker({ 
@@ -92,7 +91,22 @@
 			<input type="hidden" name="output_date" id="output_date" />
 			
 		</p><!-- date end -->
-		
+		<p class="buttons"><!-- buttons start -->
+			<?php
+				$data = array(
+								'name'			=>		''
+							);
+			?>
+			<?php
+				$js = "onClick=$('#create_event').hide()";
+				$data = array(
+								'name'			=>		'btnCancel',
+								'id'			=>		'btnCancel',
+								'content'		=>		'Annuleren'
+							);
+				echo form_button($data, '', $js);
+			?>
+		</p><!-- buttons end -->
 		<?php
 			echo form_close();
 		?>
