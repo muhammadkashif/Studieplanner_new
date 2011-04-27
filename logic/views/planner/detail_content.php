@@ -44,6 +44,11 @@
 							});
 		
 		$("#btnSubmit").click(function(e)	{
+			$("div.feedback").slideUp();
+			$("div.feedback").html('');
+			$("p.warning").slideUp();
+			
+			
 			var title = $("#title").val();
 			var description = $("#description").val();
 			var output_date = $("#output_date").val();
@@ -58,7 +63,7 @@
 				{
 					if( ! data['status'])
 					{
-						$("div.feedback").append(data['error']);
+						$("div.feedback").append("<p class='error'>" + data['error'] + "</p>");
 						$("p.warning").slideDown("fast");
 						$("div.feedback").slideDown("fast");
 					}
