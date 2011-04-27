@@ -4,9 +4,9 @@ div#overview_days
 	border-radius: 8px;
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
-	box-shadow: 0 0 5px #888;
-		-moz-box-shadow: 0 0 5px #888;
-		-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 1px 1px 3px #444;
+		-moz-box-shadow: 1px 1px 3px #444;
+		-webkit-box-shadow: 1px 1px 3px #444;
 	height: 60px;
 }
 
@@ -146,10 +146,7 @@ div#detail_content
 	background-color: #f8f8f8;
 	border-radius: 8px;
 		-moz-border-radius: 8px;
-		-webkit-border-radius: 8px;
-	box-shadow: 0 0 5px #888;
-		-moz-box-shadow: 0 0 5px #888;
-		-webkit-box-shadow: 0 0 5px #888;
+		-webkit-border-radius: 8px;ﬂ
 	height: 500px;
 	margin: 15px auto 0 auto;
 	width: 850px;
@@ -200,9 +197,9 @@ div#create_event
 	border-radius: 8px;
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
-	box-shadow: 0 0 3px #888;
-		-moz-box-shadow: 0 0 3px #888;
-		-webkit-box-shadow: 0 0 3px #888;
+	box-shadow: 1px 1px 3px #444;
+		-moz-box-shadow: 1px 1px 3px #444;
+		-webkit-box-shadow: 1px 1px 3px #444;
 /*	display: none;	*/	
 	float: left;
 	margin-top: 30px;
@@ -213,11 +210,10 @@ div#create_event
 
 div#create_event p.title
 {
-	float: left;
 	font-size: 1.8em;
-	margin: 30px 0 10px 180px;
-	
-	
+	margin: 10px 0 0 20px;
+	text-align: center;
+	width: 100%;
 }
 
 div#create_event form
@@ -244,8 +240,8 @@ div#create_event input[type="text"]
 	height: 10px;
 	margin-bottom: 15px;
 	padding: 12px 15px;
-	width: 244px;
 	text-align: right;
+	width: 244px;
 }
 
 div#create_event textarea
@@ -267,9 +263,10 @@ div#create_event input[type="text"]:focus, div#create_event textarea:focus
 	outline: none;
 }
 
-div#create_event p.buttons, p.times
+div#create_event p.times, div#create_event p.buttons
 {
 	float: right;
+	font-size: 1.3em;
 	margin: 5px 25px 25px 0;
 }
 
@@ -286,7 +283,7 @@ div#create_event p.buttons input, div#create_event p.buttons button
 	width: 80px;
 }
 
-div#create_event p.buttons #btnCancel:hover
+div#create_event p.buttons #btnCancel:hover, div#create_event p.buttons input:hover
 {
 	cursor: pointer;
 }
@@ -295,4 +292,25 @@ div#create_event select
 {
 	background-color: #fff;
 	border: 1px solid #888;
+}
+
+div#create_event div.feedback
+{
+	display: none;
+	margin: 10px 0 0 180px;
+	width: 350px;
+}
+
+div#create_event  p.warning
+{
+	display: none;
+	float: left;
+	font-size: 1.4em;
+	padding: 15px 0 0 25px;
+}
+
+div#create_event div.feedback p.error
+{
+	font-size: 1.4em;
+	line-height: 1.2em;
 }
