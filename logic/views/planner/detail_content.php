@@ -76,9 +76,9 @@
 	});
 	</script>
 	<div id="create_event">
-		<!-- hier nog een image voor titel -->
+		<img src="<?= base_url(); ?>assets/images/header_create_event.png" alt="Nieuwe taak plannen" />
 		
-		<p class="warning">Let op:</p>
+		<p class="clearfix warning">Let op:</p>
 		<div class="feedback">
 				
 		</div> <!-- feedback -->

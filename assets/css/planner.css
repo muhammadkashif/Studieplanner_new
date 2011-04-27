@@ -208,17 +208,15 @@ div#create_event
 	width: 500px;
 }
 
-div#create_event p.title
+div#create_event img
 {
-	font-size: 1.8em;
-	margin: 10px 0 0 20px;
-	text-align: center;
-	width: 100%;
+	float: right;
+	margin: 10px 40px 0 0;
 }
 
 div#create_event form
 {
-	margin: 20px auto 0 auto;
+	margin: 15px auto 0 auto;
 	width: 450px;
 }
 
