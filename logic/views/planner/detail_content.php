@@ -50,9 +50,24 @@
 			var start_time = $("#start_time_hrs").val() + ":" + $("#start_time_min").val() + ":" + "00";
 			var end_time = $("#end_time_hrs").val() + ":" + $("#end_time_min").val() + ":" + "00";
 			
-			
-			alert(end_time);
-			
+			$.ajax({
+				type: "POST",
+				url: "/planner/create_event",
+				data: { title: title, description: description, date: output_date, start_time: start_time, end_time: end_time },
+				success: function(data)
+				{
+					if( ! data['status'])
+					{
+						$("div.feedback").append(data['error']);
+						$("p.warning").slideDown("fast");
+						$("div.feedback").slideDown("fast");
+					}
+					else
+					{
+						$("div.feedback").html(data['message']);
+					}
+				}
+			});
 			
 			// prevent submit
 			e.preventDefault();			
@@ -61,7 +76,12 @@
 	});
 	</script>
 	<div id="create_event">
-		<p class="title">Nieuwe taak plannen</p>
+		<!-- hier nog een image voor titel -->
+		
+		<p class="warning">Let op:</p>
+		<div class="feedback">
+				
+		</div> <!-- feedback -->
 		<p class="clearfix"></p>
 		<?php
 			echo form_open('planner/create_event');
@@ -115,7 +135,7 @@
 				{
 					if($i == 24)
 					{
-						$options['00'] = '00';
+						$options[$i] = '00';
 					}
 					else
 					{
@@ -146,7 +166,7 @@
 				{
 					if($i == 24)
 					{
-						$options['00'] = '00';
+						$options[$i] = '00';
 					}
 					else
 					{
@@ -172,6 +192,8 @@
 				echo " : " . form_dropdown('end_time_min', $options, '', $id);
 			?>
 		</p><!-- times end -->
+		<p class="clearfix"></p>
+		
 		<p class="buttons"><!-- buttons start -->
 			<?php
 				$data = array(

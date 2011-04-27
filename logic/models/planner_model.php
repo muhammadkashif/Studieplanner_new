@@ -116,6 +116,25 @@ class Planner_model extends CI_Model
 		return $data;
 	}
 	
+
+	public function insert_event($data)
+	{
+		/*
+		INSERT INTO `tblEvents` (title, description, date, time_start, time_end, user_id)
+		VALUES ("Kwantitatieve Methoden", "Oefeningen statistiek 7-16", "2011-04-30", "9:00:00", "10:00:00", 1)
+		*/
+		if($this->db->insert('tblEvents', $data))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+/* private functions */
+	
 	private function get_detail_info($day, $month, $year, $end_of_month)
 	{
 		$day_start = $day;
@@ -137,11 +156,10 @@ class Planner_model extends CI_Model
 			$day++;
 			$j++;
 		}
-		
-		
 
 		return $detail_info;
 	}
+	
 	
 	private function get_day_info($day, $month, $year)
 	{
