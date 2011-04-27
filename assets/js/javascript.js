@@ -2,7 +2,7 @@ $(document).ready(function()	{
 	
 	$("#day_list li").live("click", function()	{
 		$(".selected").removeClass("selected");
-		var day = $(this).attr('value');
+		var day = $(this).text();
 		$(this).addClass('selected');
 
 		$.ajax({
