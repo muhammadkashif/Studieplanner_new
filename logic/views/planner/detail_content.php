@@ -43,9 +43,26 @@
 								altFormat: 'yy-m-d'
 							});
 		
+		$("#btnSubmit").click(function(e)	{
+			var title = $("#title").val();
+			var description = $("#description").val();
+			var output_date = $("#output_date").val();
+			var start_time = $("#start_time_hrs").val() + ":" + $("#start_time_min").val() + ":" + "00";
+			var end_time = $("#end_time_hrs").val() + ":" + $("#end_time_min").val() + ":" + "00";
+			
+			
+			alert(end_time);
+			
+			
+			// prevent submit
+			e.preventDefault();			
+		});
+		
 	});
 	</script>
 	<div id="create_event">
+		<p class="title">Nieuwe taak plannen</p>
+		<p class="clearfix"></p>
 		<?php
 			echo form_open('planner/create_event');
 		?>
@@ -98,42 +115,61 @@
 				{
 					if($i == 24)
 					{
-						$options[] = '00';
+						$options['00'] = '00';
 					}
 					else
 					{
-						$options[] = $i;
+						$options[$i] = $i;
 					}
 				}
-				echo "Van " . form_dropdown('start_time_hrs', $options);
+				
+				$id = "id='start_time_hrs'";
+				echo "Van " . form_dropdown('start_time_hrs', $options, '', $id);
 				
 				$options = array();
 				for($i = 0; $i <= 45; $i+=15)
 				{
-					$options[] = $i;
+					if($i == 0)
+					{
+						$options['00'] = '00';
+					}
+					else
+					{
+						$options[$i] = $i;
+					}
 				}
-				echo " : " . form_dropdown('start_time_min', $options);
+				$id = "id='start_time_min'";
+				echo " : " . form_dropdown('start_time_min', $options, '', $id);
 			
 				$options = array();
 				for($i = 8; $i <= 24; $i++)
 				{
 					if($i == 24)
 					{
-						$options[] = '00';
+						$options['00'] = '00';
 					}
 					else
 					{
-						$options[] = $i;
+						$options[$i] = $i;
 					}
 				}
-				echo " tot " . form_dropdown('start_time_hrs', $options);
+				$id = "id='end_time_hrs'";
+				echo " tot " . form_dropdown('end_time_hrs', $options, '9', $id);
 				
 				$options = array();
 				for($i = 0; $i <= 45; $i+=15)
 				{
-					$options[] = $i;
+					if($i == 0)
+					{
+						$options['00'] = '00';
+					}
+					else
+					{
+						$options[$i] = $i;
+					}
 				}
-				echo " : " . form_dropdown('start_time_min', $options);
+				$id = "id='end_time_min'";
+				echo " : " . form_dropdown('end_time_min', $options, '', $id);
 			?>
 		</p><!-- times end -->
 		<p class="buttons"><!-- buttons start -->
@@ -146,7 +182,7 @@
 			
 				echo form_submit($data);
 				
-				$js = "onClick=$('#create_event').hide()";
+				$js = 'onClick=$("#create_event").hide()';
 				$data = array(
 								'name'			=>		'btnCancel',
 								'id'			=>		'btnCancel',
@@ -155,6 +191,7 @@
 				echo form_button($data, '', $js);
 			?>
 		</p><!-- buttons end -->
+		<p class="clearfix"></p>
 		<?php
 			echo form_close();
 		?>
