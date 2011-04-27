@@ -91,13 +91,61 @@
 			<input type="hidden" name="output_date" id="output_date" />
 			
 		</p><!-- date end -->
+		<p class='times'><!-- times start -->
+			<?php
+				$options = array();
+				for($i = 8; $i <= 24; $i++)
+				{
+					if($i == 24)
+					{
+						$options[] = '00';
+					}
+					else
+					{
+						$options[] = $i;
+					}
+				}
+				echo "Van " . form_dropdown('start_time_hrs', $options);
+				
+				$options = array();
+				for($i = 0; $i <= 45; $i+=15)
+				{
+					$options[] = $i;
+				}
+				echo " : " . form_dropdown('start_time_min', $options);
+			
+				$options = array();
+				for($i = 8; $i <= 24; $i++)
+				{
+					if($i == 24)
+					{
+						$options[] = '00';
+					}
+					else
+					{
+						$options[] = $i;
+					}
+				}
+				echo " tot " . form_dropdown('start_time_hrs', $options);
+				
+				$options = array();
+				for($i = 0; $i <= 45; $i+=15)
+				{
+					$options[] = $i;
+				}
+				echo " : " . form_dropdown('start_time_min', $options);
+			?>
+		</p><!-- times end -->
 		<p class="buttons"><!-- buttons start -->
 			<?php
 				$data = array(
-								'name'			=>		''
+								'name'			=>		'btnSubmit',
+								'id'			=>		'btnSubmit',
+								'value'			=>		'Opslaan'
 							);
-			?>
-			<?php
+			
+				echo form_submit($data);
+				
 				$js = "onClick=$('#create_event').hide()";
 				$data = array(
 								'name'			=>		'btnCancel',

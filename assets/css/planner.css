@@ -234,8 +234,9 @@ div#create_event input[type="text"]
 	font-size: 1.3em;
 	height: 10px;
 	margin-bottom: 15px;
-	padding: 12px;
-	width: 250px;
+	padding: 12px 15px;
+	width: 244px;
+	text-align: right;
 }
 
 div#create_event textarea
@@ -251,14 +252,19 @@ div#create_event textarea
 	width: 250px;
 }
 
-div#create_event p.buttons
+div#create_event input[type="text"]:focus, div#create_event textarea:focus
 {
-	float: right;
-	margin-right: 25px;
-	margin-bottom: 15px;
+	outline: none;
+	border: 1px solid #777;
 }
 
-div#create_event p.buttons #btnCancel
+div#create_event p.buttons, p.times
+{
+	float: right;
+	margin: 5px 25px 15px 0;
+}
+
+div#create_event p.buttons input, div#create_event p.buttons button
 {
 	background-color: #333;
 	border: none;
@@ -267,10 +273,17 @@ div#create_event p.buttons #btnCancel
 		-webkit-border-radius: 5px;
 	color: #fff;
 	height: 40px;
+	margin-left: 20px;
 	width: 80px;
 }
 
 div#create_event p.buttons #btnCancel:hover
 {
 	cursor: pointer;
+}
+
+div#create_event select
+{
+	border: 1px solid #888;
+	background-color: #fff;
 }
