@@ -15,5 +15,4 @@ class Student extends MY_Controller
 		$this->loadView('student/index');
 		
 	}
-	
 }

@@ -12,6 +12,7 @@
 			for($i = 1; $i <= $details[$key]['event_count']; $i++)
 			{
 				echo "<div class='event'>";
+					echo "<p style='float:right;'>" . "x" . "</p>";
 					echo "<p class='event_title'>" . $details[$key][$i]['title'] . "</p>";
 					echo $details[$key][$i]['description'];
 				echo "</div>";
