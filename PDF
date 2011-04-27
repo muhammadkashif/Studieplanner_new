@@ -1,0 +1,7 @@
+function pdf()
+{
+     $this->load->helper('to_pdf');
+     // page info here, db calls, etc.     
+     $html = $this->load->view('student/index', '', true);
+     pdf_create($html, 'filename');
+}
