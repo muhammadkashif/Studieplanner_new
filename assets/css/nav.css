@@ -15,6 +15,35 @@ header div#yellow
 	background-color: #ff0;
 }
 
+header div#feedback_top
+{
+	background-color: #ff0;
+	border-bottom-left-radius: 6px;
+		-moz-border-bottom-left-radius: 6px;
+		-webkit-border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+		-moz-border-bottom-right-radius: 6px;
+		-webkit-border-bottom-right-radius: 6px;
+	box-shadow: 1px 1px 4px #000;
+		-moz-box-shadow: 1px 1px 4px #000;
+		-webkit-box-shadow: 1px 1px 4px #000;
+	display: none;
+	height: 40px;
+	left: 50%;
+	margin-left: -200px;
+	position: absolute;
+	top: 0;
+	width: 400px;
+}
+
+header div#feedback_top p
+{
+	font-size: 1.3em;
+	font-weight: bold;
+	padding-top: 12px;
+	text-align: center;
+}
+
 div#container_h #logo
 {
 	float: left;
@@ -46,7 +75,8 @@ nav	ul li
 	font-weight: bold;
 	text-align: center;
 	border-radius: 15px;
-	-moz-border-radius: 15px;
+		-moz-border-radius: 15px;
+		-webkit-border-radius: 15px;
 	border: 1px solid #4a4a4b;
 	padding-top: 7px;
 }

@@ -1,14 +1,16 @@
 <div id="detail_content">	
 	<div class="base">
 		<?php
-
 		foreach($details as $key => $detail)
 		{
-			$header = "<p class='detail_header'>" . ucfirst($dates[0][$key]['name']) . ", " . $key . " " . $init['curr_month_name'];
-			$header .= "<img src='" . base_url() . "assets/images/create_event.png' alt='Plan iets'>";
-
 			echo "<div class='grid'>";
+			$header = "<p class='detail_header'>";
+			// . ucfirst($dates[0][$key]['name']) . ", " . $key . " " . $init['curr_month_name'];
+			$header .= ucfirst($dates[0][$key]['name']) . ", " . $key . " " . $init['curr_month_name'];
+			$header .= "<img src='" . base_url() . "assets/images/create_event.png' alt='Plan iets'></p>";
+			
 			echo $header;
+		
 			for($i = 1; $i <= $details[$key]['event_count']; $i++)
 			{
 				echo "<div class='event " . $details[$key][$i]['type'] . "'>";
@@ -16,10 +18,9 @@
 					echo $details[$key][$i]['description'];
 				echo "</div>";
 			}
-			echo "</div>";
-			
-		}
+			echo "</div>";	
 		
+		}
 		?>
 	</div>
 
@@ -55,11 +56,13 @@
 			var output_date = $("#output_date").val();
 			var start_time = $("#start_time_hrs").val() + ":" + $("#start_time_min").val() + ":" + "00";
 			var end_time = $("#end_time_hrs").val() + ":" + $("#end_time_min").val() + ":" + "00";
+			var event_type = $("#drop_event_type").val();
+			
 			
 			$.ajax({
 				type: "POST",
 				url: "/planner/create_event",
-				data: { title: title, description: description, date: output_date, start_time: start_time, end_time: end_time },
+				data: { title: title, description: description, date: output_date, start_time: start_time, end_time: end_time, event_type: event_type },
 				success: function(data)
 				{
 					if( ! data['status'])
@@ -70,7 +73,8 @@
 					}
 					else
 					{
-						$("div.feedback").html(data['message']);
+						$("#create_event").fadeOut();
+						$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
 					}
 				}
 			});
@@ -92,7 +96,19 @@
 		<?php
 			echo form_open('planner/create_event');
 		?>
-
+		<p class='drop_event_type'>
+			<label for="drop_event_type">Type</label>
+			<?
+				$options = array(
+									'huiswerk'		=>		'Huiswerk',
+									'deadline'		=>		'Deadline',
+									'vrijetijd'		=>		'Vrije Tijd'
+							);
+				$id = "id='drop_event_type'";
+				echo form_dropdown('event_type', $options, '', $id);
+			?>
+		</p>
+		<p class="clearfix"></p>
 		<p><!-- title start -->
 			<label for="title">Titel</label>
 			<?php
@@ -199,7 +215,7 @@
 			?>
 		</p><!-- times end -->
 		<p class="clearfix"></p>
-		
+
 		<p class="buttons"><!-- buttons start -->
 			<?php
 				$data = array(
@@ -228,6 +244,3 @@
 
 <p class='clearfix'></p>
 <div class='event_type'></div>
-<pre>
-	<?php print_r($dates) ?>
-</pre>

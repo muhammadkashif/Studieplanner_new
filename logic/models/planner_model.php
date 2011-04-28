@@ -12,7 +12,9 @@ class Planner_model extends CI_Model
 							'today'					=>		$day,
 							'current_month'			=>		$month,
 							'current_year'	 		=>		$year,
-							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, $month, $year)
+							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, $month, $year),
+							'next_month'			=>		$month + 1,
+							'next_year'				=>		$year + 1
 							
 					);
 		}
@@ -22,7 +24,9 @@ class Planner_model extends CI_Model
 							'today'					=>		date('j'),
 							'current_month'			=>		date('n'),
 							'current_year'	 		=>		date('Y'),
-							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, date('n'), date('Y'))
+							'days_in_curr_month'	=>		cal_days_in_month(CAL_GREGORIAN, date('n'), date('Y')),
+							'next_month'			=>		date('n') + 1,
+							'next_year'				=>		date('Y') + 1
 					);
 		}
 		
@@ -107,6 +111,30 @@ class Planner_model extends CI_Model
 			}
 			
 		}
+		
+		for($i = 1; $i <= 4; $i++)
+		{
+			$push[$i] = array();
+			if($data['init']['current_month'] == 12)
+			{
+				$day_info = $this->get_day_info($i, 1, $data['init']['next_year']);
+				$event_info = $this->get_event_info($i, 1, $data['init']['next_year']);
+			}
+			else
+			{
+				$day_info = $this->get_day_info($i, $data['init']['next_month'], $data['init']['current_year']);
+				$event_info = $this->get_event_info($i, $data['init']['next_month'], $data['init']['current_year']);
+			}
+			$push[$i]['name'] = $day_info['day_name'];
+			$push[$i]['frame'] = 'future';
+			$push[$i]['type'] = $day_info['day_type'];
+			$push[$i]['events'] = $event_info;
+			$push[$i]['event_count'] = count($event_info);
+			$push[$i]['selected'] = false;
+		}
+		
+		$data['dates'][1] = $push;
+		
 		if(isset($data['init']['selected']))
 		{
 			$detail_info = $this->get_detail_info($data['init']['selected'], $data['init']['current_month'], $data['init']['current_year'], $data['init']['days_in_curr_month']);

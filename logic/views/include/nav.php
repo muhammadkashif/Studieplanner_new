@@ -1,5 +1,6 @@
 <header>
 	<div id="yellow"></div>
+	<div id="feedback_top"><p>Taak opgeslagen</p></div>
 	<div id="container_h">
 		<a href="/site">
 			<?php

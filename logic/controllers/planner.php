@@ -96,6 +96,7 @@ class Planner extends MY_Controller
 						'date' 			=> $this->input->post('date'),
 						'time_start'	=> $this->input->post('start_time'),
 						'time_end'		=> $this->input->post('end_time'),
+						'type'			=> $this->input->post('event_type'),
 						'user_id'		=> $this->session->userdata('id')
 					);
 

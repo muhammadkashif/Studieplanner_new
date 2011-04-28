@@ -249,7 +249,6 @@ div#create_event input[type="text"]
 	height: 10px;
 	margin-bottom: 15px;
 	padding: 12px 15px;
-	text-align: right;
 	width: 244px;
 }
 
@@ -308,6 +307,11 @@ div#create_event div.feedback
 	display: none;
 	margin: 0 0 0 180px;
 
+}
+
+div#create_event select#drop_event_type
+{
+	margin-bottom: 15px;
 }
 
 div#create_event  p.warning
