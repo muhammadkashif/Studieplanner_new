@@ -11,7 +11,7 @@
 			echo $header;
 			for($i = 1; $i <= $details[$key]['event_count']; $i++)
 			{
-				echo "<div class='event'>";
+				echo "<div class='event " . $details[$key][$i]['type'] . "'>";
 					echo "<p class='event_title'>" . $details[$key][$i]['title'] . "</p>";
 					echo $details[$key][$i]['description'];
 				echo "</div>";
