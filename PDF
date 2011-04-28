@@ -5,3 +5,5 @@ function pdf()
      $html = $this->load->view('student/index', '', true);
      pdf_create($html, 'filename');
 }
+
+http://codeigniter.com/wiki/PDF_generation_using_dompdf/

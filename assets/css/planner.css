@@ -190,6 +190,17 @@ div.event p.event_title
 	padding-bottom: 5px;
 }
 
+div.event_type
+{
+	background-color: #f8f8f8;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	height: 40px;
+	margin: 12px auto 0 auto;
+	width: 850px;
+}
+
 div#create_event
 {
 	background-color: #fff;
@@ -200,7 +211,7 @@ div#create_event
 	box-shadow: 1px 1px 3px #444;
 		-moz-box-shadow: 1px 1px 3px #444;
 		-webkit-box-shadow: 1px 1px 3px #444;
-/*	display: none;	*/	
+	display: none;		
 	float: left;
 	margin-top: 30px;
 	margin-left: 175px;
@@ -210,8 +221,8 @@ div#create_event
 
 div#create_event img
 {
-	float: right;
-	margin: 10px 40px 0 0;
+	float: left;
+	margin: 10px 0 5px 15px;
 }
 
 div#create_event form
@@ -295,7 +306,7 @@ div#create_event select
 div#create_event div.feedback
 {
 	display: none;
-	margin: 10px 0 0 180px;
+	margin: 0 0 0 180px;
 
 }
 

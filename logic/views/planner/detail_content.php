@@ -12,7 +12,6 @@
 			for($i = 1; $i <= $details[$key]['event_count']; $i++)
 			{
 				echo "<div class='event'>";
-					echo "<p style='float:right;'>" . "x" . "</p>";
 					echo "<p class='event_title'>" . $details[$key][$i]['title'] . "</p>";
 					echo $details[$key][$i]['description'];
 				echo "</div>";
@@ -23,11 +22,12 @@
 		
 		?>
 	</div>
+
 	<script type="text/javascript">
 	$(document).ready(function()	{
 		
 		$("p.detail_header img").click(function()	{
-			$("#create_event").show();
+			$("#create_event").fadeIn();
 		});
 	
 	   $("#date").datepicker({ 
@@ -85,7 +85,7 @@
 		<img src="<?= base_url(); ?>assets/images/header_create_event.png" alt="Nieuwe taak plannen" />
 		
 		<p class="clearfix warning">Let op:</p>
-		<div class="feedback">
+		<div class="feedback clearfix">
 				
 		</div> <!-- feedback -->
 		<p class="clearfix"></p>
@@ -223,5 +223,8 @@
 		<?php
 			echo form_close();
 		?>
-	</div>
+	</div>		
 </div>
+
+<p class='clearfix'></p>
+<div class='event_type'></div>

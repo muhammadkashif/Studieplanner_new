@@ -208,6 +208,7 @@ class Planner_model extends CI_Model
 			$event_info[$i]['time_start'] = $row->time_start;
 			$event_info[$i]['time_end'] = $row->time_end;
 			$event_info[$i]['id'] = $row->id;
+			$event_info[$i]['type'] = $row->type;
 			$i++;
 		
 		}
