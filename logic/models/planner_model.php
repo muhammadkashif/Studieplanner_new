@@ -37,41 +37,41 @@ class Planner_model extends CI_Model
 			$day_info = $this->get_day_info($i, $data['init']['current_month'], $data['init']['current_year']);
 			
 			// naam vd dag (zon, ma, ..)
-			$data['dates'][$i]['name'] = $day_info['day_name'];
+			$data['dates'][0][$i]['name'] = $day_info['day_name'];
 			
 			// past or future?
 			
 			if($data['init']['current_year'] > date('Y'))
 			{
-				$data['dates'][$i]['frame'] = 'future';
+				$data['dates'][0][$i]['frame'] = 'future';
 			}
 			if($data['init']['current_year'] < date('Y'))
 			{
-				$data['dates'][$i]['frame'] = 'past';
+				$data['dates'][0][$i]['frame'] = 'past';
 			}
 			if($data['init']['current_year'] == date('Y'))
 			{
 				if($data['init']['current_month'] < date('n'))
 				{
-					$data['dates'][$i]['frame'] = 'past';
+					$data['dates'][0][$i]['frame'] = 'past';
 				}
 				if($data['init']['current_month'] > date('n'))
 				{
-					$data['dates'][$i]['frame'] = 'future';
+					$data['dates'][0][$i]['frame'] = 'future';
 				}
 				if($data['init']['current_month'] == date('n'))
 				{
 					if($i < date('j'))
 					{
-						$data['dates'][$i]['frame'] = 'past';
+						$data['dates'][0][$i]['frame'] = 'past';
 					}
 					if($i > date('j'))
 					{
-						$data['dates'][$i]['frame'] = 'future';
+						$data['dates'][0][$i]['frame'] = 'future';
 					}
 					if($i == date('j'))
 					{
-						$data['dates'][$i]['frame'] = 'today';
+						$data['dates'][0][$i]['frame'] = 'today';
 					}
 				}
 			}
@@ -80,30 +80,30 @@ class Planner_model extends CI_Model
 			// today type uitzondering
 			if( ! empty($data['init']['today']) && $i == $data['init']['today'])
 			{
-				$data['dates'][$i]['type'] = 'today';
+				$data['dates'][0][$i]['type'] = 'today';
 			}
 			else
 			{
-				$data['dates'][$i]['type'] = $day_info['day_type'];
+				$data['dates'][0][$i]['type'] = $day_info['day_type'];
 			}
 
 			
 			// event info ophalen vanuit get_event_info($day, $month, $year);
 			$event_info = $this->get_event_info($i, $data['init']['current_month'], $data['init']['current_year']);
 			
-			$data['dates'][$i]['events'] = $event_info;
+			$data['dates'][0][$i]['events'] = $event_info;
 			// aantal events
-			$data['dates'][$i]['event_count'] = count($event_info);
+			$data['dates'][0][$i]['event_count'] = count($event_info);
 			
 			// selected logic
 			if($i == $data['init']['today'])
 			{
-				$data['dates'][$i]['selected'] = true;
+				$data['dates'][0][$i]['selected'] = true;
 				$data['init']['selected'] = $i;
 			}
 			else
 			{
-				$data['dates'][$i]['selected'] = false;
+				$data['dates'][0][$i]['selected'] = false;
 			}
 			
 		}

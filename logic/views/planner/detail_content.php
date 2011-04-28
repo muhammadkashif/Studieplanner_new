@@ -4,7 +4,7 @@
 
 		foreach($details as $key => $detail)
 		{
-			$header = "<p class='detail_header'>" . ucfirst($dates[$key]['name']) . ", " . $key . " " . $init['curr_month_name'];
+			$header = "<p class='detail_header'>" . ucfirst($dates[0][$key]['name']) . ", " . $key . " " . $init['curr_month_name'];
 			$header .= "<img src='" . base_url() . "assets/images/create_event.png' alt='Plan iets'>";
 
 			echo "<div class='grid'>";
@@ -228,3 +228,6 @@
 
 <p class='clearfix'></p>
 <div class='event_type'></div>
+<pre>
+	<?php print_r($dates) ?>
+</pre>

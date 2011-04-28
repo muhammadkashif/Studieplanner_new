@@ -77,7 +77,7 @@
 						break;
 				}
 				?>">
-			<?php foreach($dates as $day => $date): ?>
+			<?php foreach($dates[0] as $day => $date): ?>
 				<li class="<?php 
 								echo $date['type']; 
 								if($date['event_count'] > 0) { echo " has_event"; }
