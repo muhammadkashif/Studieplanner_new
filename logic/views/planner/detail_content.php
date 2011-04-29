@@ -1,7 +1,7 @@
 <div id="detail_content">	
 	<div class="base">
 		<?php
-		foreach($details as $key => $detail)
+		foreach($details[0] as $key => $detail)
 		{
 			echo "<div class='grid'>";
 			$header = "<p class='detail_header'>";
@@ -10,15 +10,38 @@
 			
 			echo $header;
 		
-			for($i = 1; $i <= $details[$key]['event_count']; $i++)
+			for($i = 1; $i <= $details[0][$key]['event_count']; $i++)
 			{
-				echo "<div class='event " . $details[$key][$i]['type'] . "'>";
-					echo "<p class='event_title'>" . $details[$key][$i]['title'] . "</p>";
-					echo $details[$key][$i]['description'];
+				echo "<div class='event " . $details[0][$key][$i]['type'] . "'>";
+					echo "<p class='event_title'>" . $details[0][$key][$i]['title'] . "</p>";
+					echo $details[0][$key][$i]['description'];
 				echo "</div>";
 			}
 			echo "</div>";	
 		
+		}
+		
+		if( ! empty($details[1]))
+		{
+			foreach($details[1] as $key => $detail)
+			{
+				echo "<div class='grid'>";
+				$header = "<p class='detail_header'>";
+				$header .= ucfirst($dates[1][$key]['name']) . ", " . $key . " " . $init['next_month_name'];
+				$header .= "<img src='" . base_url() . "assets/images/create_event.png' alt='Plan iets'></p>";
+
+				echo $header;
+
+				for($i = 1; $i <= $details[1][$key]['event_count']; $i++)
+				{
+					echo "<div class='event " . $details[1][$key][$i]['type'] . "'>";
+						echo "<p class='event_title'>" . $details[1][$key][$i]['title'] . "</p>";
+						echo $details[1][$key][$i]['description'];
+					echo "</div>";
+				}
+				echo "</div>";	
+
+			}
 		}
 		?>
 	</div>

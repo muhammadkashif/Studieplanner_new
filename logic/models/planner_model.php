@@ -33,7 +33,7 @@ class Planner_model extends CI_Model
 
 		// naam vd huidige maand in $init steken
 		$data['init']['curr_month_name'] = $this->get_month_info($data['init']['current_month']);
-
+		$data['init']['next_month_name'] = $this->get_month_info($data['init']['next_month']);
 		// for loop: van 1 tot einde van de maand: array maken
 		for($i = 1; $i <= $data['init']['days_in_curr_month']; $i++)
 		{
@@ -165,7 +165,7 @@ class Planner_model extends CI_Model
 	
 	private function get_detail_info($day, $month, $year, $end_of_month)
 	{
-		
+		$start_day = $day;
 		if($day + 4 > $end_of_month)
 		{
 			$end_day = $end_of_month;
@@ -177,10 +177,24 @@ class Planner_model extends CI_Model
 		
 		for($i = $day; $i <= $end_day; $i++)
 		{
-			$detail_info[$day] = $this->get_event_info($day, $month, $year);
-			$detail_info[$day]['event_count'] = count($detail_info[$day]);
+			$detail_info[0][$day] = $this->get_event_info($day, $month, $year);
+			$detail_info[0][$day]['event_count'] = count($detail_info[0][$day]);
 			$day++;	
 		}
+		if($end_day == $end_of_month)
+		{
+			$a = $end_of_month - $start_day;
+			$add = 4 - $a;
+			
+			for($i = 1; $i <= $add; $i++)
+			{
+				$detail_info[1][$i] = $this->get_event_info($i, $month + 1, $year);
+				$detail_info[1][$i]['event_count'] = count($detail_info[1][$i]);
+				
+			}
+		}
+		
+		
 
 		return $detail_info;
 		
