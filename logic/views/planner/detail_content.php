@@ -94,12 +94,23 @@
 						$("div.feedback").slideDown("fast");
 					}
 					else
-					{
+					{	
+						$.ajax({
+							type: "POST",
+							url: "/planner/change_detail",
+							//data: { month: current_month, year: current_year },
+							success: function(data)
+							{
+								$("#detail_content").html(data);
+							}
+						});
 						$("#create_event").fadeOut();
 						$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
+						
 					}
-				}
+				}	
 			});
+				
 			
 			// prevent submit
 			e.preventDefault();			
@@ -265,4 +276,4 @@
 </div>
 
 <p class='clearfix'></p>
-<div class='event_type'></div>
+<div class='event_type'></div>	
