@@ -29,8 +29,8 @@ class Planner_model extends CI_Model
 							'next_year'				=>		date('Y') + 1
 					);
 		}
-		
-
+	
+	
 		// naam vd huidige maand in $init steken
 		$data['init']['curr_month_name'] = $this->get_month_info($data['init']['current_month']);
 		$data['init']['next_month_name'] = $this->get_month_info($data['init']['next_month']);
@@ -44,7 +44,6 @@ class Planner_model extends CI_Model
 			$data['dates'][0][$i]['name'] = $day_info['day_name'];
 			
 			// past or future?
-			
 			if($data['init']['current_year'] > date('Y'))
 			{
 				$data['dates'][0][$i]['frame'] = 'future';
@@ -79,7 +78,6 @@ class Planner_model extends CI_Model
 					}
 				}
 			}
-
 			
 			// today type uitzondering
 			if( ! empty($data['init']['today']) && $i == $data['init']['today'])
@@ -91,7 +89,6 @@ class Planner_model extends CI_Model
 				$data['dates'][0][$i]['type'] = $day_info['day_type'];
 			}
 
-			
 			// event info ophalen vanuit get_event_info($day, $month, $year);
 			$event_info = $this->get_event_info($i, $data['init']['current_month'], $data['init']['current_year']);
 			
@@ -112,6 +109,7 @@ class Planner_model extends CI_Model
 			
 		}
 		
+		// eerste dagen vd volgende maand toevoegen aan array
 		for($i = 1; $i <= 4; $i++)
 		{
 			$push[$i] = array();
@@ -135,6 +133,7 @@ class Planner_model extends CI_Model
 		
 		$data['dates'][1] = $push;
 		
+		// detail data voor selected dag
 		if(isset($data['init']['selected']))
 		{
 			$detail_info = $this->get_detail_info($data['init']['selected'], $data['init']['current_month'], $data['init']['current_year'], $data['init']['days_in_curr_month']);
@@ -160,6 +159,7 @@ class Planner_model extends CI_Model
 			return FALSE;
 		}
 	}
+
 
 /* private functions */
 	
@@ -189,8 +189,7 @@ class Planner_model extends CI_Model
 			for($i = 1; $i <= $add; $i++)
 			{
 				$detail_info[1][$i] = $this->get_event_info($i, $month + 1, $year);
-				$detail_info[1][$i]['event_count'] = count($detail_info[1][$i]);
-				
+				$detail_info[1][$i]['event_count'] = count($detail_info[1][$i]);		
 			}
 		}
 		
@@ -274,9 +273,10 @@ class Planner_model extends CI_Model
 			case '10': $month_name = "oktober"; break;
 			case '11': $month_name = "november"; break;
 			case '12': $month_name = "december"; break;
+			default: $month_name = 'januari'; break;
 		}
 		
-		return $month_name;	
+		return $month_name;
 	}
 	
 }
