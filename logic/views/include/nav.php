@@ -24,7 +24,7 @@
 					<a href="<?= $base_url; ?>planner/">Planner</a>
 				</li>
 				<li <? if($page_title == "Informatie") {?>class="active"<? } ?>>
-					<a href="<?= $base_url; ?>student/informatie">Informatie</a>
+					<a href="<?= $base_url; ?>informatie/">Informatie</a>
 				</li>
 				<li>
 					<a href="<?= $base_url; ?>logout">Logout</a>
