@@ -327,3 +327,20 @@ div#create_event div.feedback p.error
 	font-size: 1.4em;
 	line-height: 1.2em;
 }
+
+/*
+div.deadline
+{
+	border: 1px solid red;
+}
+
+div.huiswerk
+{
+	border: 1px solid green;
+}
+
+div.vrijetijd
+{
+	border: 1px solid blue;
+}
+*/	
