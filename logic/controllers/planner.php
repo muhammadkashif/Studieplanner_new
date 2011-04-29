@@ -60,12 +60,12 @@ class Planner extends MY_Controller
 						array(
 							'field'		=>		'title', 
 		                    'label'		=> 		'titel', 
-		                    'rules'		=> 		'required|xss_clean'
+		                    'rules'		=> 		'required|xss_clean|strip_tags'
 						),
 		               	array(
 		                    'field'		=> 		'description', 
 		                    'label'		=>	 	'omschrijving', 
-		                    'rules'		=>		'required|xss_clean'
+		                    'rules'		=>		'required|xss_clean|strip_tags'
 		               	),
 					  	array(
 					   		'field'  	=>		'date',
