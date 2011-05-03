@@ -1,6 +1,8 @@
 <div id="detail_content">	
 	<div class="base">
 		<?php
+		
+		// TODO: fix times :(
 		foreach($details[0] as $key => $detail)
 		{
 			echo "<div class='grid'>";
