@@ -24,7 +24,14 @@
 		
 		if( ! ($this->uri->segment(1) == "login"))
 		{
-			$this->load->view('include/nav');
+			if($this->session->userdata('role') == 1)
+			{
+				$this->load->view('include/nav');
+			}
+			else if($this->session->userdata('role') == 2)
+			{
+				$this->load->view('include/nav_admin.php');
+			}
 		}
 
 		$this->load->view($view, $data);
