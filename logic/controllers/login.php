@@ -44,8 +44,15 @@ class Login extends MY_Controller
 							'error'			=>		validation_errors()
 						);
 			
-			header('Content-type: application/json');
-			echo json_encode($feedback);
+			if($this->input->is_ajax_request())
+			{
+				header('Content-type: application/json');
+				echo json_encode($feedback);
+			}
+			else
+			{
+				$this->loadView('login/index', $feedback);
+			}
 		}
 		else
 		{
@@ -63,8 +70,15 @@ class Login extends MY_Controller
 							'redirect'		=>		'site/index'
 						);
 			
-			header('Content-type: application/json');
-			echo json_encode($feedback);
+			if($this->input->is_ajax_request())
+			{
+				header('Content-type: application/json');
+				echo json_encode($feedback);
+			}
+			else
+			{
+				redirect('site/index');
+			}
 			
 		}
 	}
