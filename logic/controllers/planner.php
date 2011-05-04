@@ -25,6 +25,7 @@ class Planner extends MY_Controller
 		$this->load->view('planner/dates_content', $dates);		
 		$this->load->view('planner/detail_content', $dates);
 		
+		$this->load->view('planner/event_type');
 		$this->load->view('include/footer', $dates);
 
 	}
