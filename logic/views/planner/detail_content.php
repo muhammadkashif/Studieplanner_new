@@ -15,7 +15,10 @@
 			for($i = 1; $i <= $details[0][$key]['event_count']; $i++)
 			{
 				echo "<div class='event " . $details[0][$key][$i]['type'] . "'>";
+				echo "<p class='uren'>" . substr($details[0][$key][$i]['time_start'], 0, 5) . " - "
+				 		   . substr($details[0][$key][$i]['time_end'], 0, 5) . "</p>";
 					echo "<p class='event_title'>" . $details[0][$key][$i]['title'] . "</p>";
+
 					echo $details[0][$key][$i]['description'];
 				echo "</div>";
 			}
@@ -37,6 +40,8 @@
 				for($i = 1; $i <= $details[1][$key]['event_count']; $i++)
 				{
 					echo "<div class='event " . $details[1][$key][$i]['type'] . "'>";
+						echo "<p class='uren'>" . substr($details[1][$key][$i]['time_start'], 0, 5) . " - "
+						   . substr($details[1][$key][$i]['time_end'], 0, 5) . "</p>";
 						echo "<p class='event_title'>" . $details[1][$key][$i]['title'] . "</p>";
 						echo $details[1][$key][$i]['description'];
 					echo "</div>";
@@ -276,6 +281,3 @@
 		?>
 	</div>		
 </div>
-
-<p class='clearfix'></p>
-<div class='event_type'></div>	
