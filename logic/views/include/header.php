@@ -19,5 +19,5 @@
 		<?= link_tag('assets/css/jquery_ui/jquery.ui.all.css'); ?>
 	</head>
 	<body>
-
+		<noscript class="js_feedback"><p>Deze site werkt het best met Javascript ingeschakeld!</p></noscript>
 
