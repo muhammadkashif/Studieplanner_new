@@ -1,4 +1,5 @@
 @import url('reset.css');
+@import url('wysiwyg.css');
 
 /** general */
 
@@ -249,7 +250,7 @@ nav .active a:link, nav .active a:visited, nav .active a:hover, nav .active a:ac
 
 /** planner */
 
-div#dates_content, div#info_wrapper
+div#dates_content
 {
 	width: 850px;
 	margin: -18px auto 0 auto;
@@ -503,6 +504,8 @@ div.event_type #type_wrapper p span.vrijetijd
 	background-color: #c8d7b7;
 }
 
+/** create event, add content */
+
 div#create_event
 {
 	background-color: #fff;
@@ -521,19 +524,19 @@ div#create_event
 	width: 500px;
 }
 
-div#create_event img
+div#create_event img, div#add_content img
 {
 	float: left;
 	margin: 10px 0 5px 15px;
 }
 
-div#create_event form
+div#create_event form, div#add_content form
 {
 	margin: 15px auto 0 auto;
 	width: 450px;
 }
 
-div#create_event label
+div#create_event label, div#add_content label
 {
 	display: block;
 	float: left;
@@ -541,7 +544,7 @@ div#create_event label
 	width: 150px;
 }
 
-div#create_event input[type="text"]
+div#create_event input[type="text"], div#add_content input[type="text"]
 {
 	border: 1px solid #BBB;
 	border-radius: 8px;
@@ -567,20 +570,24 @@ div#create_event textarea
 	width: 250px;
 }
 
-div#create_event input[type="text"]:focus, div#create_event textarea:focus
+div#create_event input[type="text"]:focus, div#create_event textarea:focus, div#add_content input[type="text"]:focus, div#add_content textarea:focus
 {
 	border: 1px solid #777;
 	outline: none;
 }
 
-div#create_event p.times, div#create_event p.buttons
+div#create_event p.times, div#create_event p.buttons, div#add_content p.buttons
 {
 	float: right;
 	font-size: 1.3em;
 	margin: 5px 25px 25px 0;
 }
 
-div#create_event p.buttons input, div#create_event p.buttons button
+div#add_content p.buttons
+{
+	margin-top: 20px;
+}
+div#create_event p.buttons input, div#create_event p.buttons button, div#add_content p.buttons input, div#add_content p.buttons button
 {
 	background-color: #333;
 	border: none;
@@ -593,7 +600,7 @@ div#create_event p.buttons input, div#create_event p.buttons button
 	width: 80px;
 }
 
-div#create_event p.buttons #btnCancel:hover, div#create_event p.buttons input:hover
+div#create_event p.buttons #btnCancel:hover, div#create_event p.buttons input:hover, div#add_content p.buttons #btnCancel:hover, div#add_content p.buttons input:hover
 {
 	cursor: pointer;
 }
@@ -616,7 +623,7 @@ div#create_event select#drop_event_type
 	margin-bottom: 15px;
 }
 
-div#create_event  p.warning
+div#create_event p.warning, div#add_content p.warning
 {
 	display: none;
 	float: left;
@@ -624,7 +631,7 @@ div#create_event  p.warning
 	padding-left: 25px;
 }
 
-div#create_event div.feedback p.error
+div#create_event div.feedback p.error, div#add_content div.feedback p.error
 {
 	font-size: 1.4em;
 	line-height: 1.2em;
@@ -695,5 +702,136 @@ div#info_content
 	border-radius: 8px;
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
+	margin: -18px auto 0 auto;
 	min-height: 600px;
+	width: 850px;
+}
+
+div#add_content
+{
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	box-shadow: 1px 1px 3px #444;
+		-moz-box-shadow: 1px 1px 3px #444;
+		-webkit-box-shadow: 1px 1px 3px #444;
+	display: none;
+	float: left;
+	margin-top: -8px;
+	margin-left: 125px;
+	position: absolute;
+	width: 600px;
+}
+
+div#add_content form
+{
+	margin: 15px auto 0 auto;
+	width: 525px;
+}
+
+div#add_content textarea
+{
+	border: 1px solid #BBB;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	height: 300px;
+	margin-bottom: 15px;
+	padding: 12px;
+	resize: none;
+	width: 500px;
+}
+
+div#add_content label.fix
+{
+	margin-bottom: 10px;
+}
+
+div#add_content input[type="text"]
+{
+	width: 343px;
+}
+
+div#add_content p.warning
+{
+	float: left;
+	font-size: 1.4em;
+	margin-left: 10px;
+	padding-left: 25px;
+}
+
+div#add_content div.feedback
+{
+	float: left;
+	margin-left: 190px;
+}
+
+div#add_content #cancelContent
+{
+	cursor: pointer;
+}
+
+div#info_content_wrapper
+{
+	padding: 30px 0 0 35px;
+}
+
+div#info_content_wrapper img
+{
+	margin-bottom: 12px;
+}
+
+div#info_content_wrapper p
+{
+	font-size: 1.2em;
+}
+
+div#info_content_wrapper ul
+{
+	margin: 25px 0 0 35px;
+}
+
+div#info_content_wrapper ul li
+{
+	background-color: #efeeee;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	font-size: 1.2em;
+	height: 18px;
+	margin-top: 2px;
+	padding: 10px 15px 0 15px;
+	width: 670px;
+}
+
+div#info_content_wrapper ul li:hover
+{
+	background-color: #ff0;
+}
+
+div#info_content_wrapper ul li:hover span
+{
+	color: #000;
+}
+
+div#info_content_wrapper ul li span
+{
+	color: #cecdcd;
+	float: right;
+}
+
+#back_to_main
+{
+	display: none;
+	float: right;
+	font-size: 1.2em;
+	margin-right: 85px;
+	margin-top: 10px;
+}
+
+#tips_list a:link, #tips_list a:visited, #tips_list a:hover, #tips_list:active
+{
+	color: #000;
 }

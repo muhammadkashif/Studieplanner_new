@@ -14,6 +14,7 @@
 		<![endif]-->
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery-1.5.2-min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery-ui-1.8.12-min.js"></script>
+		<script type="text/javascript" src="<?= base_url(); ?>assets/js/tiny_mce/tiny_mce.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/javascript.js"></script>
 		<?= link_tag('assets/css/global.css'); ?>
 		<?= link_tag('assets/css/jquery_ui/jquery.ui.all.css'); ?>

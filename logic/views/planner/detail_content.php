@@ -181,7 +181,7 @@
 				$data = array(
 								'name'			=>		'date',
 								'id'			=>		'date',
-								'placeholder'	=>		'',
+								'placeholder'	=>		'Klik hier',
 								'value'			=>		set_value('date')
 							 );
 				
