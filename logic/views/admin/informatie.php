@@ -1,4 +1,8 @@
 <div id="info_content">
+	<!-- remove confirm dialog -->
+	<div id="dialog" title="Gelieve te bevestigen">
+		<p>Bent u zeker dat u deze tip wil verwijderen?</p>
+	</div>
 	<!-- ajax div -->
 	<div id="add_content">
 		<img src="<?= base_url(); ?>assets/images/header_add_content.png" alt="Nieuwe inhoud toevoegen" />
@@ -77,7 +81,9 @@
 						$i = 1;
 						foreach($content as $item)
 						{
-							echo "<li><a href='#' name='" . $item['id'] . "'>" . $item['title'] . "</a><span>bewerk | verwijder</span></li>";
+							echo "<li id='" . $item['id'] . "'><a href='#' name='" . $item['id'] . "' class='item_link'>" . $item['title'] . "</a><span>bewerk | 
+								<a href='#' name='" . $item['id'] . "' class='del_link'>verwijder</a>
+								</span></li>";
 							$i++;
 						}
 					}
@@ -97,6 +103,45 @@
 
 <script type="text/javascript">
 	$(document).ready(function()	{
+
+		    $("#dialog").dialog({
+		      modal: true,
+		            bgiframe: true,
+		            width: 300,
+		            height: 200,
+		      autoOpen: false
+		      });
+
+
+		    $(".del_link").click(function(e) {
+				
+				e.preventDefault();
+		        var id = $(this).attr('name');
+				var cct = $.cookie('ci_csrf_token');
+		
+		        $("#dialog").dialog('option', 'buttons', {
+		                "Verwijderen" : function() {
+							$.ajax({
+								type: "POST",
+								url: "/informatie/del_content",
+								data: { id: id, ci_csrf_token: cct },
+								success: function(data)
+								{
+									$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
+									$("#tips_list ul li#" + id).fadeOut(); 
+								}
+							});
+							$(this).dialog("close");
+		        		},
+		                "Annuleren" : function() {
+		                    $(this).dialog("close");
+		        		}
+		     	});
+
+		        $("#dialog").dialog("open");
+				
+		    });
+	
 		
 		$("#submitContent").click(function(e)	{
 			
@@ -133,7 +178,7 @@
 			e.preventDefault();
 		});
 		
-		$("#tips_list ul li a").click(function(e)	{
+		$("#tips_list ul li a.item_link").click(function(e)	{
 			var id = $(this).attr('name');
 			var cct = $.cookie('ci_csrf_token');
 		

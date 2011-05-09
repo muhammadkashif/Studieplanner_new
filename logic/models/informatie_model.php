@@ -57,4 +57,19 @@ class Informatie_model extends CI_Model
 		
 		return $data;
 	}
+	
+	public function del_content($id)
+	{
+		$this->db->where('id', $id);
+		
+		if($this->db->delete('tblContent'))
+		{
+			return TRUE;
+		}
+		else 
+		{
+			return FALSE;
+		}
+	}
+	
 }

@@ -74,8 +74,30 @@ class Informatie extends MY_Controller
 	
 	
 	// delete
-	public function del_content($id)
+	public function del_content()
 	{
-		
+		if($this->session->userdata('role') == 2 )
+		{
+			$id = $this->input->post('id');
+			$result = $this->informatie_model->del_content($id);
+			if($result)
+			{
+				$data['status'] = TRUE;
+				$data['message'] = "Tip verwijderd.";
+			}
+			else
+			{
+				$data['status'] = FALSE;
+				$data['message'] = "Er was een probleem met het verwijderen";
+			}
+			
+			header('Content-type: application/json');
+			echo json_encode($data);
+			
+		}
+		else
+		{
+			redirect('/site');
+		}
 	}
 }
