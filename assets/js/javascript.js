@@ -3,12 +3,14 @@ $(document).ready(function()	{
 	$("#day_list li").live("click", function()	{
 		$(".selected").removeClass("selected");
 		var day = $(this).text();
+		var cct = $.cookie('ci_csrf_token');
+	
 		$(this).addClass('selected');
 
 		$.ajax({
 			type: "POST",
 			url: "/planner/change_detail",
-			data: { day: day, month: current_month, year: current_year },
+			data: { day: day, month: current_month, year: current_year, ci_csrf_token: cct },
 			success: function(data)
 			{
 				$("#detail_content").html(data);

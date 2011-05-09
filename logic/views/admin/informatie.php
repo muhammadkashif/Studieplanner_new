@@ -103,12 +103,13 @@
 			var title = $("#title").val();
 		    var content_temp = tinyMCE.get('content');
 			var content = content_temp.getContent();
+			var cct = $.cookie('ci_csrf_token');
 			$(".feedback").html("");
 			
 			$.ajax({
 				type: "POST",
 				url: "/informatie/add_content",
-				data: { title: title, content: content },
+				data: { title: title, content: content, ci_csrf_token: cct },
 				success: function(data)
 				{
 					if(! data['status'])
@@ -134,11 +135,12 @@
 		
 		$("#tips_list ul li a").click(function(e)	{
 			var id = $(this).attr('name');
-			
+			var cct = $.cookie('ci_csrf_token');
+		
 			$.ajax({
 				type: "POST",
 				url: "/informatie/print_item",
-				data: { id: id },
+				data: { id: id, ci_csrf_token: cct },
 				success: function(data)
 				{
 					$("#tips_list").hide();

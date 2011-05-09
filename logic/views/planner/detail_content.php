@@ -8,7 +8,7 @@
 			echo "<div class='grid'>";
 			$header = "<p class='detail_header'>";
 			$header .= ucfirst($dates[0][$key]['name']) . ", " . $key . " " . $init['curr_month_name'];
-			$header .= "<img src='" . base_url() . "assets/images/create_event.png' alt='Plan iets'></p>";
+			$header .= "<img src='" . base_url() . "assets/images/create_event.png' alt='Plan nieuwe taak' title='Plan nieuwe taak'></p>";
 			
 			echo $header;
 		
@@ -86,12 +86,12 @@
 			var start_time = $("#start_time_hrs").val() + ":" + $("#start_time_min").val() + ":" + "00";
 			var end_time = $("#end_time_hrs").val() + ":" + $("#end_time_min").val() + ":" + "00";
 			var event_type = $("#drop_event_type").val();
-			
+			var cct = $.cookie('ci_csrf_token');
 			
 			$.ajax({
 				type: "POST",
 				url: "/planner/create_event",
-				data: { title: title, description: description, date: output_date, start_time: start_time, end_time: end_time, event_type: event_type },
+				data: { title: title, description: description, date: output_date, start_time: start_time, end_time: end_time, event_type: event_type, ci_csrf_token: cct },
 				success: function(data)
 				{
 					if( ! data['status'])

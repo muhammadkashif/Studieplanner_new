@@ -12,6 +12,8 @@
 		
 			// previous, next month ajax call
 			$(".previous, .next").click(function(event)	{
+				
+				var cct = $.cookie('ci_csrf_token');
 				$("#days_loader").show();
 				if(event.target.id == "previous")
 				{
@@ -41,7 +43,7 @@
 				$.ajax({
 					type: "POST",
 					url: "/planner/change_dates",
-					data: { month: current_month, year: current_year },
+					data: { month: current_month, year: current_year, ci_csrf_token: cct },
 					success: function(data)
 					{
 						$("#dates_content").html(data);

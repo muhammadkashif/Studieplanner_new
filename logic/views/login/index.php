@@ -103,11 +103,10 @@
 	$(document).ready(function(){
 		
 		$("#btnLogin").click(function(e)	{
-			
 			// init vars
 			var email = $("#email").val();
 			var password = $("#password").val();
-			
+			var cct = $.cookie('ci_csrf_token');
 			
 			$("p.error").hide();
 			$(".loader").show();
@@ -116,7 +115,7 @@
 			$.ajax({
 				type: "POST",
 				url: "/login/go",
-				data: ({email: email, password: password}),
+				data: ({email: email, password: password, ci_csrf_token: ctt}),
 				success: function(data){
 					$(".loader").hide();
 					

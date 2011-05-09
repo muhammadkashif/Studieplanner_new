@@ -33,11 +33,12 @@
 		
 		$("#tips_list ul li a").click(function(e)	{
 			var id = $(this).attr('name');
+			var cct = $.cookie('ci_csrf_token');
 			
 			$.ajax({
 				type: "POST",
 				url: "/informatie/print_item",
-				data: { id: id },
+				data: { id: id, ci_csrf_token: cct },
 				success: function(data)
 				{
 					$("#tips_list").hide();

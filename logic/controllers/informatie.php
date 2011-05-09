@@ -10,15 +10,9 @@ class Informatie extends MY_Controller
 		$this->load->model('informatie_model');
 	}
 	
-	public function print_item()
-	{
-		$id = $this->input->post('id');
-		$data = $this->informatie_model->get_item($id);
-		
-		header('Content-type: application/json');
-		echo json_encode($data);
-	}
+	/* crud */
 	
+	// create
 	public function add_content()
 	{
 		$rules = array(
@@ -64,5 +58,24 @@ class Informatie extends MY_Controller
 			header('Content-type: application/json');
 			echo json_encode($feedback);		
 		}
+	}
+	
+	// read
+	public function print_item()
+	{
+		$id = $this->input->post('id');
+		$data = $this->informatie_model->get_item($id);
+		
+		header('Content-type: application/json');
+		echo json_encode($data);
+	}
+	
+	// update
+	
+	
+	// delete
+	public function del_content($id)
+	{
+		
 	}
 }
