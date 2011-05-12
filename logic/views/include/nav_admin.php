@@ -21,7 +21,7 @@
 					<a href="<?= $base_url; ?>admin/">Home</a>
 				</li>
 				<li <? if($page_title == "Planner") {?>class="active"<? } ?>>
-					<a href="<?= $base_url; ?>planner/admin">Planner</a>
+					<a href="<?= $base_url; ?>admin/users">Gebruikers</a>
 				</li>
 				<li <? if($page_title == "Informatie") {?>class="active"<? } ?>>
 					<a href="<?= $base_url; ?>admin/informatie">Informatie</a>

@@ -89,7 +89,8 @@
 					}
 				?>
 			</ul>
-			<a href="/admin/add_content" id="voegtoe">nieuwe tip toevoegen</a>
+			<br />
+			<a href="/admin/add_content" id="voegtoe"><img src="<?= base_url(); ?>assets/images/create_event.png" />Nieuwe tip toevoegen</a>
 		</div>
 	</div>
 	<div class='wysiwyg'>
@@ -170,7 +171,6 @@
 						$("#add_content").hide();
 						$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();				
 					}
-					
 				}
 			});
 			

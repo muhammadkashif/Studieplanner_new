@@ -21,6 +21,7 @@ $(document).ready(function()	{
 	$("#voegtoe").click(function(e)	{
 		
 		// show add_content div
+		
 		$("#add_content").fadeIn();
 		
 		// tinyMCE 
@@ -37,5 +38,5 @@ $(document).ready(function()	{
 		// prevent link behaviour
 		e.preventDefault();
 	});
-	
+
 });

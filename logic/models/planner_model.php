@@ -160,6 +160,30 @@ class Planner_model extends CI_Model
 		}
 	}
 
+	public function get_single_event_by_id($id)
+	{		
+		$qry = $this->db->where('id', $id)
+			 	 		->get('tblEvents');
+				
+		$data = $qry->result_array();
+		
+		return $data;
+	}
+	
+	public function update_event($data)
+	{
+		/* UPDATE query */
+		if($this->db->where('id', $data['id'])
+				 	->update('tblEvents', $data))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+				
+	}
 
 /* private functions */
 	

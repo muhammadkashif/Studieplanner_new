@@ -227,6 +227,10 @@ nav	ul li
 nav ul li a:link, nav ul li a:visited, nav ul li a:hover, nav ul li a:active
 {
 	color: #fff;
+	display: block;
+	height: 15px;
+	margin: 0 auto;
+	width: 90px;
 }
 
 
@@ -234,7 +238,6 @@ nav ul li:hover a, nav ul li:hover
 {
 	color: #000;
 	background-color: #ff0;
-	border: 1px solid #ff0;
 }
 
 nav .active
@@ -506,7 +509,7 @@ div.event_type #type_wrapper p span.vrijetijd
 
 /** create event, add content */
 
-div#create_event
+div#create_event, div#edit_event
 {
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -524,19 +527,19 @@ div#create_event
 	width: 500px;
 }
 
-div#create_event img, div#add_content img
+div#create_event img, div#add_content img, div#edit_event img
 {
 	float: left;
 	margin: 10px 0 5px 15px;
 }
 
-div#create_event form, div#add_content form
+div#create_event form, div#add_content form, div#edit_event form
 {
 	margin: 15px auto 0 auto;
 	width: 450px;
 }
 
-div#create_event label, div#add_content label
+div#create_event label, div#add_content label, div#edit_event label
 {
 	display: block;
 	float: left;
@@ -544,7 +547,7 @@ div#create_event label, div#add_content label
 	width: 150px;
 }
 
-div#create_event input[type="text"], div#add_content input[type="text"]
+div#create_event input[type="text"], div#add_content input[type="text"], div#edit_event input[type="text"]
 {
 	border: 1px solid #BBB;
 	border-radius: 8px;
@@ -557,7 +560,7 @@ div#create_event input[type="text"], div#add_content input[type="text"]
 	width: 244px;
 }
 
-div#create_event textarea
+div#create_event textarea, div#edit_event textarea
 {
 	border: 1px solid #BBB;
 	border-radius: 8px;
@@ -570,24 +573,26 @@ div#create_event textarea
 	width: 250px;
 }
 
-div#create_event input[type="text"]:focus, div#create_event textarea:focus, div#add_content input[type="text"]:focus, div#add_content textarea:focus
+div#create_event input[type="text"]:focus, div#create_event textarea:focus, div#add_content input[type="text"]:focus, div#add_content textarea:focus,
+div#edit_event input[type="text"]: focus, div#edit_event textarea:focus
 {
 	border: 1px solid #777;
 	outline: none;
 }
 
-div#create_event p.times, div#create_event p.buttons, div#add_content p.buttons
+div#create_event p.times, div#create_event p.buttons, div#add_content p.buttons, div#edit_event p.times, div#edit_event p.buttons
 {
 	float: right;
 	font-size: 1.3em;
 	margin: 5px 25px 25px 0;
 }
 
-div#add_content p.buttons
+div#add_content p.buttons, div#edit_event p.buttons
 {
 	margin-top: 20px;
 }
-div#create_event p.buttons input, div#create_event p.buttons button, div#add_content p.buttons input, div#add_content p.buttons button
+div#create_event p.buttons input, div#create_event p.buttons button, div#add_content p.buttons input, div#add_content p.buttons button,
+div#edit_event p.buttons input, div#edit_event p.buttons button
 {
 	background-color: #333;
 	border: none;
@@ -600,30 +605,31 @@ div#create_event p.buttons input, div#create_event p.buttons button, div#add_con
 	width: 80px;
 }
 
-div#create_event p.buttons #btnCancel:hover, div#create_event p.buttons input:hover, div#add_content p.buttons #btnCancel:hover, div#add_content p.buttons input:hover
+div#create_event p.buttons #btnCancel:hover, div#create_event p.buttons input:hover, div#add_content p.buttons #btnCancel:hover, div#add_content p.buttons input:hover,
+div#edit_event p.buttons #btnCancel:hover, div#edit_event p.buttons input:hover
 {
 	cursor: pointer;
 }
 
-div#create_event select
+div#create_event select, div#edit_event select
 {
 	background-color: #fff;
 	border: 1px solid #888;
 }
 
-div#create_event div.feedback
+div#create_event div.feedback, div#edit_event div.feedback
 {
 	display: none;
 	margin: 0 0 0 180px;
 
 }
 
-div#create_event select#drop_event_type
+div#create_event select#cr_drop_event_type, div#edit_event select#ed_drop_event_type
 {
 	margin-bottom: 15px;
 }
 
-div#create_event p.warning, div#add_content p.warning
+div#create_event p.warning, div#add_content p.warning, div#edit_event p.warning
 {
 	display: none;
 	float: left;
@@ -631,7 +637,7 @@ div#create_event p.warning, div#add_content p.warning
 	padding-left: 25px;
 }
 
-div#create_event div.feedback p.error, div#add_content div.feedback p.error
+div#create_event div.feedback p.error, div#add_content div.feedback p.error, div#edit_event div.feedback p.error
 {
 	font-size: 1.4em;
 	line-height: 1.2em;
@@ -688,6 +694,11 @@ div.vrijetijd:hover
 	margin-left: 10px;
 	margin-right: 10px;
 	text-align: center;
+}
+
+.grid div
+{
+	cursor: pointer;
 }
 
 .base .grid {
@@ -800,10 +811,10 @@ div#info_content_wrapper ul li
 		-moz-border-radius: 8px;
 		-webkit-border-radius: 8px;
 	font-size: 1.2em;
-	height: 18px;
-	margin-top: 2px;
+	height: 28px;
 	padding: 10px 15px 0 15px;
-	width: 670px;
+	margin-top: 4px;
+	width: 700px;
 }
 
 div#info_content_wrapper ul li:hover
@@ -811,14 +822,13 @@ div#info_content_wrapper ul li:hover
 	background-color: #ff0;
 }
 
-div#info_content_wrapper ul li:hover span
-{
-	color: #000;
-}
-
 div#info_content_wrapper ul li span
 {
-	color: #cecdcd;
+	float: right;
+}
+
+div#info_content_wrapper ul li:hover span
+{
 	float: right;
 }
 
@@ -831,7 +841,58 @@ div#info_content_wrapper ul li span
 	margin-top: 10px;
 }
 
+
 #tips_list a:link, #tips_list a:visited, #tips_list a:hover, #tips_list:active
 {
 	color: #000;
+}
+
+
+#voegtoe
+{
+	font-size: 1.2em;
+	margin-top: 9px;
+}
+
+#voegtoe img
+{
+	float: left;
+	margin-left: 40px;
+	margin-right: 7px;
+}
+
+
+/* users */
+
+div.user_info
+{
+	display: none;
+}
+
+div#user_container, div.user_info
+{
+	padding: 30px 0 0 35px;
+}
+
+div#user_container ul
+{
+	margin: 25px 0 0 35px;
+}
+
+div#user_container ul li
+{
+	background-color: #efeeee;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	font-size: 1.2em;
+	height: 18px;
+	padding: 10px 15px 0 15px;
+	margin-top: 4px;
+	width: 700px;
+}
+
+div#user_container ul li:hover
+{
+	background-color: #ff0;
 }

@@ -7,6 +7,7 @@ class Planner extends MY_Controller
 		
 		parent::__construct();
 		$this->load->helper('form');
+		$this->load->helper('text');
 		$this->load->library('form_validation');
 		$this->load->model('planner_model');
 
@@ -115,17 +116,41 @@ class Planner extends MY_Controller
 			}
 			else
 			{
-				$result = $this->planner_model->insert_event($data);
-				$feedback = array(
-								'status'		=>		TRUE,
-								'message'		=>		'Taak opgeslagen'
-						);
-				
-				header('Content-type: application/json');
-				echo json_encode($feedback);
+				if( ! $this->input->post('update'))
+				{
+					$result = $this->planner_model->insert_event($data);
+					$feedback = array(
+									'status'		=>		TRUE,
+									'message'		=>		'Taak opgeslagen'
+							);
+
+					header('Content-type: application/json');
+					echo json_encode($feedback);
+				}
+				else
+				{
+					$data['id'] = $this->input->post('id');
+					$result = $this->planner_model->update_event($data);
+					$feedback = array(
+									'status'		=>		TRUE,
+									'message'		=>		'Taak gewijzigd'
+							);
+					
+					header('Content-type: application/json');
+					echo json_encode($feedback);
+				}
 			}
 			
 		}
 
+	}
+	
+	public function get_edit_content()
+	{
+		$id = $this->input->post('id');
+		$data = $this->planner_model->get_single_event_by_id($id);
+
+		header('Content-type: application/json');
+		echo json_encode($data[0]);
 	}
 }
