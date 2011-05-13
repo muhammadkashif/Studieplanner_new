@@ -5,7 +5,7 @@
     #'system' can be replaced if you have renamed your system folder.
     RewriteCond %{REQUEST_URI} ^core.*
     RewriteRule ^(.*)$ index.php/$1 [L]
-
+	
     #Checks to see if the user is attempting to access a valid file,
     #such as an image or css document, if this isn't true it sends the
     #request to index.php
@@ -15,6 +15,8 @@
     #This last condition enables access to the images and css folders, and the robots.txt file
     RewriteCond $1 !^(index\.php|(.*)\.swf|images|robots\.txt|css|docs|cache)
     RewriteRule ^(.*)$ index.php/$1 [L]
+
+
     </IfModule>
 
 <IfModule !mod_rewrite.c>

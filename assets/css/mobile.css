@@ -8,3 +8,9 @@ h3.fix_margin
 {
 	margin-bottom: 0px;
 }
+
+input[data-type="date"]
+{
+	color: #000;
+	text-shadow: none;
+}

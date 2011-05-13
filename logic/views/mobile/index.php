@@ -26,23 +26,30 @@
 		{
 			echo "<p><strong>Welkom</strong> bij de mobiele versie van <strong>Studieplanner!</strong></p>";
 		}
-		else 
-		{
-			echo "<p>Welkom terug, " . ucfirst($this->session->userdata('firstname')) . "</p>";
-		}
 		?>
-		<ul data-role="listview" data-inset="true">
+		<ul data-role="listview" data-inset="true" data-dividertheme="a">
 		<?
 		if( ! $this->session->userdata("is_logged_in")) 
 		{
-			echo "<li> <a href='mobile/login'>Aanmelden</a> </li>";
+			echo "<li><a href='mobile/login'>Aanmelden</a></li>";
 		}
 		else
 		{
-			echo "<li> <a href='mobile/planner'>Mijn planner</a> </li>";
+		?>
+			<li data-role="list-divider">Mijn planner</li>
+			<li><a href="/mobile/vandaag">Vandaag</a></li>
+			<li><a href="/mobile/week">Deze week</a></li>
+		</ul>
+		<ul data-role="listview" data-inset="true" data-dividertheme="a">
+			<li data-role="list-divider">Plannen</li>
+			<li><a href="/mobile/add">Taak toevoegen</a></li>
+		</ul>
+		<?
 		}
 		?>	
-			<li> <a href="mobile/about" data-transition="pop">Over studieplanner</a> </li>
+		<ul data-role="listview" data-inset="true" data-dividertheme="a">
+			<li data-role="list-divider">Informatie</li>	
+			<li><a href="mobile/about">Over studieplanner</a></li>
 		</ul>
 		<?
 		if($this->session->userdata("is_logged_in"))

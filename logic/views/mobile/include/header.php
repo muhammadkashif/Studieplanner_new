@@ -9,6 +9,7 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	
 		<link rel="apple-touch-icon" href="apple-touch-icon-57x57.png" />
 		<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png" />
@@ -19,10 +20,18 @@
 		<!--[if IE]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/mobile.css" />
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
-		<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/css/mobile.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jquery.mobile.datebox.css" /> 
+		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+		<script>
+		// BEFORE loading jQM
+			$( document ).bind( "mobileinit", function(){
+		    	$.mobile.page.prototype.options.degradeInputs.date = 'text';
+			});
+		</script>
+		<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+		<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jquery.mobile.datebox.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/cookie.js"></script>
 		
 	</head>

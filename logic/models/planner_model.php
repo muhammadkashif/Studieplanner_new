@@ -184,6 +184,45 @@ class Planner_model extends CI_Model
 		}
 				
 	}
+	
+	public function get_today()
+	{
+		$day = date('j');
+		$month = date('n');
+		$year = date('Y');
+		
+		$data['today'] = $this->get_event_info($day, $month, $year);
+		
+		return $data;
+	}
+	
+	public function get_week()
+	{
+		$day = date('j');
+		$month = date('n');
+		$year = date('Y');
+		$days_in_curr_month = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+		
+		for($i = 1; $i <= 5; $i++)
+		{
+			$data['week'][$day] = $this->get_event_info($day, $month, $year);
+			$day++;
+			if($day > $days_in_curr_month)
+			{
+				$day = 1;
+				if($month == 12)
+				{
+					$month = 1;
+				}
+				else
+				{
+					$month++;
+				}
+			}
+		}
+		
+		return $data;
+	}
 
 /* private functions */
 	
