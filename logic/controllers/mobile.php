@@ -38,6 +38,15 @@ class Mobile extends CI_Controller
 		$this->load->view('mobile/include/footer');
 	}
 	
+	public function planner()
+	{
+		$this->load->view('mobile/include/header');
+		
+		$this->load->view('mobile/planner');
+		
+		$this->load->view('mobile/include/footer');
+	}
+	
 	public function logout()
 	{
 		$this->session->sess_destroy();
