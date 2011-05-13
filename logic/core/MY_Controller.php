@@ -5,6 +5,12 @@
     function __construct() {
         
 		parent::__construct();
+		$this->load->library('user_agent');
+
+		if($this->agent->is_mobile())
+		{
+			redirect('http://m.frenchyimfaking.com/mobile');
+		}
 		
 		if( ! ($this->uri->segment(1) == "login"))
 		{

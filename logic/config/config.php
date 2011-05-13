@@ -14,7 +14,14 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://studieplanner.be/';
+//$config['base_url']	= 'http://studieplanner.be/';
+
+if(isset($_SERVER['HTTPS']) and 'on' === $_SERVER['HTTPS']) {
+    $config['base_url'] = 'https://';
+} else {
+    $config['base_url'] = 'http://';
+}
+$config['base_url'] .= $_SERVER['SERVER_NAME'] . '/';
 
 /*
 |--------------------------------------------------------------------------
