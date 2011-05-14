@@ -153,4 +153,30 @@ class Planner extends MY_Controller
 		header('Content-type: application/json');
 		echo json_encode($data[0]);
 	}
+	
+	public function delete_event()
+	{
+		$id = $this->input->post('id');
+		$user_id = $this->session->userdata('id');
+		$data = $this->planner_model->delete_event($id, $user_id);
+		
+		if( ! $data)
+		{
+			$feedback = array(
+							'status'		=>		FALSE,
+							'message'		=>		'Fout bij verwijderen'
+			);
+		}
+		else
+		{
+			$feedback = array(
+							'status'		=>		TRUE,
+							'message'		=>		'Taak verwijderd'
+			);
+		}
+		
+		header('Content-type: application/json');
+		echo json_encode($feedback);
+		
+	}
 }

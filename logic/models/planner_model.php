@@ -185,6 +185,26 @@ class Planner_model extends CI_Model
 				
 	}
 	
+	
+	public function delete_event($id, $user_id)
+	{
+		$qry = $this->db->where('id', $id)
+			    	    ->get('tblEvents');
+		
+		$row = $qry->result_array();
+		if($user_id == $row[0]['user_id'])
+		{
+			$this->db->where('id', $id)
+					 ->delete('tblEvents');
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
+/* mobile */
 	public function get_today()
 	{
 		$day = date('j');
@@ -224,6 +244,7 @@ class Planner_model extends CI_Model
 		return $data;
 	}
 
+	
 /* private functions */
 	
 	private function get_detail_info($day, $month, $year, $end_of_month)

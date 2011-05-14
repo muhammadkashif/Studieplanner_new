@@ -1,4 +1,7 @@
-<div id="detail_content">	
+<div id="detail_content">
+	<div id="dialog" title="Gelieve te bevestigen">
+		<p>Bent u zeker dat u deze taak wil verwijderen?</p>
+	</div>	
 	<div class="base">
 		<?php
 		
@@ -7,13 +10,13 @@
 			echo "<div class='grid'>";
 			$header = "<p class='detail_header'>";
 			$header .= ucfirst($dates[0][$key]['name']) . ", " . $key . " " . $init['curr_month_name'];
-			$header .= "<img src='" . base_url() . "assets/images/create_event.png' alt='Plan nieuwe taak' title='Plan nieuwe taak'></p>";
+			$header .= "<img src='" . base_url() . "assets/images/create_event.png' alt='Plan nieuwe taak' title='Plan nieuwe taak' class='tipsy_new_event'></p>";
 			
 			echo $header;
 		
 			for($i = 1; $i <= $details[0][$key]['event_count']; $i++)
 			{
-				echo "<div id='" . $details[0][$key][$i]['id'] . "' class='event " . $details[0][$key][$i]['type'] . "'>";
+				echo "<div title='Taak bewerken' id='" . $details[0][$key][$i]['id'] . "' class='event " . $details[0][$key][$i]['type'] . "'>";
 				echo "<p class='uren'>" . substr($details[0][$key][$i]['time_start'], 0, 5) . " - "
 				 		   . substr($details[0][$key][$i]['time_end'], 0, 5) . "</p>";
 					echo "<p class='event_title'>" . $details[0][$key][$i]['title'] . "</p>";
@@ -55,11 +58,30 @@
 	<script type="text/javascript">
 	$(document).ready(function()	{
 		
+		$('.tipsy_new_event').tipsy({gravity: 'n'});
+		$('.event').tipsy({gravity: 'w'});
+		
 		$("p.detail_header img").click(function()	{
 			
 			$(".date").val("");
 			$("#create_event").fadeIn();
 		});
+		
+		$(".edit_close").click(function()	{
+			$("#edit_event").hide();
+		});
+		
+		$(".create_close").click(function()	{
+			$("#create_event").hide();
+		})
+		
+	    $("#dialog").dialog({
+	      modal: true,
+	            bgiframe: true,
+	            width: 300,
+	            height: 200,
+	      autoOpen: false
+	   });
 	
 	   $(".date").datepicker({ 
 								showAnim: 'fadeIn', 
@@ -221,10 +243,49 @@
 					}
 				}
 			});
-			
+		
 			e.preventDefault();
 		});
 		
+		$("#btnDelete").click(function(e)	{
+			e.preventDefault();
+			
+			var id = $("#event_id").val();
+			var cct = $.cookie('ci_csrf_token');
+			
+			$("#dialog").dialog('option', 'buttons', {
+	                "Verwijderen" : function() {
+						$.ajax({
+							type: "POST",
+							url: "/planner/delete_event",
+							data: { id: id, ci_csrf_token: cct },
+							success: function(data)
+							{
+								$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
+								if(data['status'])
+								{
+									$.ajax({
+										type: "POST",
+										url: "/planner/change_detail",
+										//data: { month: current_month, year: current_year },
+										success: function(data)
+										{
+											$("#detail_content").html(data);
+										}
+									});
+									$("#edit_event").hide();
+								}
+							}
+						});
+						$(this).dialog("close");
+	        		},
+	                "Annuleren" : function() {
+	                    $(this).dialog("close");
+	        		}
+	     	});
+
+	        $("#dialog").dialog("open");
+		});
 		
 	});
 	</script>
@@ -232,7 +293,7 @@
 	<!-- create event div, hidden -->
 	<div id="create_event">
 		<img src="<?= base_url(); ?>assets/images/header_create_event.png" alt="Nieuwe taak plannen" />
-		
+		<img src="<?= base_url(); ?>assets/images/close_edit.png" alt="Sluiten" class="create_close"/>
 		<p class="clearfix warning">Let op:</p>
 		<div class="feedback clearfix">
 				
@@ -376,6 +437,7 @@
 	<!-- edit event -->	
 	<div id="edit_event">
 		<img src="<?= base_url(); ?>assets/images/header_edit_event.png" alt="Taak bewerken" />
+		<img src="<?= base_url(); ?>assets/images/close_edit.png" alt="Sluiten" class="edit_close"/>
 		
 		<p class="clearfix warning">Let op:</p>
 		<div class="feedback clearfix">
@@ -501,6 +563,13 @@
 
 		<p class="buttons"><!-- buttons start -->
 			<?php
+				$data = array(
+								'name'			=>		'btnDelete',
+								'id'			=>		'btnDelete',
+								'value'			=>		'Verwijderen'
+							);
+				echo form_submit($data);
+				
 				$data = array(
 								'name'			=>		'btnEdit',
 								'id'			=>		'btnEdit',

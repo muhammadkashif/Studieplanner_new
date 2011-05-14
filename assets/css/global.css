@@ -606,7 +606,7 @@ div#edit_event p.buttons input, div#edit_event p.buttons button
 }
 
 div#create_event p.buttons #btnCancel:hover, div#create_event p.buttons input:hover, div#add_content p.buttons #btnCancel:hover, div#add_content p.buttons input:hover,
-div#edit_event p.buttons #btnCancel:hover, div#edit_event p.buttons input:hover
+div#edit_event p.buttons #btnCancel:hover, div#edit_event p.buttons input:hover, div#edit_event p.buttons button
 {
 	cursor: pointer;
 }
@@ -674,6 +674,12 @@ div.vrijetijd:hover
 	background-color: #d5e4c4;	
 }
 
+div#edit_event img.edit_close, div#create_event img.create_close
+{
+	cursor: pointer;
+	float: right;
+	margin: 5px 5px 0 0;
+}
 
 /*
 	Based on 960 Grid System - http://960.gs/

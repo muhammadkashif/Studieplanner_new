@@ -11,9 +11,9 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	
 		<link rel="apple-touch-icon" href="apple-touch-icon-57x57.png" />
-		<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png" />
-		<link rel="apple-touch-startup-image" href="apple-touch-startup-image-320x460.png" />
+		<link rel="apple-touch-startup-image" href="/apple-touch-startup-image-320x460.png" />
 		<link rel="apple-touch-startup-image" sizes="768x1004" href="apple-touch-startup-image-768x1004.png" />
 		<title>Studieplanner Mobile</title>
 

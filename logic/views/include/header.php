@@ -17,8 +17,11 @@
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/cookie.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/tiny_mce/tiny_mce.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/javascript.js"></script>
+		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.tipsy.js"></script>
+		
 		<?= link_tag('assets/css/global.css'); ?>
 		<?= link_tag('assets/css/jquery_ui/jquery.ui.all.css'); ?>
+		<?= link_tag('assets/css/tipsy.css'); ?>
 	</head>
 	<body>
 		<noscript class="js_feedback"><p>Deze site werkt het best met Javascript ingeschakeld!</p></noscript>

@@ -81,6 +81,8 @@
 				<label for="mo_date">Datum</label>
 				<input value="" name="mo_date" type="date" data-role="datebox" id="mo_date" data-options='{"mode": "calbox", "noButtonFocusMode": "true"}' readonly="true" />
 				<br />
+			</div>
+			<div data-role="fieldcontain">
 				<label for="mo_start_time_hrs">Van:</label>
 				<select name="mo_start_time_hrs" id="mo_start_time_hrs" >
 					<option data-placeholder="true">Start Uur</li>

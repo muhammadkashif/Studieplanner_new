@@ -223,15 +223,15 @@ class Mobile extends CI_Controller
 	}
 
 
-/* private form validation callbacks */
+/*  form validation callbacks */
 
-	private function check_email($email)
+	public function check_email($email)
 	{
 		$result = $this->login_model->check_email($email);
 		return $result;
 	}
 
-	private function check_pass($pass)
+	public function check_pass($pass)
 	{
 		$result = $this->login_model->check_pass($pass);
 		return $result;

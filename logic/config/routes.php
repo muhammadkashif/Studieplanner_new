@@ -38,7 +38,15 @@
 |
 */
 
-$route['default_controller'] = "site";
+if ($_SERVER['SERVER_NAME'] == 'm.studieplanner.be')
+{
+    $route['default_controller'] = "mobile";	
+}
+else
+{
+	$route['default_controller'] = "site";
+}
+
 $route['404_override'] = '';
 
 
