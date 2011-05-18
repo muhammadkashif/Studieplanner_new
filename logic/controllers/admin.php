@@ -8,8 +8,10 @@ class Admin extends MY_Controller
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->library('pagination');
 		$this->load->model('informatie_model');
 		$this->load->model('user_model');
+		$this->load->model('school_model');
 		if($this->session->userdata('role') != 2)
 		{
 			redirect('/site');
@@ -18,7 +20,19 @@ class Admin extends MY_Controller
 	
 	public function index()
 	{
-		$this->loadView('admin/index');
+		redirect('admin/scholen');
+	}
+	
+	public function scholen()
+	{
+		$init = $this->init->set();		
+		$this->load->view('include/header', $init);
+		$this->load->view('include/nav_admin');
+		
+		$data = $this->school_model->get_school_data();
+		$this->load->view('admin/scholen', $data);
+
+		$this->load->view('include/footer');
 	}
 	
 	public function informatie()
@@ -43,10 +57,9 @@ class Admin extends MY_Controller
 	}
 	
 	
-	public function users()
+	public function gebruikers()
 	{	
 		// pagination for users
-		$this->load->library('pagination');
 		$config['base_url'] = base_url() . 'admin/users/';
 		$get_total_rows = $this->user_model->get_total_rows();
 		$qry = $this->db->query("select count(*) as cnt from tblusers where role = '1'")->result_array();

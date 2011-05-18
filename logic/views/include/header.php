@@ -18,10 +18,12 @@
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/tiny_mce/tiny_mce.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/javascript.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.tipsy.js"></script>
+		<script type="text/javascript" src="<?= base_url(); ?>assets/js/bsn.AutoSuggest_2.1.3_comp.js"></script>
 		
 		<?= link_tag('assets/css/global.css'); ?>
 		<?= link_tag('assets/css/jquery_ui/jquery.ui.all.css'); ?>
 		<?= link_tag('assets/css/tipsy.css'); ?>
+		<?= link_tag('assets/css/autosuggest_inquisitor.css'); ?>
 	</head>
 	<body>
 		<noscript class="js_feedback"><p>Deze site werkt het best met Javascript ingeschakeld!</p></noscript>

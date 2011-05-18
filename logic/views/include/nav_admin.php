@@ -17,11 +17,11 @@
 		</a>
 		<nav>
 			<ul>
-				<li <? if($page_title == "Student") {?>class="active"<? } ?>>
-					<a href="<?= $base_url; ?>admin/">Home</a>
+				<li <? if($page_title == "Scholen") {?>class="active"<? } ?>>
+					<a href="<?= $base_url; ?>admin/scholen">Scholen</a>
 				</li>
-				<li <? if($page_title == "Planner") {?>class="active"<? } ?>>
-					<a href="<?= $base_url; ?>admin/users">Gebruikers</a>
+				<li <? if($page_title == "Gebruikers") {?>class="active"<? } ?>>
+					<a href="<?= $base_url; ?>admin/gebruikers">Gebruikers</a>
 				</li>
 				<li <? if($page_title == "Informatie") {?>class="active"<? } ?>>
 					<a href="<?= $base_url; ?>admin/informatie">Informatie</a>

@@ -21,7 +21,7 @@
 				 		   . substr($details[0][$key][$i]['time_end'], 0, 5) . "</p>";
 					echo "<p class='event_title'>" . $details[0][$key][$i]['title'] . "</p>";
 
-					echo "<p style='line-height: 1.2em;'>" . character_limiter($details[0][$key][$i]['description'], 30) . "</p>";
+					echo "<p style='line-height: 1.2em;'>" . ellipsize($details[0][$key][$i]['description'], 20, 1) . "</p>";
 				echo "</div>";
 			}
 			echo "</div>";	
@@ -58,7 +58,7 @@
 	<script type="text/javascript">
 	$(document).ready(function()	{
 		
-		$('.tipsy_new_event').tipsy({gravity: 'n'});
+		$('.tipsy_new_event').tipsy({gravity: 's'});
 		$('.event').tipsy({gravity: 'w'});
 		
 		$("p.detail_header img").click(function()	{
@@ -272,7 +272,7 @@
 										{
 											$("#detail_content").html(data);
 										}
-									});
+									});ﬂ
 									$("#edit_event").hide();
 								}
 							}
@@ -305,11 +305,7 @@
 		<p class='drop_event_type'>
 			<label for="cr_drop_event_type">Type</label>
 			<?
-				$options = array(
-									'huiswerk'		=>		'Huiswerk',
-									'deadline'		=>		'Deadline',
-									'vrijetijd'		=>		'Vrije Tijd'
-							);
+				$options = $type;
 				$id = "id='cr_drop_event_type'";
 				echo form_dropdown('event_type', $options, '', $id);
 			?>

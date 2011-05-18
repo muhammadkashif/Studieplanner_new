@@ -38,6 +38,10 @@
 			{
 				$this->load->view('include/nav_admin.php');
 			}
+			else if($this->session->userdata('role') == 3)
+			{
+				$this->load->view('include/nav_school.php');
+			}
 		}
 
 		$this->load->view($view, $data);

@@ -15,7 +15,11 @@ class Site extends MY_Controller
 			case '2':
 				redirect('admin/');
 				break;
-
+			
+			case '3':
+				redirect('school/');
+				break;
+				
 			default:
 				redirect("login/");
 		}

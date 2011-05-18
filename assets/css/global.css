@@ -15,6 +15,12 @@ a:link, a:visited, a:hover, a:active
 	text-decoration: none;
 }
 
+input[type="text"]:focus, input[type="password"]:focus
+{
+	border: 1px solid #777;
+	outline: none;
+}
+
 .clearfix
 {
 	clear: both;
@@ -118,12 +124,6 @@ div#login_form input[type="submit"]:hover
 }
 
 
-div#login_form input[type="text"]:focus, div#login_form input[type="password"]:focus, div#login_form input[type="submit"]:focus
-{
-	border: 1px solid #777;
-	outline: none;
-}
-
 div#login_form p.error
 {
 	margin-top: 17px;
@@ -211,8 +211,6 @@ nav	ul li
 {
 	display: block;
 	float: left;
-	height: 19px;				/* 26 (19+7padding-top) */
-	width: 103px;
 	margin-left: 15px;
 	font-size: 1.2em;
 	font-weight: bold;
@@ -221,16 +219,19 @@ nav	ul li
 		-moz-border-radius: 15px;
 		-webkit-border-radius: 15px;
 	border: 1px solid #4a4a4b;
-	padding-top: 7px;
 }
 
 nav ul li a:link, nav ul li a:visited, nav ul li a:hover, nav ul li a:active
 {
 	color: #fff;
 	display: block;
-	height: 15px;
+	height: 19px;				/* 26 (19+7padding-top) */
+	width: 103px;
 	margin: 0 auto;
-	width: 90px;
+	border-radius: 15px;
+		-moz-border-radius: 15px;
+		-webkit-border-radius: 15px;
+	padding-top: 7px;
 }
 
 
@@ -580,19 +581,19 @@ div#edit_event input[type="text"]: focus, div#edit_event textarea:focus
 	outline: none;
 }
 
-div#create_event p.times, div#create_event p.buttons, div#add_content p.buttons, div#edit_event p.times, div#edit_event p.buttons
+div#create_event p.times, div#create_event p.buttons, div#add_content p.buttons, div#edit_event p.times, div#edit_event p.buttons, #profile_right p.buttons
 {
 	float: right;
 	font-size: 1.3em;
 	margin: 5px 25px 25px 0;
 }
 
-div#add_content p.buttons, div#edit_event p.buttons
+div#add_content p.buttons, div#edit_event p.buttons, #profile_right p.buttons
 {
 	margin-top: 20px;
 }
 div#create_event p.buttons input, div#create_event p.buttons button, div#add_content p.buttons input, div#add_content p.buttons button,
-div#edit_event p.buttons input, div#edit_event p.buttons button
+div#edit_event p.buttons input, div#edit_event p.buttons button, #profile_right p.buttons input
 {
 	background-color: #333;
 	border: none;
@@ -606,7 +607,7 @@ div#edit_event p.buttons input, div#edit_event p.buttons button
 }
 
 div#create_event p.buttons #btnCancel:hover, div#create_event p.buttons input:hover, div#add_content p.buttons #btnCancel:hover, div#add_content p.buttons input:hover,
-div#edit_event p.buttons #btnCancel:hover, div#edit_event p.buttons input:hover, div#edit_event p.buttons button
+div#edit_event p.buttons #btnCancel:hover, div#edit_event p.buttons input:hover, div#edit_event p.buttons button, #profile_right p.buttons input:hover
 {
 	cursor: pointer;
 }
@@ -875,9 +876,9 @@ div.user_info
 	display: none;
 }
 
-div#user_container, div.user_info
+div#user_container, div.user_info, div#profile_container, div#school_container
 {
-	padding: 30px 0 0 35px;
+	padding: 30px 0 40px 35px;
 }
 
 div#user_container ul
@@ -901,4 +902,228 @@ div#user_container ul li
 div#user_container ul li:hover
 {
 	background-color: #ff0;
+}
+
+
+/* profile */
+
+#profile_left
+{
+	float: left;
+	margin-top: 15px;
+	margin-right: 50px;
+	min-height: 500px;
+}
+
+#profile_left p
+{
+	width: 175px;
+	background-color: #e6e6e6;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	display: block;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 5px;
+	padding: 10px 0 7px 15px;	
+}
+
+#profile_left p select
+{
+	margin-top: 10px;
+	margin-left: -7px;
+	
+}
+#profile_left ul
+{
+	width: 175px;
+	min-height: 500px;
+}
+
+#profile_left ul li
+{
+	background-color: #e6e6e6;
+	border-radius: 8px;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#profile_left ul li a
+{
+	border-radius: 8px;
+	display: block;
+	padding: 7px 0 7px 15px;
+}
+
+#profile_left ul li a:link, #profile_left ul li a:visited, #profile_left ul li a:hover, #profile_left ul li a:active
+{
+	color: #000;
+}
+
+#profile_left ul li a:hover
+{
+	background-color: #ff0;
+}
+
+#profile_right
+{
+	margin: 15px 0 0 0;
+	float: left;
+}
+
+#profile_right .form_school, #profile_right .form_pass
+{
+	display: none;
+}
+
+#profile_right .form_profile, #profile_right .form_school, #profile_right .form_pass, #profile_right .edit_school
+{
+	float: left;
+	width: 475px;
+}
+
+#profile_right .form_profile form, #profile_right .form_school form, #profile_right .form_pass form
+{
+	margin-top: 20px;
+}
+
+#profile_right form label
+{
+	display: inline-block;
+	font-size: 1.2em;
+	width: 250px;
+}
+
+#profile_right form p
+{
+	margin-bottom: 5px;
+}
+
+#profile_right form input[type="text"], #profile_right form input[type="password"]
+{
+	border: 1px solid #BBB;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	font-size: 1.3em;
+	padding: 4px 12px;
+	width: 175px;
+	
+}
+
+.pass_feedback
+{
+	color: red;
+	display: none;
+	float: right;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-right: 28px;
+}
+
+/* scholen */
+
+.disabled
+{
+	disabled: disabled;
+}
+
+.p_leftfix 
+{
+	padding: 0px !important;	
+}
+
+#add_school, #per_school, #per_rol
+{
+	background-color: #e6e6e6;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	color: #000;
+	display: block;
+	padding: 9px 0 7px 15px;
+	height: 15px;
+	width: 175px;
+}
+
+#profile_left #select_school
+{
+	max-width: 170px;
+}
+
+#profile_right .edit_school form
+{
+	padding-top: 12px;
+}
+#profile_right .edit_school form p input[disabled="disabled"]
+{
+	background-color: #f8f8f8;
+	border: 1px solid #f8f8f8;
+}
+
+#profile_right .edit_school form p, 
+{
+	border-bottom: 1px solid #f0f0f0;
+}
+
+#profile_right .edit_school form p label
+{
+	font-size: 1.3em;
+	width: 270px;
+}
+
+#profile_right .edit_school p.richting_label
+{
+	display: inline-block;
+	font-size: 1.3em;
+	margin-top: 12px;
+	width: 280px;
+}
+
+#profile_right .edit_school select
+{
+	max-width: 187px;
+}
+
+.edit_school h2, .edit_school h2.richting
+{
+	border-bottom: 1px solid #888;
+}
+
+.edit_school h2.richting
+{
+	margin-bottom: 12px;
+}
+
+.richtingen
+{
+	float: right;
+	min-width: 190px;
+}
+
+.richting_overzicht
+{
+	margin-top: 4px;
+	font-size: 1.2em;
+	line-height: 15px;
+}
+
+/* paginate */
+
+#pagination
+{
+	margin: 25px auto 0 auto;
+	width: 30px;
+}
+
+#pagination a, #pagination strong
+{
+	background-color: #f6f6f6;
+	border: 1px #888 solid;
+	border-radius: 3px;
+		-moz-border-radius: 3px; 
+		-webkit-border-radius: 3px;
+	padding: 5px;
 }

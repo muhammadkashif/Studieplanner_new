@@ -140,6 +140,8 @@ class Planner_model extends CI_Model
 			$data['details'] = $detail_info;
 		}
 		
+		$data['type'] = $this->populate_type();
+		
 		return $data;
 	}
 	
@@ -363,4 +365,14 @@ class Planner_model extends CI_Model
 		return $month_name;
 	}
 	
+	private function populate_type()
+	{
+		$qry = $this->db->get('tblType');
+		foreach($qry->result_array() as $type)
+		{
+			$data[$type['key']] = $type['naam'];
+		}
+		
+		return $data;
+	}
 }
