@@ -76,14 +76,14 @@ class School_model extends CI_Model
 
 	public function get_school_data()
 	{
-		$data['scholen'] = $this->db->get('tblSchool')
+		$data = $this->db->get('tblSchool')
 						 			->result_array();
 		
 		$i = 0;		
 		$j = 1;	
-		while($i < count($data['scholen']))
+		while($i < count($data))
 		{
-			$data['scholen'][$i]['richtingen'] = $this->db->query("select r.naam from tblschoolheeftrichting sr 
+			$data[$i]['richtingen'] = $this->db->query("select r.naam from tblschoolheeftrichting sr 
 																	inner join tblstudierichting r on (sr.richting_id = r.id) where sr.school_id = '" . $j ."'")->result_array();
 			$i++;
 			$j++;
@@ -103,6 +103,24 @@ class School_model extends CI_Model
 	{
 		$result = $this->db->insert('tblSchool', $data); 
 		return $result;
+	}
+	
+	public function get_users_per_school($id)
+	{
+		$data['studenten'] = $this->db->query("SELECT u.lastname AS achternaam, u.firstname AS voornaam, u.email, r.naam AS richting
+											   FROM tblUsers u 
+											   INNER JOIN tblStudierichting r ON (u.richting_id = r.id)
+											   WHERE u.school_id = '" . $id . "' 
+											   ORDER BY u.lastname, u.firstname, r.naam 
+											")
+									   ->result_array();
+					
+		$data['leerkrachten'] = $this->db->where('school_id', $id)
+										 ->where('role', 3)
+										 ->order_by('lastname asc')
+										 ->get('tblUsers')
+										 ->result_array();
+		return $data;
 	}
 	
 	

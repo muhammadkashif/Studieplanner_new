@@ -55,7 +55,7 @@
 						<input type="text" id="website" name="website" disabled="disabled" value="<?= $scholen[0]['website'] ?>" />
 					</p>
 					<p>
-						<label for="verantwoordelijke">Verantwoordelijke:</label>
+						<label for="verantwoordelijke">Contactpersoon:</label>
 						<input type="text" id="verantwoordelijke" name="verantwoordelijke" disabled="disabled" value="<?= $scholen[0]['verantwoordelijke'] ?>" />
 					</p>
 					<p class="buttons" style="margin-right: 5px;">
@@ -63,6 +63,9 @@
 						<input type="button" value="Bewerken" id="bewerken" />
 						<input type="submit" value="Opslaan" id="save_school_changes">
 					</p>
+					<p class="clearfix add_school_feedback" style="display: none; font-size: 1.2em; line-height: 1.4em">Vergeet niet een verantwoordelijke toe te voegen voor deze school onder menu-item 'Gebruikers'.</p>
+					
+					<div>
 					<h2 class="richting"><img src="<?= base_url(); ?>assets/images/school_richtingen.png" alt="Studierichtingen"></h2>
 						 <div class="richtingen">
 								<?
@@ -79,6 +82,7 @@
 									}
 								?>
 						</div>
+					</div>
 					<p class="clearfix"></p>
 
 				<?= form_close(); ?>

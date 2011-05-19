@@ -94,4 +94,21 @@ class User_model extends CI_Model
 		
 		return $data;
 	}
+	
+	public function get_functie_data()
+	{
+		$data = $this->db->order_by('rol asc')
+						 ->get('tblRole')
+						 ->result_array();
+		return $data;
+	}
+	
+	public function get_users_per_functie($id)
+	{
+		$data = $this->db->select('firstname, lastname, email')
+						 ->where('role', $id)
+						 ->get('tblUsers')
+						 ->result_array();
+		return $data;	
+	}
 }

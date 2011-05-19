@@ -29,7 +29,7 @@ class Admin extends MY_Controller
 		$this->load->view('include/header', $init);
 		$this->load->view('include/nav_admin');
 		
-		$data = $this->school_model->get_school_data();
+		$data['scholen'] = $this->school_model->get_school_data();
 		$this->load->view('admin/scholen', $data);
 
 		$this->load->view('include/footer');
@@ -58,34 +58,16 @@ class Admin extends MY_Controller
 	
 	
 	public function gebruikers()
-	{	
-		// pagination for users
-		$config['base_url'] = base_url() . 'admin/users/';
-		$get_total_rows = $this->user_model->get_total_rows();
-		$qry = $this->db->query("select count(*) as cnt from tblusers where role = '1'")->result_array();
-		$config['total_rows'] = $qry[0]['cnt'];
-		$config['per_page'] = 15;
-		
-		$this->pagination->initialize($config);
-		
-		
+	{		
 		$init = $this->init->set();
 		
 		$this->load->view('include/header', $init);
 		$this->load->view('include/nav_admin');
 		
-		$data['user_query'] = $this->user_model->get_users($config['per_page'], $this->uri->segment(3));
-		$data['pagination_links'] = $this->pagination->create_links();
-		
-		if( ! $data)
-		{
-			$this->load->view('admin/gebruikers');
-		}
-		else
-		{
-			$this->load->view('admin/gebruikers', $data);
-		}
-		
+		$data['scholen'] = $this->school_model->get_school_data();
+		$data['functies'] = $this->user_model->get_functie_data();
+		$this->load->view('admin/gebruikers', $data);
+
 		$this->load->view('include/footer');
 	}
 	
@@ -96,5 +78,148 @@ class Admin extends MY_Controller
 		$this->loadView('admin/add_content');
 	
 	}
+	
+	public function school_save_changes()
+	{	
+		$data = $this->input->post();
+		$rules = array(
+	// 	data: { id: school_id, naam: naam, straat: straat, nummer: nummer, plaats: plaats, telefoon: telefoon, fax: fax, email: email, website: website, 
+	//			verantwoordelijke: verantwoordelijke, ci_csrf_token: cct },
+					array(
+							'field'		=>		'naam',
+							'label'		=>		'naam',
+							'rules'		=>		'required'
+					),
+					array(
+							'field'		=>		'straat',
+							'label'		=>		'straat',
+							'rules'		=>		'required'
+					),
+					array(
+							'field'		=>		'nummer',
+							'label'		=>		'huisnummer',
+							'rules'		=>		'required|numeric'
+					),
+					array(
+							'field'		=>		'plaats',
+							'label'		=>		'plaats',
+							'rules'		=>		'required|alpha_dash'
+					),
+					array(
+							'field'		=>		'telefoon',
+							'label'		=>		'telefoon',
+							'rules'		=>		'required'
+					),
+					array(
+							'field'		=>		'fax',
+							'label'		=>		'fax',
+							'rules'		=>		'required'
+					),
+					array(
+							'field'		=>		'email',
+							'label'		=>		'e-mail',
+							'rules'		=>		'required|valid_email'
+					),
+					array(
+							'field'		=>		'website',
+							'label'		=>		'website',
+							'rules'		=>		'required'
+					),
+					array(
+							'field'		=>		'verantwoordelijke',
+							'label'		=>		'verantwoordelijke',
+							'rules'		=>		'required|valid_email'
+					)
+				);
+		$this->form_validation->set_rules($rules);
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$feedback = array(
+							'status'		=>		FALSE,
+							'message'		=>		'Formulier niet volledig ingevuld.',
+							'errors'		=>		validation_errors()
+						);
+
+			header('Content-type: application/json');
+			echo json_encode($feedback);
+		}
+		else
+		{
+			if($data['id'] != 0)
+			{
+				if($this->school_model->update_school_data($data))
+				{	
+					$feedback = array(
+									'status'		=>		TRUE,
+									'message'		=>		'Schoolgegevens aangepast.'
+								);
+				}
+				else
+				{
+					$feedback = array(
+									'status'		=>		FALSE,
+									'message'		=>		'Formulier niet volledig ingevuld.'
+								);
+				}
+
+				header('Content-type: application/json');
+				echo json_encode($feedback);
+			}
+			else
+			{
+				if($this->school_model->add_school_data($data))
+				{
+					$feedback = array(
+									'status'		=>		TRUE,
+									'message'		=>		'School toegevoegd aan databank.'
+									);
+				}
+				else
+				{
+					$feedback = array(
+									'status'		=>		FALSE,
+									'message'		=>		'Formulier niet volledig ingevuld.'
+								);
+				}
+				
+				header('Content-type: application/json');
+				echo json_encode($feedback);
+			}
+		}				
+	}
+	
+	public function get_users_per_school()
+	{
+		$id = $this->input->post('id');
 		
+		$data = $this->school_model->get_users_per_school($id);
+		
+		header('Content-type: application/json');
+		echo json_encode($data);		
+	}
+	
+	public function get_users_per_functie()
+	{
+		$id = $this->input->post('id');
+		
+		$data = $this->user_model->get_users_per_functie($id);
+		
+		header('Content-type: application/json');
+		echo json_encode($data);
+	}
+	
+	public function show_school()
+	{
+		$id = $this->input->post('id');
+		
+		$data = $this->school_model->get_single_school($id);
+		header('Content-type: application/json');
+		echo json_encode($data);
+	}
+	
+	public function add_verantwoordelijke()
+	{
+		
+	}	
 }

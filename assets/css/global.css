@@ -978,7 +978,7 @@ div#user_container ul li:hover
 	display: none;
 }
 
-#profile_right .form_profile, #profile_right .form_school, #profile_right .form_pass, #profile_right .edit_school
+#profile_right .form_profile, #profile_right .form_school, #profile_right .form_pass, #profile_right .edit_school, .users_per_school
 {
 	float: left;
 	width: 475px;
@@ -1035,7 +1035,8 @@ div#user_container ul li:hover
 	padding: 0px !important;	
 }
 
-#add_school, #per_school, #per_rol
+
+#add_school, #per_school, #per_rol, #add_user
 {
 	background-color: #e6e6e6;
 	border-radius: 8px;
@@ -1046,6 +1047,11 @@ div#user_container ul li:hover
 	padding: 9px 0 7px 15px;
 	height: 15px;
 	width: 175px;
+}
+
+#add_school:hover, #per_school:hover, #per_rol:hover, #add_user:hover
+{
+	background-color: #ff0;
 }
 
 #profile_left #select_school
@@ -1108,6 +1114,53 @@ div#user_container ul li:hover
 	margin-top: 4px;
 	font-size: 1.2em;
 	line-height: 15px;
+}
+
+
+/* gebruikers */
+
+.users_per_school p.label_select_school, .users_per_functie p.label_select_functie
+{
+	font-size: 1.2em;
+	margin: 20px 0 0 3px;
+	float: left;
+	
+}
+
+.users_per_school p.select_school select, .users_per_functie p.select_functie select
+{
+	float: right;
+	margin: 20px 0 0 3px;
+	min-width: 180px;
+	
+}
+
+.users_per_school table, .users_per_functie table
+{
+	font-size: 1.2em;
+	margin-top: 25px;
+	width: 500px;
+}
+
+.users_per_school table caption, .users_per_functie table caption
+{
+	font-size: 1.2em;
+	margin-bottom: 14px;
+	text-align: left;
+}
+
+.users_per_school table th, .users_per_functie table th
+{
+	border: 1px solid #f0f0f0;
+	font-weight: bold;
+	padding: 5px;
+	text-align: left;
+}
+
+.users_per_school table td, .users_per_functie table td
+{
+	border: 1px solid #f0f0f0;
+	padding: 5px;
 }
 
 /* paginate */

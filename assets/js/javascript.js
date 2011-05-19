@@ -194,7 +194,7 @@ $(document).ready(function()	{
 		
 		$.ajax({
 			type: "POST",
-			url: "/school/save_changes",
+			url: "/admin/school_save_changes",
 			data: { id: school_id, naam: naam, straat: straat, nummer: nummer, plaats: plaats, telefoon: telefoon, fax: fax, email: email, website: website, 
 					verantwoordelijke: verantwoordelijke, ci_csrf_token: cct },
 			success: function(data)
@@ -213,7 +213,7 @@ $(document).ready(function()	{
 		
 		$.ajax({
 			type: "POST",
-			url: "/school/show_school",
+			url: "/admin/show_school",
 			data: { id: school_id, ci_csrf_token: cct },
 			success: function(data)
 			{
@@ -229,6 +229,7 @@ $(document).ready(function()	{
 						$("#website").val(data['school'][0]['website']);
 						$("#verantwoordelijke").val(data['school'][0]['verantwoordelijke']);
 						$(".richtingen").html("");
+						$(".add_school_feedback").hide();
 						if(data['richting'].length === 0)
 						{
 							$(".richtingen").append("<p class='richting_overzicht'>Nog geen studierichtingen toegevoegd.</p>");
@@ -239,7 +240,9 @@ $(document).ready(function()	{
 								$(".richtingen").append("<p class='richting_overzicht'>" + data['richting'][key]['naam'] + "</p>");
 							});
 						}
+						$(".richting").parent().show();
 				});
+				
 				$(".edit_school").fadeIn();
 			}
 		});
@@ -249,9 +252,118 @@ $(document).ready(function()	{
 		$(".edit_school").fadeOut('fast', function()	{
 			$("#school_id").val("0");
 			$("#naam, #straat, #nummer, #plaats, #telefoon, #fax, #email, #website, #verantwoordelijke").val("").attr("disabled", "");
+			$(".richting").parent().hide();
+			$(".add_school_feedback").show();
 		$(".edit_school").fadeIn();
 		});
 		e.preventDefault();
 	});
+	
+	/* gebruikers */
+	
+	$("#select_school_users").change(function()	{
+		$("#school_id").val($(this).val());
+		var school_id = $("#school_id").val();
+		var cct = $.cookie('ci_csrf_token');
+		
+		$.ajax({
+				type: "POST",
+				url: "/admin/get_users_per_school",
+				data: { id: school_id, ci_csrf_token: cct },
+				success: function(data)
+				{
+					$("#tbl_students tr.row, #tbl_students tr.no_selection").remove();
+					if(data['studenten'] != 0)
+					{
+						$.each(data['studenten'], function(key, value)	{
+							$("#tbl_students").append(
+							"<tr class='row'>" + 
+								"<td>" + data['studenten'][key]['achternaam'] + "</td><td>" + data['studenten'][key]['voornaam'] + "</td>" +
+								"<td>" + data['studenten'][key]['email'] + "</td><td>" + data['studenten'][key]['richting'] + "</td>" +
+							"</tr>"
+							);
+							
+							
+						});
+					}
+					else
+					{
+						$("#tbl_students").append(
+							"<tr class='no_selection'><td>Er zitten nog geen studenten in de databank.</td></tr>"
+						);
+					}	
+				
+					$("#tbl_leerkrachten tr.row, #tbl_leerkrachten tr.no_selection").remove();
+					if(data['leerkrachten'] != 0)
+					{
+						$.each(data['leerkrachten'], function(key, value)	{
+							$("#tbl_leerkrachten").append(
+								"<tr class='row'>" +
+									"<td>" + data['leerkrachten'][key]['lastname'] + "</td><td>" + data['leerkrachten'][key]['firstname'] + "</td>" +
+									"<td>" + data['leerkrachten'][key]['email'] + "</td>" +
+								"</tr>"
+							);
+						});
+					}
+					else
+					{
+						$("#tbl_leerkrachten").append(
+							"<tr class='no_selection'><td>Er zitten nog geen leerkrachten in de databank.</td></tr>"
+						);
+					}
+				}
+		});
+	});
 
+	$("#select_functie_users").change(function()	{
+		$("#functie_id").val($(this).val());
+		var functie_id = $("#functie_id").val();
+		var cct = $.cookie('ci_csrf_token');
+		
+		$.ajax({
+			type: "POST",
+			url: "/admin/get_users_per_functie",
+			data: { id: functie_id, ci_csrf_token: cct },
+			success: function(data)	{						
+				if(data.length == 0)
+				{
+					$(".tbl_functies tr").not(".tbl_functies tr.tr_header").remove();
+					$(".tbl_functies").append("<tr><td colspan='4'>Geen resultaten gevonden.</td></tr>");
+					
+				}
+				else
+				{
+					$(".tbl_functies tr").not(".tbl_functies tr.tr_header").remove();
+					console.log(data);
+					$.each(data, function(key, value)	{
+						$(".tbl_functies").append(
+							"<tr class='row'>" +
+								"<td>" + data[key]['lastname'] + "</td><td>" + data[key]['firstname'] + "</td>" +
+								"<td>" + data[key]['email'] + "</td>" +
+							"</tr>"
+						)
+					});
+				}
+			}
+		});
+	});
+	
+	$("#per_rol").click(function(e)	{
+		$(".users_per_school").hide();
+		$(".add_users").hide();
+		$(".users_per_functie").slideDown();
+		
+	});
+	
+	$("#per_school").click(function(e)	{
+		$(".users_per_functie").hide();
+		$(".add_users").hide();
+		$(".users_per_school").slideDown();
+	});
+	
+	$("#add_user").click(function(e)	{
+		$(".users_per_school").hide();
+		$(".users_per_functie").hide();
+		$(".add_users").slideDown();
+	});
 });
