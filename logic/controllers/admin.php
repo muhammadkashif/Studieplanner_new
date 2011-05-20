@@ -12,7 +12,7 @@ class Admin extends MY_Controller
 		$this->load->model('informatie_model');
 		$this->load->model('user_model');
 		$this->load->model('school_model');
-		if($this->session->userdata('role') != 2)
+		if($this->session->userdata('role') != 3)
 		{
 			redirect('/site');
 		}
@@ -201,10 +201,9 @@ class Admin extends MY_Controller
 	
 	public function get_users_per_functie()
 	{
-		$id = $this->input->post('id');
-		
+		$id = $this->input->post('id');		
 		$data = $this->user_model->get_users_per_functie($id);
-		
+
 		header('Content-type: application/json');
 		echo json_encode($data);
 	}
@@ -218,16 +217,16 @@ class Admin extends MY_Controller
 		echo json_encode($data);
 	}
 	
-	public function add_verantwoordelijke()
+	public function add_leerkracht()
 	{		
 		$rules = array(
 						array(
-								'field'		=>		'voornaam',
+								'field'		=>		'firstname',
 								'label'		=>		'voornaam',
 								'rules'		=>		'required'
 						),
 						array(
-								'field'		=>		'achternaam',
+								'field'		=>		'lastname',
 								'label'		=>		'achternaam',
 								'rules'		=>		'required'
 						),
@@ -235,9 +234,17 @@ class Admin extends MY_Controller
 								'field'		=>		'email',
 								'label'		=>		'e-mail',
 								'rules'		=>		'required|valid_email'
+						),
+						array(
+								'field'		=>		'password',
+								'label'		=>		'wachtwoord',
+								'rules'		=>		'required'
 						)
 					);
-					
+		
+		$this->form_validation->set_rules($rules);
+		
+		
 		if($this->form_validation->run() == FALSE)
 		{
 			$feedback = array(
@@ -249,9 +256,24 @@ class Admin extends MY_Controller
 		else
 		{
 			$data = $this->input->post();
+			$data['password'] = md5($data['password']);
+			if($this->user_model->add_leerkracht($data))
+			{
+				$feedback = array(
+								'status'		=>		TRUE,
+								'message'		=>		'Leerkracht toegevoegd aan databank.'
+							);
+			}
+			else
+			{
+				$feedback = array(
+								'status'		=>		FALSE,
+								'message'		=>		'Toevoegen leerkracht mislukt.'
+							);
+			}
 		}
 		
 		header('Content-type: application/json');
-		echo json_encode($data);
+		echo json_encode($feedback);
 	}	
 }

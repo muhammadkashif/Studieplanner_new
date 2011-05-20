@@ -37,7 +37,7 @@
 			
 			$.ajax({
 				type: "POST",
-				url: "/informatie/print_item",
+				url: "/student/print_info_item",
 				data: { id: id, ci_csrf_token: cct },
 				success: function(data)
 				{

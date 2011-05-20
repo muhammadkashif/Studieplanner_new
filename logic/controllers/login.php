@@ -60,6 +60,15 @@ class Login extends MY_Controller
 			$session_data['email'] = $this->input->post('email');
 			$session_data['is_logged_in'] = TRUE;
 			$session_data['role'] = $this->login_model->get_role($this->input->post('email'));
+			if($session_data['role'] == 1)
+			{
+				$session_data['unique_id'] = $this->login_model->get_unique_id($this->input->post('email'), $session_data['role']);
+			}
+			if($session_data['role'] == 2)
+			{
+				$session_data['unique_id'] = $this->login_model->get_unique_id($this->input->post('email'), $session_data['role']);
+				$session_data['school_id'] = $this->login_model->get_teacher_school_id($this->input->post('email'), $session_data['role']);
+			}
 						
 			$this->session->set_userdata($session_data);
 			

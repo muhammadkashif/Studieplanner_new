@@ -17,14 +17,14 @@
 		</a>
 		<nav>
 			<ul>
-				<li <? if($page_title == "Planner") {?>class="active"<? } ?>>
-					<a href="<?= $base_url; ?>planner/">Planner</a>
+				<li <? if($page_title == "School") {?>class="active"<? } ?>>
+					<a href="<?= $base_url; ?>school/school">School</a>
 				</li>	
-				<li <? if($page_title == "Tips") {?>class="active"<? } ?>>
-					<a href="<?= $base_url; ?>student/tips">Tips</a>
+				<li <? if($page_title == "Leerlingen") {?>class="active"<? } ?>>
+					<a href="<?= $base_url; ?>school/leerlingen">Leerlingen</a>
 				</li>
-				<li <? if($page_title == "Profiel") {?>class="active"<? } ?>>
-					<a href="<?= $base_url; ?>student/profiel">Profiel</a>
+				<li <? if($page_title == "Tips") {?>class="active"<? } ?>>
+					<a href="<?= $base_url; ?>school/tips">Tips</a>
 				</li>
 				<li>
 					<a href="<?= $base_url; ?>logout">Log uit</a>

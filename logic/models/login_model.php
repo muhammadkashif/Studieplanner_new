@@ -53,17 +53,47 @@ class Login_model extends CI_Model
 	
 	public function get_role($email)
 	{
-			$query = $this->db->query("
-										SELECT email, role FROM (
-										SELECT s.email AS email, s.role AS role FROM tblStudents s
-										UNION
-										SELECT a.email AS email, a.role AS role FROM tblAdmin a
-										UNION
-										SELECT t.email AS email, t.role AS role FROM tblTeachers t
-										) AS users WHERE email = '" . $email . "'
-								 	")
-								->result_array();
-			$data = $query[0]['role'];
-			return $data;
+		$query = $this->db->query("
+									SELECT email, role FROM (
+									SELECT s.email AS email, s.role AS role FROM tblStudents s
+									UNION
+									SELECT a.email AS email, a.role AS role FROM tblAdmin a
+									UNION
+									SELECT t.email AS email, t.role AS role FROM tblTeachers t
+									) AS users WHERE email = '" . $email . "'
+							 	")
+							->result_array();
+		$data = $query[0]['role'];
+		return $data;
+	}
+	
+	public function get_unique_id($email, $role)
+	{
+		if($role == 1)
+		{
+			$query = $this->db->where('email', $email)
+							  ->get('tblStudents')
+							  ->result_array();
+			
+		}
+		else if($role == 2)
+		{
+			$query = $this->db->where('email', $email)
+							  ->get('tblTeachers')
+							  ->result_array();
+			
+		}
+
+		$data = $query[0]['unique_id'];
+		return $data;
+	}
+	
+	public function get_teacher_school_id($email)
+	{
+		$query = $this->db->where('email', $email)
+						  ->get('tblTeachers')
+						  ->result_array();
+		$data = $query[0]['school_id'];
+		return $data;
 	}
 }

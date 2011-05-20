@@ -30,7 +30,6 @@ class Planner_model extends CI_Model
 					);
 		}
 	
-	
 		// naam vd huidige maand in $init steken
 		$data['init']['curr_month_name'] = $this->get_month_info($data['init']['current_month']);
 		$data['init']['next_month_name'] = $this->get_month_info($data['init']['next_month']);
@@ -129,8 +128,7 @@ class Planner_model extends CI_Model
 			$push[$i]['events'] = $event_info;
 			$push[$i]['event_count'] = count($event_info);
 			$push[$i]['selected'] = false;
-		}
-		
+		}	
 		$data['dates'][1] = $push;
 		
 		// detail data voor selected dag
@@ -139,7 +137,6 @@ class Planner_model extends CI_Model
 			$detail_info = $this->get_detail_info($data['init']['selected'], $data['init']['current_month'], $data['init']['current_year'], $data['init']['days_in_curr_month']);
 			$data['details'] = $detail_info;
 		}
-		
 		$data['type'] = $this->populate_type();
 		
 		return $data;
@@ -148,10 +145,6 @@ class Planner_model extends CI_Model
 
 	public function insert_event($data)
 	{
-		/*
-		INSERT INTO `tblEvents` (title, description, date, time_start, time_end, user_id)
-		VALUES ("Kwantitatieve Methoden", "Oefeningen statistiek 7-16", "2011-04-30", "9:00:00", "10:00:00", 1)
-		*/
 		if($this->db->insert('tblEvents', $data))
 		{
 			return TRUE;
@@ -164,17 +157,15 @@ class Planner_model extends CI_Model
 
 	public function get_single_event_by_id($id)
 	{		
-		$qry = $this->db->where('id', $id)
-			 	 		->get('tblEvents');
-				
-		$data = $qry->result_array();
+		$data = $this->db->where('id', $id)
+			 	 		 ->get('tblEvents')
+						 ->result_array();
 		
 		return $data;
 	}
 	
 	public function update_event($data)
 	{
-		/* UPDATE query */
 		if($this->db->where('id', $data['id'])
 				 	->update('tblEvents', $data))
 		{
@@ -183,18 +174,15 @@ class Planner_model extends CI_Model
 		else
 		{
 			return FALSE;
-		}
-				
+		}		
 	}
 	
-	
-	public function delete_event($id, $user_id)
+	public function delete_event($id, $user_unique_id)
 	{
-		$qry = $this->db->where('id', $id)
-			    	    ->get('tblEvents');
-		
-		$row = $qry->result_array();
-		if($user_id == $row[0]['user_id'])
+		$row = $this->db->where('id', $id)
+			    	    ->get('tblEvents')
+						->result_array();
+		if($user_unique_id == $row[0]['user_unique_id'])
 		{
 			$this->db->where('id', $id)
 					 ->delete('tblEvents');
@@ -214,7 +202,6 @@ class Planner_model extends CI_Model
 		$year = date('Y');
 		
 		$data['today'] = $this->get_event_info($day, $month, $year);
-		
 		return $data;
 	}
 	
@@ -241,8 +228,7 @@ class Planner_model extends CI_Model
 					$month++;
 				}
 			}
-		}
-		
+		}		
 		return $data;
 	}
 
@@ -278,21 +264,16 @@ class Planner_model extends CI_Model
 				$detail_info[1][$i]['event_count'] = count($detail_info[1][$i]);		
 			}
 		}
-		
-		
-
 		return $detail_info;
 		
 	}
-	
 	
 	private function get_day_info($day, $month, $year)
 	{
 		$day_name_num = date("w", mktime(0,0,0, $month, $day, $year));
 		
 		switch($day_name_num)
-		{
-			
+		{	
 			case '0': $day_name = "zon"; $day_type = 'weekend'; break;
 			case '1': $day_name = "maa"; $day_type = 'weekdag'; break;
 			case '2': $day_name = "din"; $day_type = 'weekdag'; break;
@@ -300,34 +281,29 @@ class Planner_model extends CI_Model
 			case '4'; $day_name = "don"; $day_type = 'weekdag'; break;
 			case '5'; $day_name = "vrij"; $day_type = 'weekdag'; break;
 			case '6'; $day_name = "zat"; $day_type = 'weekend'; break;
-	
 		}
 		
 		$day_info = array(
 							'day_name'		=>		$day_name,
 							'day_type'		=>		$day_type
-					);
-					
+					);			
 		return $day_info;
 	}
 	
 	
 	private function get_event_info($day, $month, $year)
 	{
-		
 		// dag maand jaar samenvoegen naar mysql date formaat
 		$date = $year . "-" . $month . "-" . $day;
 		$this->db->where('date', $date);
-		$this->db->where('user_id', $this->session->userdata('id'));	
+		$this->db->where('user_unique_id', $this->session->userdata('unique_id'));	
 		$this->db->order_by('time_start', 'asc');
 		$query = $this->db->get('tblEvents');
 		
-		$event_info = array();
-		
+		$event_info = array();	
 		$i = 1;
 		foreach($query->result() as $row)
 		{
-			
 			$event_info[$i]['title'] = $row->title;
 			$event_info[$i]['description'] = $row->description;
 			$event_info[$i]['time_start'] = $row->time_start;
@@ -335,13 +311,10 @@ class Planner_model extends CI_Model
 			$event_info[$i]['id'] = $row->id;
 			$event_info[$i]['type'] = $row->type;
 			$i++;
-		
 		}
 		
-		return $event_info;
-		
+		return $event_info;		
 	}
-	
 	
 	private function get_month_info($month)
 	{
@@ -360,8 +333,7 @@ class Planner_model extends CI_Model
 			case '11': $month_name = "november"; break;
 			case '12': $month_name = "december"; break;
 			default: $month_name = 'januari'; break;
-		}
-		
+		}		
 		return $month_name;
 	}
 	

@@ -12,11 +12,11 @@ class Site extends MY_Controller
 				redirect('student/');
 				break;
 
-			case '2':
+			case '3':
 				redirect('admin/');
 				break;
 			
-			case '3':
+			case '2':
 				redirect('school/');
 				break;
 				

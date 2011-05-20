@@ -121,7 +121,7 @@ $(document).ready(function()	{
 		
 		$.ajax({
 		   type: "POST",
-		   url: "/profiel/edit_pass",
+		   url: "/student/edit_pass",
 		   data: { huidig: huidig, nieuw: nieuw, bevestigen: bevestigen, ci_csrf_token: cct},
 		   success: function(data)
 		   {
@@ -144,7 +144,7 @@ $(document).ready(function()	{
 		
 		$.ajax({
 		   type: "POST",
-		   url: "/profiel/save_personal",
+		   url: "/student/save_personal",
 		   data: { firstname: firstname, lastname: lastname, date: date, town: town, email: email, ci_csrf_token: cct},
 		   success: function(data)
 		   {
@@ -162,7 +162,7 @@ $(document).ready(function()	{
 		
 		$.ajax({
 			type: "POST",
-			url: "/profiel/save_school",
+			url: "/student/save_school",
 			data: { school_id: school_id, richting_id: richting_id, ci_csrf_token: cct },
 			success: function(data)
 			{
@@ -272,11 +272,11 @@ $(document).ready(function()	{
 				data: { id: school_id, ci_csrf_token: cct },
 				success: function(data)
 				{
-					$("#tbl_students tr.row, #tbl_students tr.no_selection").remove();
-					if(data['studenten'] != 0)
+					$(".tbl_students tr.row, .tbl_students tr.no_selection").remove();
+					if(data['studenten'].length != 0)
 					{
 						$.each(data['studenten'], function(key, value)	{
-							$("#tbl_students").append(
+							$(".tbl_students").append(
 							"<tr class='row'>" + 
 								"<td>" + data['studenten'][key]['achternaam'] + "</td><td>" + data['studenten'][key]['voornaam'] + "</td>" +
 								"<td>" + data['studenten'][key]['email'] + "</td><td>" + data['studenten'][key]['richting'] + "</td>" +
@@ -288,13 +288,13 @@ $(document).ready(function()	{
 					}
 					else
 					{
-						$("#tbl_students").append(
-							"<tr class='no_selection'><td>Er zitten nog geen studenten in de databank.</td></tr>"
+						$(".tbl_students").append(
+							"<tr class='no_selection'><td colspan='4'>De databank bevat nog geen studenten voor deze school.</td></tr>"
 						);
 					}	
 				
 					$("#tbl_leerkrachten tr.row, #tbl_leerkrachten tr.no_selection").remove();
-					if(data['leerkrachten'] != 0)
+					if(data['leerkrachten'].length != 0)
 					{
 						$.each(data['leerkrachten'], function(key, value)	{
 							$("#tbl_leerkrachten").append(
@@ -308,7 +308,7 @@ $(document).ready(function()	{
 					else
 					{
 						$("#tbl_leerkrachten").append(
-							"<tr class='no_selection'><td>Er zitten nog geen leerkrachten in de databank.</td></tr>"
+							"<tr class='no_selection'><td colspan='4'>De databank bevat nog geen leerkrachten voor deze school.</td></tr>"
 						);
 					}
 				}
@@ -367,3 +367,7 @@ $(document).ready(function()	{
 		$(".add_users").slideDown();
 	});
 });
+
+	/* leerkrachten school details */
+	
+	

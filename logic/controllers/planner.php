@@ -3,32 +3,33 @@
 class Planner extends MY_Controller
 {
 	public function __construct()
-	{
-		
+	{	
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->helper('text');
 		$this->load->library('form_validation');
 		$this->load->model('planner_model');
-
+		
+		if($this->session->userdata('role') != 1)
+		{
+			redirect('/site');
+		}
 	}
 	
 	public function index()
 	{
-
 		$init = $this->init->set();
 		
 		$this->load->view('include/header', $init);
 		$this->load->view('include/nav');
 		
+		// lijst met dagen inladen
 		$dates = $this->planner_model->create_date_list();
-
 		$this->load->view('planner/dates_content', $dates);		
 		$this->load->view('planner/detail_content', $dates);
 		
 		$this->load->view('planner/event_type');
 		$this->load->view('include/footer', $dates);
-
 	}
 
 
@@ -40,7 +41,6 @@ class Planner extends MY_Controller
 		$year = $this->input->post('year');
 		
 		$dates = $this->planner_model->create_date_list($day, $month, $year);
-		
 		$this->load->view('planner/dates_content', $dates);
 	}
 	
@@ -52,7 +52,6 @@ class Planner extends MY_Controller
 		$year = $this->input->post('year');
 		
 		$dates = $this->planner_model->create_date_list($day, $month, $year);
-
 		$this->load->view('planner/detail_content', $dates);
 	}
 	
@@ -81,7 +80,7 @@ class Planner extends MY_Controller
 
 		if ($this->form_validation->run() == FALSE)
 		{
-			// valideren mislulkt: feedback array -> json
+			// valideren mislukt: feedback array -> json
 			$feedback = array(
 							'status'		=>		FALSE,
 							'error'			=>		validation_errors()
@@ -157,7 +156,7 @@ class Planner extends MY_Controller
 	public function delete_event()
 	{
 		$id = $this->input->post('id');
-		$user_id = $this->session->userdata('id');
+		$user_id = $this->session->userdata('unique_id');
 		$data = $this->planner_model->delete_event($id, $user_id);
 		
 		if( ! $data)
@@ -177,6 +176,5 @@ class Planner extends MY_Controller
 		
 		header('Content-type: application/json');
 		echo json_encode($feedback);
-		
 	}
 }

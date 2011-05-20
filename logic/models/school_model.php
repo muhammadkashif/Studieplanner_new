@@ -27,22 +27,10 @@ class School_model extends CI_Model
 		return $data;
 	}
 	
-	public function get_richtingen($id)
+	public function get_richtingen()
 	{
-		/*
-		select sr.id, r.naam, s.naam
-		from (tblSchoolHeeftRichting sr INNER JOIN tblStudieRichting r
-		ON (sr.id = r.id))
-		INNER JOIN tblSchool s ON(sr.school_id = s.id)
-		
-		WHERE sr.school_id = 4
-		*/
-		
 		$qry = $this->db->query("
-								SELECT sr.id, r.naam as studierichting, s.naam as school
-								FROM (tblSchoolHeeftRichting sr INNER JOIN tblStudieRichting r ON (sr.id = r.id)) 
-								INNER JOIN tblSchool s ON (sr.school_id = s. id)
-								WHERE sr.school_id = '" . $id . "'
+								SELECT * FROM tblStudierichting
 							");
 		$data = array();
 		if($qry->num_rows == 0)
@@ -54,13 +42,14 @@ class School_model extends CI_Model
 		{
 			foreach($qry->result_array() as $row)
 			{
-				$data['richtingen'][] = $row['studierichting'];
-				$data['school'][] = $row['school'];
+				$data['richtingen'][] = $row['naam'];
 			}
 		}
 
 		return $data;
 	}
+	
+
 
 	public function get_single_school($id)
 	{
@@ -108,7 +97,7 @@ class School_model extends CI_Model
 	public function get_users_per_school($id)
 	{
 		$data['studenten'] = $this->db->query("SELECT u.lastname AS achternaam, u.firstname AS voornaam, u.email, r.naam AS richting
-											   FROM tblUsers u 
+											   FROM tblStudents u 
 											   INNER JOIN tblStudierichting r ON (u.richting_id = r.id)
 											   WHERE u.school_id = '" . $id . "' 
 											   ORDER BY u.lastname, u.firstname, r.naam 
@@ -116,10 +105,37 @@ class School_model extends CI_Model
 									   ->result_array();
 					
 		$data['leerkrachten'] = $this->db->where('school_id', $id)
-										 ->where('role', 3)
 										 ->order_by('lastname asc')
-										 ->get('tblUsers')
+										 ->get('tblTeachers')
 										 ->result_array();
+		return $data;
+	}
+	
+	public function check_school_has_richting($data)
+	{
+		$qry = $this->db->where('school_id', $data['school_id'])
+				 		->where('richting_id', $data['richting_id'])
+				 		->get('tblSchoolHeeftRichting');
+		if($qry->num_rows == 0)
+		{
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+	
+	public function get_school_by_teacher_uid($unique_id)
+	{
+		$query = $this->db->query("
+									SELECT t.school_id, s.* 
+									FROM tblTeachers t 
+									INNER JOIN tblSchool s ON (t.school_id = s.id) 
+									WHERE t.unique_id = '" . $unique_id . "'
+								")
+							->result_array();
+		$data['school'] = $query[0];
 		return $data;
 	}
 	

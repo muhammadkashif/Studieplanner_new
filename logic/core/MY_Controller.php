@@ -34,11 +34,11 @@
 			{
 				$this->load->view('include/nav');
 			}
-			else if($this->session->userdata('role') == 2)
+			else if($this->session->userdata('role') == 3)
 			{
 				$this->load->view('include/nav_admin.php');
 			}
-			else if($this->session->userdata('role') == 3)
+			else if($this->session->userdata('role') == 2)
 			{
 				$this->load->view('include/nav_school.php');
 			}

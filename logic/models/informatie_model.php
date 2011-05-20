@@ -38,9 +38,9 @@ class Informatie_model extends CI_Model
 		return $data;
 	}
 
-	public function get_item($id)
+	public function get_item($unique_id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where('unique_id', $unique_id);
 		$query = $this->db->get('tblContent');
 		
 		if($query->num_rows() == 0)

@@ -1,6 +1,7 @@
+<!-- validates -->
 <div id="info_content">
 	<div id="profile_container">
-		<img src="<?= base_url(); ?>assets/images/header_profiel.png" />
+		<img src="<?= base_url(); ?>assets/images/header_profiel.png" alt="Profiel" />
 		<p class="clearfix"></p>
 		<div id="profile_left">
 			<ul class="profile_links">
@@ -12,8 +13,8 @@
 		
 		<div id="profile_right">
 			<div class="form_profile">
-				<img src="<?= base_url(); ?>assets/images/edit_personal.png" />
-				<?= form_open('profiel/save_personal')?>
+				<img src="<?= base_url(); ?>assets/images/edit_personal.png" alt="Persoonlijke gegevens aanpassen" />
+				<?= form_open('student/save_personal')?>
 					<p>
 						<label for="firstname">Voornaam:</label>
 						<input type="text" id="firstname" name="firstname" value="<?= ucfirst($user['firstname']); ?>"/>
@@ -32,12 +33,11 @@
 											'placeholder'	=>		'Klik hier',
 											'value'			=>		set_value('date')
 										 );
-
 							echo form_input($data);
 						?>
 						<input type="hidden" name="output_date" class="output_date" value="<?= $user['birthdate'] ?>"/>
 
-					</p><!-- date end -->
+					</p>
 					<p>
 						<label for="town">Woonplaats:</label>
 						<input type="text" id="town" name="town" value="<?= ucfirst($user['town']); ?>"/>
@@ -52,12 +52,12 @@
 				</form>
 			</div>
 			<div class="form_school">
-				<img src="<?= base_url(); ?>assets/images/edit_school.png" />
-				<?= form_open('profiel/save_school')?>
+				<img src="<?= base_url(); ?>assets/images/edit_school.png" alt="Schoolgegevens aanpassen" />
+				<?= form_open('student/save_school')?>
 					<p>
 						<label for="school">School:</label>
-						<input type="text" name="school" id="school" value="<?= $school['naam'] ?>" />
-						<input type="hidden" name="school_id" id="school_id" value="<?= $school['id'] ?>" />
+						<input type="text" name="school" id="school" value="<?= $school[0]['naam'] ?>" />
+						<input type="hidden" name="school_id" id="school_id" value="<?= $school[0]['id'] ?>" />
 					</p>
 					<p>
 						<label for="richting">Studierichting:</label>
@@ -74,8 +74,8 @@
 				</form>
 			</div>
 			<div class="form_pass">
-				<img src="<?= base_url(); ?>assets/images/edit_pass.png">
-				<?= form_open('profiel/edit_pass')?>
+				<img src="<?= base_url(); ?>assets/images/edit_pass.png" alt="Wachtwoord wijzigen">
+				<?= form_open('student/edit_pass')?>
 					<p>
 						<label for="huidig">Huidig wachtwoord:</label>
 						<input type="password" name="huidig" id="huidig" />
@@ -130,7 +130,7 @@
 		
 		// zoekfunctie
 		var scholen = {
-			script:"/profiel/search_school?json=true&limit=6&",
+			script:"/student/search_school?json=true&limit=6&",
 			varname:"input",
 			json:true,
 			shownoresults:true,
@@ -141,7 +141,7 @@
 		var as_json = new bsn.AutoSuggest('school', scholen);
 		
 		var richtingen = {
-		  	script:  "/profiel/search_richting?json=true&limit=6&",
+		  	script:  "/student/search_richting?json=true&limit=6&",
 		   	varname:"input",
 			json:true,
 			shownoresults:true,

@@ -9,7 +9,7 @@
 		</div>
 
 		<div id="profile_right">
-			<div class="users_per_school" style="display:none" >
+			<div class="users_per_school">
 				<h2><img src="<?= base_url(); ?>assets/images/users_per_school.png" alt="Informatie scholen" /></h2>
 				<p class="label_select_school">Selecteer een school:</p>
 				<p class="select_school">
@@ -78,20 +78,24 @@
 					</tr>
 				</table>
 			</div>
-			<div class="add_users">
+			<div class="add_users" style="display:none" >
 				<img src="<?=base_url(); ?>assets/images/add_users.png" alt="Gebruiker toevoegen" style="margin-bottom: 20px"/>
-					<?= form_open('admin/add_verantwoordelijke'); ?>
+					<?= form_open('admin/add_leerkracht'); ?>
 						<p>
-							<label for="voornaam">Voornaam:</label>
-							<input type="text" id="voornaam" name="voornaam" />
+							<label for="firstname">Voornaam:</label>
+							<input type="text" id="firstname" name="voornaam" />
 						</p>
 						<p>
-							<label for="achternaam">Achternaam:</label>
-							<input type="text" id="achternaam" name="achternaam" />
+							<label for="lastname">Achternaam:</label>
+							<input type="text" id="lastname" name="achternaam" />
 						</p>
 						<p>
 							<label for="email">E-mail</label>
 							<input type="text" id="email" name="email" />
+						</p>
+						<p>
+							<label for="password">Wachtwoord</label>
+							<input type="password" id="password" name="password" />
 						</p>			
 						<p>
 							<label for="add_user_select_school">School:</label>
@@ -108,7 +112,7 @@
 						</p>
 						<p class="buttons" style="margin-right: 3px;">
 							<br />
-							<input type="submit" value="Opslaan" id="add_verantwoordelijke">
+							<input type="submit" value="Opslaan" id="add_leerkracht">
 						</p>									
 						<p class="clearfix"></p>
 					<?= form_close(); ?>
@@ -118,17 +122,18 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function()	{
-		$("#add_verantwoordelijke").click(function(e)	{
-			var firstname = $("#voornaam").val();
-			var lastname = 	$("#achternaam").val();
+		$("#add_leerkracht").click(function(e)	{
+			var firstname = $("#firstname").val();
+			var lastname = 	$("#lastname").val();
 			var email = $("#email").val();
 			var school_id = $("#add_user_select_school").val();
+			var password = $("#password").val();
 			var cct = $.cookie('ci_csrf_token');
 			
 			$.ajax({
 				type: "POST",
-				url: "/admin/add_verantwoordelijke",
-				data: { firstname: firstname, lastname: lastname, email: email, school_id: school_id , ci_csrf_token: cct },
+				url: "/admin/add_leerkracht",
+				data: { firstname: firstname, lastname: lastname, email: email, school_id: school_id , password: password, ci_csrf_token: cct },
 				success: function(data)
 				{
 					console.log(data);

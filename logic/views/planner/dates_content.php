@@ -56,11 +56,11 @@
 	<div id="overview_days">
 		<p class="month"><?= ucfirst($init['curr_month_name']) . " " . $init['current_year']; ?></p>
 	
-		<img src="<?= base_url(); ?>assets/images/days_loader.gif" id="days_loader"/> 
+		<img src="<?= base_url(); ?>assets/images/days_loader.gif" id="days_loader" alt="ajaxloader"/> 
 	
 		<div class="clearfix"></div> 
 	
-		<div class="month_selector previous"><img src="<?= base_url(); ?>assets/images/arrow_l.png" id="previous" /></div>
+		<div class="month_selector previous"><img src="<?= base_url(); ?>assets/images/arrow_l.png" id="previous" alt="Vorige maand" /></div>
 	
 		<ul id="day_list" class="<?php
 				switch($init['days_in_curr_month'])
@@ -89,7 +89,7 @@
 			<?php endforeach; ?>
 		</ul>
 	
-		<div class="month_selector next"><img src="<?= base_url(); ?>assets/images/arrow_r.png" id="next" /></div> 
+		<div class="month_selector next"><img src="<?= base_url(); ?>assets/images/arrow_r.png" id="next" alt="Volgende maand" /></div> 
 	
 	</div>
 </div>

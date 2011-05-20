@@ -61,14 +61,7 @@ class Informatie extends MY_Controller
 	}
 	
 	// read
-	public function print_item()
-	{
-		$id = $this->input->post('id');
-		$data = $this->informatie_model->get_item($id);
-		
-		header('Content-type: application/json');
-		echo json_encode($data);
-	}
+
 	
 	// update
 	
