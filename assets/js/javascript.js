@@ -334,7 +334,6 @@ $(document).ready(function()	{
 				else
 				{
 					$(".tbl_functies tr").not(".tbl_functies tr.tr_header").remove();
-					console.log(data);
 					$.each(data, function(key, value)	{
 						$(".tbl_functies").append(
 							"<tr class='row'>" +
@@ -366,8 +365,30 @@ $(document).ready(function()	{
 		$(".users_per_functie").hide();
 		$(".add_users").slideDown();
 	});
-});
 
 	/* leerkrachten school details */
 	
+	$("#lkrEditSchool").click(function(e)	{
+		var form_values = $("#formLkrEditSchool").serialize();
+		$.post("/school/save_school_data", form_values, function(data)	{
+				$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
+		});
+		e.preventDefault();
+	});
 	
+	$("#add_studierichting").click(function(e)	{
+		var form_data = $("#formLkrAddRichting").serialize();
+		$.post("/school/add_studierichting", form_data, function(data)	{
+				$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
+				if(data['status'])
+				{
+					var richting = $("#richting").val();
+					$("#richting").val("");
+					$(".lst_richtingen").append("<li class='richting_overzicht'>" + richting + "</li>");
+				}
+		});
+		
+		e.preventDefault();
+	});
+	
+});

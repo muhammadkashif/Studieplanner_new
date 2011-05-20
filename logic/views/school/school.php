@@ -5,8 +5,8 @@
 		<p class="clearfix"></p>
 		<div id="profile_left">
 			<ul class="profile_links">
-				<li><a href="#" name="personal">Schoolgegevens</a></li>
-				<li><a href="#" name="school">Studierichtingen</a></li>
+				<li><a href="/school/index/data" name="personal">Schoolgegevens</a></li>
+				<li><a href="/school/index/richting" name="school">Studierichtingen</a></li>
 			</ul>
 		</div>
 		
@@ -16,83 +16,88 @@
 				<?= form_open('school/save_school_data', array('id' => 'formLkrEditSchool'))?>
 					<p>
 						<label for="naam">Naam:</label>
-						<input type="text" id="naam" name="naam" value="<?= $school['naam']; ?>" />
+						<input type="text" id="naam" name="naam" value="<?= $data['school']['naam']; ?>" />
 					</p>
 					<p>
 						<label for="straat">Straat:</label>
-						<input type="text" id="straat" name="straat" value="<?= $school['straat']; ?>" />
+						<input type="text" id="straat" name="straat" value="<?= $data['school']['straat']; ?>" />
 					</p>
 					<p>
 						<label for="nummer">Huisnummer:</label>
-						<input type="text" id="nummer" name="nummer" value="<?= $school['nummer']; ?>" />
+						<input type="text" id="nummer" name="nummer" value="<?= $data['school']['nummer']; ?>" />
 					</p>
 					<p>
 						<label for="plaats">Plaats</label>
-						<input type="text" id="plaats" name="plaats" value="<?= $school['plaats']; ?>" />
+						<input type="text" id="plaats" name="plaats" value="<?= $data['school']['plaats']; ?>" />
 					</p>
 					<p>
 						<label for="email">E-mailadres:</label>
-						<input type="text" id="email" name="email" value="<?= $school['email']; ?>" />
+						<input type="text" id="email" name="email" value="<?= $data['school']['email']; ?>" />
 					</p>
 					<p>
 						<label for="website">Website</label>
-						<input type="text" id="website" name="website" value="<?= $school['website']; ?>" />
+						<input type="text" id="website" name="website" value="<?= $data['school']['website']; ?>" />
 					</p>
 					<p>
 						<label for="telefoon">Telefoon:</label>
-						<input type="text" id="telefoon" name="telefoon" value="<?= $school['telefoon']; ?>" />
+						<input type="text" id="telefoon" name="telefoon" value="<?= $data['school']['telefoon']; ?>" />
 					</p>
 					<p>
 						<label for="fax">Fax:</label>
-						<input type="text" id="fax" name="fax" value="<?= $school['fax']; ?>"/>
+						<input type="text" id="fax" name="fax" value="<?= $data['school']['fax']; ?>"/>
 					</p>
 					<p>
 						<label for="verantwoordelijke">Verantwoordelijke:</label>
-						<input type="text" id="verantwoordelijke" name="verantwoordelijke" value="<?= $school['verantwoordelijke']; ?>"/>
+						<input type="text" id="verantwoordelijke" name="verantwoordelijke" value="<?= $data['school']['verantwoordelijke']; ?>"/>
 					</p>
-					<input type="hidden" id="school_id" name="id" value="<?= $school['school_id']; ?>" />
+					<input type="hidden" id="school_id" name="id" value="<?= $data['school']['school_id']; ?>" />
 					
 					<p class="buttons">
-						<input type="submit" id="lkrEditSchool" name="lkrEditSchool" value="Opslaan" />
+						<input type="submit" id="lkrEditSchool" value="Opslaan" />
 					</p>
 				</form>
 			</div>
-			<script type="text/javascript">
-				$(document).ready(function()	{
-					$("#lkrEditSchool").click(function(e)	{
-						var form_values = $("#formLkrEditSchool").serialize();
-						$.post("school/save_school_data", form_values, function(data)	{
-								$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
-						});
-						e.preventDefault();
-					});
-				});
-			</script>
+
 			<div class="form_school">
 				<img src="<?= base_url(); ?>assets/images/edit_school.png" alt="Schoolgegevens aanpassen" />
-				<?= form_open('student/save_school')?>
+				<?= form_open('school/add_studierichting', array('id' => 'formLkrAddRichting')); ?>
 					<p>
-						<label for="school">School:</label>
-						<input type="text" name="school" id="school" />
-						<input type="hidden" name="school_id" id="school_id"  />
-					</p>
-					<p>
-						<label for="richting">Studierichting:</label>
-						<input type="text" name="richting" id="richting" />
-						<input type="hidden" name="richting_id" id="richting_id"/>
-					</p>
-					<p>
-						<label for="leerkracht">Coach:</label>
-						<input type="text" name="leerkracht" id="leerkracht" disabled="disabled"  />
+						<label for="naam">Studierichting:</label>
+						<input type="text" name="naam" id="richting" />
 					</p>
 					<p class="buttons">
-						<input type="submit" id="saveSchool" name="saveSchool" value="Opslaan" />
+						<input type="submit" id="add_studierichting" value="Opslaan" />
 					</p>
 				</form>
+				<script>
+					$(document).ready(function(e)	{
+					
+					});
+				</script>
+				<p class="clearfix"></p>
+				 <div>
+					<h2 class="richting">
+						<img src="<?= base_url(); ?>assets/images/school_richtingen.png" alt="Studierichtingen">
+					</h2>
+					<p style="padding-top: 10px; padding-bottom: 10px; font-size: 1.2em"><span style="font-size: 1.2em; font-weight: bold; border-bottom: 1px solid #888"><?= $data['school']['naam']; ?></span></p>
+					
+						<?
+							if( ! empty($data['richting']))
+							{
+								echo "<ul class='lst_richtingen'>";
+								foreach($data['richting'] as $richting)
+								{
+									echo "<li class='richting_overzicht'>" . $richting['naam'] . "</li>";
+								}
+								echo "</ul>";
+							}
+							else
+							{
+								echo "<p class='richting_overzicht'>Nog geen studierichtingen toegevoegd.</p>";
+							}
+						?>
+					</div>
 			</div>
 		</div>
 	</div>
 </div>
-<pre>
-	<? print_r($school); ?>
-</pre>

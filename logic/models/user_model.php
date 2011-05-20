@@ -142,4 +142,17 @@ class User_model extends CI_Model
 			return FALSE;
 		}		
 	}
+	
+	public function get_students_for_teacher($unique_id)
+	{
+		$data = $this->db->query("	
+									SELECT s.firstname AS voornaam, s.lastname AS achternaam, s.email AS email, r.naam AS studierichting
+						  		   	FROM tblStudents s 
+						  			INNER JOIN tblTeacherCoachesStudent tcs ON(s.id = tcs.student_id) 
+						  			INNER JOIN tblTeachers t ON (tcs.teacher_id = t.id) 
+									INNER JOIN tblStudierichting r ON (s.richting_id = r.id)
+						  			WHERE t.unique_id = '" . $unique_id . "'")
+				  	 	 ->result_array();
+		return $data;		
+	}
 }

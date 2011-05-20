@@ -135,9 +135,36 @@ class School_model extends CI_Model
 									WHERE t.unique_id = '" . $unique_id . "'
 								")
 							->result_array();
-		$data['school'] = $query[0];
+		$data = $query[0];
 		return $data;
 	}
 	
+	public function get_richtingen_by_teacher_uid($unique_id)
+	{
+		$query = $this->db->query("
+									SELECT t.school_id, shr.richting_id, r.naam 
+									FROM tblTeachers t 
+									INNER JOIN tblSchoolHeeftRichting shr ON(t.school_id = shr.school_id) 
+									INNER JOIN tblStudieRichting r ON (shr.richting_id = r.id)
+									WHERE t.unique_id = '" . $unique_id . "'
+								")
+							->result_array();
+		foreach($query as $richting)
+		{
+			$data[]['naam'] = $richting['naam'];
+		}
+		
+		return $data;
+	}	
+	
+	public function add_studierichting($school_id, $data)
+	{
+		$this->db->insert('tblStudierichting', $data);
+		$richting_id = $this->db->insert_id();
+		
+		$this->db->query("INSERT INTO tblSchoolHeeftRichting (school_id, richting_id) VALUES ('" . $school_id . "', '" . $richting_id . "')");
+		
+		return TRUE;
+	}
 	
 }
