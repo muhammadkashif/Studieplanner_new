@@ -49,6 +49,16 @@ $(document).ready(function()	{
 		
 		switch(id)
 		{
+			case "leerlingen":
+				$(".taak_plannen").fadeOut('fast', function()	{
+					$(".users_per_school").fadeIn();
+				});
+				break;
+			case "taak_plannen":
+				$(".users_per_school").fadeOut('fast', function()	{
+					$(".taak_plannen").fadeIn();
+				});
+				break;
 			case "personal":
 				if($(".form_school").css('display') != 'none')
 				{

@@ -973,7 +973,7 @@ div#user_container ul li:hover
 	float: left;
 }
 
-#profile_right .form_school, #profile_right .form_pass
+#profile_right .form_school, #profile_right .form_pass, .taak_plannen
 {
 	display: none;
 }
@@ -1163,6 +1163,15 @@ div#user_container ul li:hover
 	padding: 5px;
 }
 
+
+/* taak plannen */
+
+
+p.uitleg
+{
+	font-size: 1.2em;
+	margin-top: 10px;
+}
 /* paginate */
 
 #pagination

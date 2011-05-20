@@ -92,13 +92,13 @@ class Planner extends MY_Controller
 		else
 		{
 			$data = array(
-						'title' 		=> $this->input->post('title'),
-						'description' 	=> $this->input->post('description'),
-						'date' 			=> $this->input->post('date'),
-						'time_start'	=> $this->input->post('start_time'),
-						'time_end'		=> $this->input->post('end_time'),
-						'type'			=> $this->input->post('event_type'),
-						'user_id'		=> $this->session->userdata('id')
+						'title' 				=> $this->input->post('title'),
+						'description' 			=> $this->input->post('description'),
+						'date' 					=> $this->input->post('date'),
+						'time_start'			=> $this->input->post('start_time'),
+						'time_end'				=> $this->input->post('end_time'),
+						'type'					=> $this->input->post('event_type'),
+						'user_unique_id'		=> $this->session->userdata('unique_id')
 					);
 
 			// http://stackoverflow.com/questions/5803856/php-comparing-time

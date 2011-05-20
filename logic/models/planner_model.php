@@ -299,7 +299,14 @@ class Planner_model extends CI_Model
 		$this->db->where('user_unique_id', $this->session->userdata('unique_id'));	
 		$this->db->order_by('time_start', 'asc');
 		$query = $this->db->get('tblEvents');
-		
+	
+	/*	$query = $this->db->query("
+							SELECT e.*, ty.key as type 
+							FROM tblEvents e 
+							INNER JOIN tblType ty ON (e.type_id = ty.id) WHERE 
+							e.date = '" . $date . "' AND e.user_unique_id = '" . $this->session->userdata('unique_id') . "' ORDER BY time_start ASC
+						");
+	*/
 		$event_info = array();	
 		$i = 1;
 		foreach($query->result() as $row)
@@ -339,7 +346,7 @@ class Planner_model extends CI_Model
 	
 	private function populate_type()
 	{
-		$qry = $this->db->get('tblType');
+		$qry = $this->db->get('tblType', 3);
 		foreach($qry->result_array() as $type)
 		{
 			$data[$type['key']] = $type['naam'];

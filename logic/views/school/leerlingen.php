@@ -5,14 +5,15 @@
 		<p class="clearfix"></p>
 		<div id="profile_left">
 			<ul class="profile_links">
-				<li><a href="/school/index/data" name="personal">Mijn leerlingen</a></li>
-				<li><a href="/school/index/richting" name="school">Taak plannen</a></li>
+				<li><a href="/school/index/data" name="leerlingen">Mijn leerlingen</a></li>
+				<li><a href="/school/index/richting" name="taak_plannen">Taak plannen</a></li>
 			</ul>
 		</div>
 		
 		<div id="profile_right">
 			<div class="users_per_school">
 				<img src="<?= base_url(); ?>assets/images/mijn_lln.png" alt="Mijn leerlingen" />
+				<p class="uitleg">Hier vindt u een overzicht van alle studenten die u begeleidt.</p>
 				<table class="tbl_students">
 					<tr>
 						<th>Achternaam</th>
@@ -29,26 +30,12 @@
 						</tr>
 					<? endforeach;?>
 				</table>
+				<p>todo nieuwe gebruiker toevoegen</p>
 			</div>
 
-			<div class="form_school">
-				<img src="<?= base_url(); ?>assets/images/edit_school.png" alt="Schoolgegevens aanpassen" />
-				<?= form_open('school/add_studierichting', array('id' => 'formLkrAddRichting')); ?>
-					<p>
-						<label for="naam">Studierichting:</label>
-						<input type="text" name="naam" id="richting" />
-					</p>
-					<p class="buttons">
-						<input type="submit" id="add_studierichting" value="Opslaan" />
-					</p>
-				</form>
-				<p class="clearfix"></p>
-			 	<div>
-					<h2 class="richting">
-						<img src="<?= base_url(); ?>assets/images/school_richtingen.png" alt="Studierichtingen">
-					</h2>
-				
-				</div>
+			<div class="taak_plannen">
+				<img src="<?= base_url(); ?>assets/images/plan_taak.png" alt="Taak plannen" />
+				<p class="uitleg">Hier kan u een taak plannen voor alle studenten die u begeleidt.</p>
 			</div>
 		</div>
 	</div>
