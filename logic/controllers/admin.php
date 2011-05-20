@@ -219,7 +219,39 @@ class Admin extends MY_Controller
 	}
 	
 	public function add_verantwoordelijke()
-	{
+	{		
+		$rules = array(
+						array(
+								'field'		=>		'voornaam',
+								'label'		=>		'voornaam',
+								'rules'		=>		'required'
+						),
+						array(
+								'field'		=>		'achternaam',
+								'label'		=>		'achternaam',
+								'rules'		=>		'required'
+						),
+						array(
+								'field'		=>		'email',
+								'label'		=>		'e-mail',
+								'rules'		=>		'required|valid_email'
+						)
+					);
+					
+		if($this->form_validation->run() == FALSE)
+		{
+			$feedback = array(
+							'status'		=>		FALSE,
+							'message'		=>		'Formulier niet volledig ingevuld.',
+							'errors'		=>		validation_errors()
+						);
+		}
+		else
+		{
+			$data = $this->input->post();
+		}
 		
+		header('Content-type: application/json');
+		echo json_encode($data);
 	}	
 }

@@ -57,12 +57,10 @@ class Login extends MY_Controller
 		else
 		{
 			// succesvol: session data in session gooien en redirect naar site controller
-			$session_data = array(
-									'email'			=>		$this->input->post('email'),
-									'is_logged_in'	=>		TRUE,
-									'role'			=>		$this->db->get_where('tblUsers', array('email'=>$this->input->post('email')))->row()->role,
-									'id'			=> 		$this->db->get_where('tblUsers', array('email'=>$this->input->post('email')))->row()->id
-							);
+			$session_data['email'] = $this->input->post('email');
+			$session_data['is_logged_in'] = TRUE;
+			$session_data['role'] = $this->login_model->get_role($this->input->post('email'));
+						
 			$this->session->set_userdata($session_data);
 			
 			$feedback = array(

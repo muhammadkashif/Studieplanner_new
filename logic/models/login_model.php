@@ -9,8 +9,15 @@ class Login_model extends CI_Model
 	
 	public function check_email($email)
 	{
-		$this->db->where('email', $email);
-		$query = $this->db->get('tblUsers');
+		$query = $this->db->query("
+									SELECT * FROM (
+									SELECT s.id AS id, s.email AS email, s.password AS password, s.role AS role FROM tblStudents s
+									UNION
+									SELECT a.id AS id, a.email AS email, a.password AS password, a.role AS role FROM tblAdmin a
+									UNION
+									SELECT t.id AS id, t.email AS email, t.password AS password, t.role AS role FROM tblTeachers t
+									) AS users WHERE email = '" . $email . "'
+							 	");
 		if($query->num_rows == 1)
 		{
 			return TRUE;
@@ -24,9 +31,15 @@ class Login_model extends CI_Model
 	
 	public function check_pass($pass)
 	{
-		$this->db->where('email', $this->input->post('email'));
-		$this->db->where('password', md5($pass));
-		$query = $this->db->get('tblUsers');
+		$query = $this->db->query("
+									SELECT * FROM (
+									SELECT s.id AS id, s.email AS email, s.password AS password, s.role AS role FROM tblStudents s
+									UNION
+									SELECT a.id AS id, a.email AS email, a.password AS password, a.role AS role FROM tblAdmin a
+									UNION
+									SELECT t.id AS id, t.email AS email, t.password AS password, t.role AS role FROM tblTeachers t
+									) AS users WHERE email = '" . $this->input->post("email") . "' AND password = '" . md5($pass) . "'
+							 	");
 		if($query->num_rows == 1)
 		{
 			return TRUE;
@@ -36,5 +49,21 @@ class Login_model extends CI_Model
 			$this->form_validation->set_message('check_pass', "Het ingegeven wachtwoord is ongeldig.");
 			return FALSE;
 		}
+	}
+	
+	public function get_role($email)
+	{
+			$query = $this->db->query("
+										SELECT email, role FROM (
+										SELECT s.email AS email, s.role AS role FROM tblStudents s
+										UNION
+										SELECT a.email AS email, a.role AS role FROM tblAdmin a
+										UNION
+										SELECT t.email AS email, t.role AS role FROM tblTeachers t
+										) AS users WHERE email = '" . $email . "'
+								 	")
+								->result_array();
+			$data = $query[0]['role'];
+			return $data;
 	}
 }

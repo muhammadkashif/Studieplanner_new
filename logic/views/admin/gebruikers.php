@@ -131,7 +131,7 @@
 				data: { firstname: firstname, lastname: lastname, email: email, school_id: school_id , ci_csrf_token: cct },
 				success: function(data)
 				{
-					
+					console.log(data);
 				}
 				
 			});
