@@ -59,7 +59,7 @@
 			</div>
 
 			<div class="form_school">
-				<img src="<?= base_url(); ?>assets/images/edit_school.png" alt="Schoolgegevens aanpassen" />
+				<img src="<?= base_url(); ?>assets/images/add_richting.png" alt="Schoolgegevens aanpassen" />
 				<?= form_open('school/add_studierichting', array('id' => 'formLkrAddRichting')); ?>
 					<p>
 						<label for="naam">Studierichting:</label>
@@ -69,11 +69,6 @@
 						<input type="submit" id="add_studierichting" value="Opslaan" />
 					</p>
 				</form>
-				<script>
-					$(document).ready(function(e)	{
-					
-					});
-				</script>
 				<p class="clearfix"></p>
 				 <div>
 					<h2 class="richting">

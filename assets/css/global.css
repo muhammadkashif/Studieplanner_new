@@ -510,7 +510,7 @@ div.event_type #type_wrapper p span.vrijetijd
 
 /** create event, add content */
 
-div#create_event, div#edit_event
+div#create_event, div#edit_event, div#add_student
 {
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -520,7 +520,7 @@ div#create_event, div#edit_event
 	box-shadow: 1px 1px 3px #444;
 		-moz-box-shadow: 1px 1px 3px #444;
 		-webkit-box-shadow: 1px 1px 3px #444;
-	display: none;		
+	display: none;	
 	float: left;
 	margin-top: 30px;
 	margin-left: 175px;
@@ -528,13 +528,13 @@ div#create_event, div#edit_event
 	width: 500px;
 }
 
-div#create_event img, div#add_content img, div#edit_event img
+div#create_event img, div#add_content img, div#edit_event img, div#add_student img
 {
 	float: left;
 	margin: 10px 0 5px 15px;
 }
 
-div#create_event form, div#add_content form, div#edit_event form
+div#create_event form, div#add_content form, div#edit_event form, div#add_student form
 {
 	margin: 15px auto 0 auto;
 	width: 450px;
@@ -561,7 +561,7 @@ div#create_event input[type="text"], div#add_content input[type="text"], div#edi
 	width: 244px;
 }
 
-div#create_event textarea, div#edit_event textarea
+div#create_event textarea, div#edit_event textarea, div#plan_student_task textarea
 {
 	border: 1px solid #BBB;
 	border-radius: 8px;
@@ -593,7 +593,7 @@ div#add_content p.buttons, div#edit_event p.buttons, #profile_right p.buttons
 	margin-top: 20px;
 }
 div#create_event p.buttons input, div#create_event p.buttons button, div#add_content p.buttons input, div#add_content p.buttons button,
-div#edit_event p.buttons input, div#edit_event p.buttons button, #profile_right p.buttons input
+div#edit_event p.buttons input, div#edit_event p.buttons button, #profile_right p.buttons input, #taak_plannen p.buttons input, #btnCancel
 {
 	background-color: #333;
 	border: none;
@@ -607,7 +607,7 @@ div#edit_event p.buttons input, div#edit_event p.buttons button, #profile_right 
 }
 
 div#create_event p.buttons #btnCancel:hover, div#create_event p.buttons input:hover, div#add_content p.buttons #btnCancel:hover, div#add_content p.buttons input:hover,
-div#edit_event p.buttons #btnCancel:hover, div#edit_event p.buttons input:hover, div#edit_event p.buttons button, #profile_right p.buttons input:hover
+div#edit_event p.buttons #btnCancel:hover, div#edit_event p.buttons input:hover, div#edit_event p.buttons button, #profile_right p.buttons input:hover, #btnCancel:hover
 {
 	cursor: pointer;
 }
@@ -849,7 +849,7 @@ div#info_content_wrapper ul li:hover span
 }
 
 
-#tips_list a:link, #tips_list a:visited, #tips_list a:hover, #tips_list:active
+#tips_list a:link, #tips_list a:visited, #tips_list a:hover, #tips_list a:active
 {
 	color: #000;
 }
@@ -1172,6 +1172,92 @@ p.uitleg
 	font-size: 1.2em;
 	margin-top: 10px;
 }
+
+/* add student */
+
+#add_student_link
+{
+	font-size: 1.2em;
+	margin-top: 15px;
+}
+
+#add_student_link a
+{
+	color: #000;
+}
+
+#add_student_link img
+{
+	padding-right: 9px;
+}
+
+#add_student label
+{
+	display: block;
+	float: left;
+	font-size: 1.3em;
+	padding-top: 10px;
+	width: 225px;
+}
+
+#add_student input[type="text"]
+{
+	border: 1px solid #BBB;
+	border-radius: 8px;
+		-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+	font-size: 1.3em;
+	height: 10px;
+	margin-bottom: 15px;
+	padding: 12px 15px;
+	width: 175px;
+}
+
+#add_student p.buttons
+{
+	float: right;
+	font-size: 1.3em;
+	margin: 5px 25px 25px 0;
+}
+
+#add_student p.buttons
+{
+	margin-top: 20px;
+}
+
+#add_student p.buttons input, #add_student p.buttons button
+{
+	background-color: #333;
+	border: none;
+	border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	color: #fff;
+	height: 40px;
+	margin-left: 20px;
+	width: 80px;
+}
+
+#add_student p.buttons input:hover, #add_student p.buttons button
+{
+	cursor: pointer;
+}
+
+#plan_student_task form
+{
+	margin-top: 20px;
+}
+
+#plan_student_task label
+{
+	float: left;
+}
+
+#plan_student_task input[type="text"]
+{
+	width: 250px !important;
+}
+
 /* paginate */
 
 #pagination

@@ -10,6 +10,7 @@ class School extends MY_Controller
 		$this->load->model('school_model');
 		$this->load->model('user_model');
 		$this->load->library('form_validation');
+		
 	}
 	
 	public function index($page = "")
@@ -188,6 +189,82 @@ class School extends MY_Controller
 			
 			header('Content-type: application/json');
 			echo json_encode($feedback);
+		}
+	}
+	
+	public function add_student()
+	{
+		$rules = array(
+						array(
+								'field'		=>		'firstname',
+								'label'		=>		'Voornaam',
+								'rules'		=>		'required'
+						),
+						array(	'field'		=>		'lastname',
+								'label'		=>		'achternaam',
+								'rules'		=>		'required',
+						),
+						array(
+								'field'		=>		'email',
+								'label'		=>		'e-mailadres',
+								'rules'		=>		'required|valid_email'
+						)
+					 );
+		$this->form_validation->set_rules($rules);
+		if($this->form_validation->run() == FALSE)
+		{
+			$feedback = array(
+								'status'		=>		FALSE,
+								'message'		=>		'Formulier niet volledig ingevuld',
+								'errors'		=>		validation_errors()
+							);
+			header('Content-type: application/json');
+			echo json_encode($feedback);
+		}
+		else
+		{
+			$data = $this->input->post();
+			$data['role'] = 1;
+			$data['birthdate'] = "0000-00-00";
+			$data['town'] = NULL;
+			$data['school_id'] = $this->session->userdata('school_id');
+			$data['richting_id'] = 0;
+			$data['unique_id'] = md5($data['email']);
+			$data['password'] = md5(substr($data['unique_id'], 26));
+					
+			$link['teacher_unique_id'] = $this->session->userdata('unique_id');
+			$link['student_unique_id'] = $data['unique_id'];
+			if($this->user_model->add_student($data) && $this->user_model->link_student_to_teacher($link))
+			{
+				$email['password'] = substr($data['unique_id'], 26);
+				$this->load->library('email');
+				$this->email->set_newline("\r\n");
+					
+				$this->email->from('imd.studieplanner@gmail.com', 'Studieplanner');
+				$this->email->to($data['email']);		
+				$this->email->subject('Studieplanner.be: Login details.');	
+				$message = "<html><head><title>Studieplanner</title></head><body><p>";
+				$message .= "Beste " . $data['firstname'] . ", <br /><br />";
+				$message .= "Je leerkracht heeft je toegevoegd aan Studieplanner. Je kan inloggen op " . base_url() . " met volgende gegevens:</p>";
+				$message .= "<ul><li>E-mail: " . $data['email'] . "</li><li>Wachtwoord: " . $email['password'] . "</li></ul>";
+				$message .= "<p>Vergeet niet je persoonlijke en schoolgegevens aan te passen en je wachtwoord te veranderen!</p>";
+				$message .= "<br /><p>Veel succes met je studies, <br />het Studieplanner team</p>";
+				$this->email->message($message);
+
+				if($this->email->send())
+				{
+					$feedback = array(
+										'status'		=>		TRUE,
+										'message'		=>		'Student toegevoegd en e-mail verzonden.'
+									);
+					header('Content-type: application/json');
+					echo json_encode($feedback);
+				}
+				else
+				{
+					show_error($this->email->print_debugger());
+				}
+			}
 		}
 	}
 }

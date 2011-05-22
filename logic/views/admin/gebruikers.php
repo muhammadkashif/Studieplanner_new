@@ -122,26 +122,6 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function()	{
-		$("#add_leerkracht").click(function(e)	{
-			var firstname = $("#firstname").val();
-			var lastname = 	$("#lastname").val();
-			var email = $("#email").val();
-			var school_id = $("#add_user_select_school").val();
-			var password = $("#password").val();
-			var cct = $.cookie('ci_csrf_token');
-			
-			$.ajax({
-				type: "POST",
-				url: "/admin/add_leerkracht",
-				data: { firstname: firstname, lastname: lastname, email: email, school_id: school_id , password: password, ci_csrf_token: cct },
-				success: function(data)
-				{
-					console.log(data);
-				}
-				
-			});
-			
-			e.preventDefault();
-		})
+
 	});
 </script>

@@ -155,4 +155,34 @@ class User_model extends CI_Model
 				  	 	 ->result_array();
 		return $data;		
 	}
+	
+	public function add_student($data)
+	{
+		if($this->db->insert('tblStudents', $data))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
+	public function link_student_to_teacher($data)
+	{
+		$student_id = $this->db->query("SELECT id FROM tblStudents WHERE unique_id = '" . $data['student_unique_id'] . "'")->result_array();
+		$teacher_id = $this->db->query("SELECT id FROM tblTeachers WHERE unique_id = '" . $data['teacher_unique_id'] . "'")->result_array();
+
+		$link['student_id'] = $student_id[0]['id'];
+		$link['teacher_id'] = $teacher_id[0]['id'];
+		
+		if($this->db->insert('tblTeacherCoachesStudent', $link))
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}	
+	}
 }

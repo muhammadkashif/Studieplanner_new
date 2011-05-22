@@ -194,6 +194,35 @@ class Planner_model extends CI_Model
 		}
 	}
 	
+	public function create_student_task($data, $teacher)
+	{
+		$query = $this->db->query("
+									SELECT s.unique_id
+									FROM tblStudents s
+									INNER JOIN tblTeacherCoachesStudent tcs
+										ON (s.id = tcs.student_id)
+									INNER JOIN tblTeachers t
+										ON (tcs.teacher_id = t.id)
+									WHERE t.unique_id = '" . $teacher . "';
+						");
+		
+		if($query->num_rows == 0)
+		{
+			return FALSE;
+		}
+		else
+		{
+			$students = $query->result_array();
+			foreach($students as $student)
+			{
+				$data['user_unique_id'] = $student['unique_id'];
+				$this->db->insert('tblEvents', $data); 
+			}
+
+			return TRUE;	
+		}
+	}
+	
 /* mobile */
 	public function get_today()
 	{

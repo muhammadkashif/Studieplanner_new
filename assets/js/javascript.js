@@ -40,6 +40,12 @@ $(document).ready(function()	{
 		e.preventDefault();
 	});
 	
+	$("#add_student_click").click(function(e)	{
+		$("#add_student").fadeIn();
+		
+		e.preventDefault();
+	});
+	
 	
 	/* profiel links */	
 	$(".profile_links li a").click(function(e)	{
@@ -375,6 +381,31 @@ $(document).ready(function()	{
 		$(".users_per_functie").hide();
 		$(".add_users").slideDown();
 	});
+	
+	$("#add_leerkracht").click(function(e)	{
+		var firstname = $("#firstname").val();
+		var lastname = 	$("#lastname").val();
+		var email = $("#email").val();
+		var school_id = $("#add_user_select_school").val();
+		var password = $("#password").val();
+		var cct = $.cookie('ci_csrf_token');
+		
+		$.ajax({
+			type: "POST",
+			url: "/admin/add_leerkracht",
+			data: { firstname: firstname, lastname: lastname, email: email, school_id: school_id , password: password, ci_csrf_token: cct },
+			success: function(data)
+			{
+				$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
+					$("#firstname").val("");
+					$("#lastname").val("");
+					$("#email").val("");
+					$("#password").val("");
+			}		
+		});
+		
+		e.preventDefault();
+	});
 
 	/* leerkrachten school details */
 	
@@ -401,4 +432,25 @@ $(document).ready(function()	{
 		e.preventDefault();
 	});
 	
+	
+	$("#submit_add_student").click(function(e)	{
+		var form_data = $("#formLkrAddStudent").serialize();
+		$.post("/school/add_student", form_data, function(data)	{
+			$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
+			var firstname = $("#firstname").val();
+			var lastname = $("#lastname").val();
+			var email = $("#email").val();
+			$("#firstname").val("");
+			$("#lastname").val("");
+			$("#email").val("");
+			$("#add_student").hide();
+			$(".tbl_students").append(
+				"<tr class='row'>" +
+					"<td>" + lastname + "</td><td>" + firstname + "</td>" +
+					"<td>" + email + "</td>" + "<td>Nog niet ingevuld</td>" +
+				"</tr>"
+			);
+		});
+		e.preventDefault();
+	});
 });

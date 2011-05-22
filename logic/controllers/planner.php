@@ -9,11 +9,7 @@ class Planner extends MY_Controller
 		$this->load->helper('text');
 		$this->load->library('form_validation');
 		$this->load->model('planner_model');
-		
-		if($this->session->userdata('role') != 1)
-		{
-			redirect('/site');
-		}
+	
 	}
 	
 	public function index()
@@ -141,7 +137,6 @@ class Planner extends MY_Controller
 			}
 			
 		}
-
 	}
 	
 	public function get_edit_content()
@@ -176,5 +171,78 @@ class Planner extends MY_Controller
 		
 		header('Content-type: application/json');
 		echo json_encode($feedback);
+	}
+
+	public function create_student_event()
+	{
+		$rules = array(
+						array(
+							'field'		=>		'title', 
+		                    'label'		=> 		'titel', 
+		                    'rules'		=> 		'required|xss_clean|strip_tags'
+						),
+		               	array(
+		                    'field'		=> 		'description', 
+		                    'label'		=>	 	'omschrijving', 
+		                    'rules'		=>		'required|xss_clean|strip_tags'
+		               	),
+					  	array(
+					   		'field'  	=>		'date',
+							'label'		=>		'datum',
+							'rules'		=>		'trim|required'
+						)
+		            );
+		$this->form_validation->set_rules($rules);
+	
+		if ($this->form_validation->run() == FALSE)
+		{
+			// valideren mislukt: feedback array -> json
+			$feedback = array(
+							'status'		=>		FALSE,
+							'error'			=>		validation_errors()
+						);
+
+			header('Content-type: application/json');
+			echo json_encode($feedback);
+		}
+		else
+		{
+			// titel starttijd eindtijd datum description
+			$data = $this->input->post();
+			$data['type'] = "coach";
+			if(strtotime($data['time_start']) > strtotime($data['time_end']) || strtotime($data['time_start']) < strtotime("08:00:00")
+			 																 || strtotime($data['time_start']) == strtotime($data['time_end']))
+			{
+				$feedback = array(
+								'status'		=>		FALSE,
+								'error'			=>		'Eind-tijd kan niet vroeger dan of gelijk zijn aan start-tijd'
+							);
+
+				header('Content-type: application/json');
+				echo json_encode($feedback);
+			}
+			else
+			{
+				$t_uid = $this->session->userdata('unique_id');
+				if($this->planner_model->create_student_task($data, $t_uid))
+				{
+					$feedback = array(
+									'status'		=>		TRUE,
+									'message'		=>		'Taak gepland'
+					);
+				}
+				else
+				{
+					$feedback = array(
+									'status'		=>		FALSE,
+									'message'		=>		'U begeleidt momenteel nog geen studenten.'
+					);
+				}
+				
+				// role // user_unique_id
+				header('Content-type: application/json');
+				echo json_encode($feedback);
+			}
+		}
 	}
 }

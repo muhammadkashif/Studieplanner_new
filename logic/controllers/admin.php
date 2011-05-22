@@ -257,6 +257,7 @@ class Admin extends MY_Controller
 		{
 			$data = $this->input->post();
 			$data['password'] = md5($data['password']);
+			$data['unique_id'] = md5($data['email']);
 			if($this->user_model->add_leerkracht($data))
 			{
 				$feedback = array(
