@@ -15,7 +15,6 @@
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery-1.5.2-min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery-ui-1.8.12-min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/cookie.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>assets/js/tiny_mce/tiny_mce.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/javascript.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.tipsy.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>assets/js/bsn.AutoSuggest_2.1.3_comp.js"></script>

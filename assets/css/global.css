@@ -80,6 +80,32 @@ div#login_form {
 	box-shadow: 0 0 5px #888;
 }
 
+.login_about
+{
+	width: 480px;
+	margin: 20px auto 0 auto;
+}
+
+.login_about h1
+{
+	font-size: 2em;
+	font-weight: bold;
+	padding: 15px 0px 10px 10px;
+}
+
+.login_about p
+{
+	font-size: 1.2em;
+	line-height: 1.3em;
+	padding: 0px 0px 8px 15px;
+}
+
+.login_about p.login_bottom
+{
+	font-size: 1em;
+	text-align: center;
+}
+
 div#login_form form
 {
 	width: 300px;
@@ -479,7 +505,7 @@ div.event_type #type_wrapper p
 	float: left;
 	font-size: 1.2em;
 	text-align: center;
-	width: 250px;
+	width: 185px;
 }
 
 div.event_type #type_wrapper p span
@@ -506,6 +532,11 @@ div.event_type #type_wrapper p span.deadline
 div.event_type #type_wrapper p span.vrijetijd
 {
 	background-color: #c8d7b7;
+}
+
+div.event_type #type_wrapper p span.coach 
+{
+	background-color: #ffcc00;
 }
 
 /** create event, add content */
@@ -650,6 +681,11 @@ div.deadline
 	background-color: #e4c4c4;
 }
 
+div.coach
+{
+	background-color: #ffcc00;
+}
+
 div.deadline:hover
 {
 	background-color: #f5d5d5;
@@ -725,71 +761,6 @@ div#info_content
 	width: 850px;
 }
 
-div#add_content
-{
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border-radius: 8px;
-		-moz-border-radius: 8px;
-		-webkit-border-radius: 8px;
-	box-shadow: 1px 1px 3px #444;
-		-moz-box-shadow: 1px 1px 3px #444;
-		-webkit-box-shadow: 1px 1px 3px #444;
-	display: none;
-	float: left;
-	margin-top: -8px;
-	margin-left: 125px;
-	position: absolute;
-	width: 600px;
-}
-
-div#add_content form
-{
-	margin: 15px auto 0 auto;
-	width: 525px;
-}
-
-div#add_content textarea
-{
-	border: 1px solid #BBB;
-	border-radius: 8px;
-		-moz-border-radius: 8px;
-		-webkit-border-radius: 8px;
-	height: 300px;
-	margin-bottom: 15px;
-	padding: 12px;
-	resize: none;
-	width: 500px;
-}
-
-div#add_content label.fix
-{
-	margin-bottom: 10px;
-}
-
-div#add_content input[type="text"]
-{
-	width: 343px;
-}
-
-div#add_content p.warning
-{
-	float: left;
-	font-size: 1.4em;
-	margin-left: 10px;
-	padding-left: 25px;
-}
-
-div#add_content div.feedback
-{
-	float: left;
-	margin-left: 190px;
-}
-
-div#add_content #cancelContent
-{
-	cursor: pointer;
-}
 
 div#info_content_wrapper
 {
@@ -839,34 +810,42 @@ div#info_content_wrapper ul li:hover span
 	float: right;
 }
 
-#back_to_main
+
+h2#upload
 {
-	display: none;
-	float: right;
-	font-size: 1.2em;
-	margin-right: 85px;
-	margin-top: 10px;
+	margin-top: 20px;
+	font-size: 1.3em;
 }
 
+#upload_feedback
+{
+	margin-top: 20px;
+	font-size: 1.2em;
+}
 
-#tips_list a:link, #tips_list a:visited, #tips_list a:hover, #tips_list a:active
+#items_list a:link, #items_list a:visited, #items_list a:hover, #items_list a:active
 {
 	color: #000;
 }
 
+#items_list a:hover
+{
+	color: #888;
+}
 
-#voegtoe
+#items_list
+{
+	margin-top: 10px;
+	margin-left: 20px;
+	list-style-type: square;
+}
+
+#items_list li
 {
 	font-size: 1.2em;
-	margin-top: 9px;
+	padding: 5px;
 }
 
-#voegtoe img
-{
-	float: left;
-	margin-left: 40px;
-	margin-right: 7px;
-}
 
 
 /* users */
@@ -1258,6 +1237,12 @@ p.uitleg
 	width: 250px !important;
 }
 
+#footer
+{
+	width: 850px;
+	margin: 20px auto 0 auto;
+}
+
 /* paginate */
 
 #pagination
@@ -1274,4 +1259,20 @@ p.uitleg
 		-moz-border-radius: 3px; 
 		-webkit-border-radius: 3px;
 	padding: 5px;
+}
+
+
+.faq_header
+{
+	font-size: 1.4em;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+
+.faq_item
+{
+	font-size: 1.2em;
+	line-height: 20px;
+	margin-left: 5px;
+	margin-bottom: 10px;
 }

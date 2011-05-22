@@ -5,92 +5,51 @@ class Informatie extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper('form');
+		$this->load->helper('form', 'url');
 		$this->load->library('form_validation');
 		$this->load->model('informatie_model');
 	}
-	
-	/* crud */
-	
-	// create
-	public function add_content()
+
+	public function upload_file()
 	{
 		$rules = array(
 						array(
-							'field'		=>		'title', 
-		                    'label'		=> 		'titel', 
-		                    'rules'		=> 		'required|xss_clean'
-						),
-		               	array(
-		                    'field'		=> 		'content', 
-		                    'label'		=>	 	'inhoud', 
-		                    'rules'		=>		'required|xss_clean'
-		               	),
-		            );
-
-		$this->form_validation->set_error_delimiters('<p class="error">', '</p>');
+								'field'		=>		'title',
+								'label'		=>		'titel',
+								'rules'		=>		'required'
+						)
+				);
+		
 		$this->form_validation->set_rules($rules);
+		
 		
 		if ($this->form_validation->run() == FALSE)
 		{
-			// valideren mislulkt: feedback array -> json
-			$feedback = array(
-							'status'		=>		FALSE,
-							'error'			=>		validation_errors()
-						);
-			
-			header('Content-type: application/json');
-			echo json_encode($feedback);
-		}	
+			$this->session->set_flashdata('upload', 'Upload mislukt.');
+		}
 		else
 		{
-			$data = array(
-						'title' 		=> 	 $this->input->post('title'),
-						'content' 		=>	 $this->input->post('content')
-					);
-		
-			$result = $this->informatie_model->insert_content($data);
-			$feedback = array(
-							'status'		=>		TRUE,
-							'message'		=>		'Nieuwe tip opgeslagen'
-					);
-			
-			header('Content-type: application/json');
-			echo json_encode($feedback);		
-		}
-	}
-	
-	// read
+			$config['upload_path'] = './files/';
+			$config['allowed_types'] = 'pdf';
+			$config['max_size']	= '';
+			$config['remove_spaces'] = TRUE;
 
-	
-	// update
-	
-	
-	// delete
-	public function del_content()
-	{
-		if($this->session->userdata('role') == 2 )
-		{
-			$id = $this->input->post('id');
-			$result = $this->informatie_model->del_content($id);
-			if($result)
+			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload())
 			{
-				$data['status'] = TRUE;
-				$data['message'] = "Tip verwijderd.";
+				$this->session->set_flashdata('upload', 'Upload mislukt.');
 			}
 			else
 			{
-				$data['status'] = FALSE;
-				$data['message'] = "Er was een probleem met het verwijderen";
+				$data = $this->upload->data();
+				$data['title'] = $this->input->post('title');
+				$this->informatie_model->handle_upload($data);
+				$this->session->set_flashdata('upload', 'Upload geslaagd.');
 			}
-			
-			header('Content-type: application/json');
-			echo json_encode($data);
-			
 		}
-		else
-		{
-			redirect('/site');
-		}
+	
+		
+		redirect('admin/informatie');
 	}
 }

@@ -6,7 +6,7 @@
         
 		parent::__construct();
 		$this->load->library('user_agent');
-
+		date_default_timezone_set('Europe/Brussels');
 		if($this->agent->is_mobile())
 		{
 			redirect('http://m.frenchyimfaking.com/mobile');

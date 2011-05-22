@@ -15,7 +15,7 @@ class User_model extends CI_Model
 
 	public function get_total_rows()
 	{
-		$data = $this->db->query("select count(*) as cnt from tblusers where role = '1'")
+		$data = $this->db->query("SELECT count(*) AS cnt FROM tblUsers WHERE role = '1'")
 						 ->result_array();
 		return $data;
 	}
@@ -145,8 +145,7 @@ class User_model extends CI_Model
 	
 	public function get_students_for_teacher($unique_id)
 	{
-		$data = $this->db->query("	
-									SELECT s.firstname AS voornaam, s.lastname AS achternaam, s.email AS email, r.naam AS studierichting
+		$data = $this->db->query("	SELECT s.firstname AS voornaam, s.lastname AS achternaam, s.email AS email, r.naam AS studierichting
 						  		   	FROM tblStudents s 
 						  			INNER JOIN tblTeacherCoachesStudent tcs ON(s.id = tcs.student_id) 
 						  			INNER JOIN tblTeachers t ON (tcs.teacher_id = t.id) 

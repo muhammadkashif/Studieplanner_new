@@ -3,9 +3,12 @@
 class Informatie_model extends CI_Model
 {
 	
-	public function insert_content($data)
+	public function handle_upload($data)
 	{
-		if($this->db->insert('tblContent', $data))
+		$insert['title'] = $data['title'];
+		$insert['content'] = $data['file_name'];
+		
+		if($this->db->insert('tblContent', $insert))
 		{
 			return TRUE;
 		}
@@ -38,38 +41,7 @@ class Informatie_model extends CI_Model
 		return $data;
 	}
 
-	public function get_item($unique_id)
-	{
-		$this->db->where('unique_id', $unique_id);
-		$query = $this->db->get('tblContent');
-		
-		if($query->num_rows() == 0)
-		{
-			$data = FALSE;
-		}
-		else
-		{
-			$row = $query->row();
-			$data['id'] = $row->id;
-			$data['title'] = $row->title;
-			$data['content'] = $row->content;
-		}
-		
-		return $data;
-	}
 	
-	public function del_content($id)
-	{
-		$this->db->where('id', $id);
-		
-		if($this->db->delete('tblContent'))
-		{
-			return TRUE;
-		}
-		else 
-		{
-			return FALSE;
-		}
-	}
+
 	
 }

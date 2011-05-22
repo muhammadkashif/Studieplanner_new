@@ -57,7 +57,7 @@ class School_model extends CI_Model
 						 		   ->get('tblSchool')
 						 		   ->result_array();
 		
-		$data['richting'] = $this->db->query("select r.naam from tblSchoolheeftRichting sr INNER JOIN tblstudierichting r ON (sr.richting_id = r.id) WHERE sr.school_id = '" . $id . "'")
+		$data['richting'] = $this->db->query("select r.naam from tblSchoolHeeftRichting sr INNER JOIN tblStudierichting r ON (sr.richting_id = r.id) WHERE sr.school_id = '" . $id . "'")
 									 ->result_array();
 		
 		return $data;
@@ -72,8 +72,8 @@ class School_model extends CI_Model
 		$j = 1;	
 		while($i < count($data))
 		{
-			$data[$i]['richtingen'] = $this->db->query("select r.naam from tblschoolheeftrichting sr 
-																	inner join tblstudierichting r on (sr.richting_id = r.id) where sr.school_id = '" . $j ."'")->result_array();
+			$data[$i]['richtingen'] = $this->db->query("select r.naam from tblSchoolHeeftRichting sr 
+																	inner join tblStudierichting r on (sr.richting_id = r.id) where sr.school_id = '" . $j ."'")->result_array();
 			$i++;
 			$j++;
 		}

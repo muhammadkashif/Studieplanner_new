@@ -60,8 +60,8 @@ class Student extends MY_Controller
 	// informatie: read
 	public function print_info_item()
 	{
-		$unique_id = $this->input->post('unique_id');
-		$data = $this->informatie_model->get_item($unique_id);
+		$id = $this->input->post('id');
+		$data = $this->informatie_model->get_item($id);
 		
 		header('Content-type: application/json');
 		echo json_encode($data);

@@ -10,6 +10,7 @@ class School extends MY_Controller
 		$this->load->model('school_model');
 		$this->load->model('user_model');
 		$this->load->library('form_validation');
+		$this->load->model('informatie_model');
 		
 	}
 	
@@ -65,8 +66,25 @@ class School extends MY_Controller
 	
 	public function tips()
 	{
-		$this->loadView("school/tips");
+		$init = $this->init->set();
+
+		$this->load->view('include/header', $init);
+		$this->load->view('include/nav_school');
+
+		$data = $this->informatie_model->get_content();
+		if( ! $data)
+		{
+			$this->load->view('school/tips');
+		}
+		else
+		{
+			$this->load->view('school/tips', $data);
+		}
+
+		$this->load->view('include/footer');
+
 	}
+	
 	
 	public function save_school_data()
 	{

@@ -1,62 +1,46 @@
+<!-- validates -->
 <div id="info_content">
-	<div id="info_content_wrapper">
-		<div id="tips_list">
-			<img src="<?= base_url(); ?>assets/images/header_tips.png" alt="Tips en technieken" />
-			<p style="line-height: 1.3em">Deze tips zijn overgenomen uit de werkmap '<em>Eerste hulp bij leerstoornissen en problemen bij het leren bij normaal begaafde kinderen</em>'. <br />
-				Ze kunnen je helpen bij het organiseren van je leeromgeving en het studeren van leerstof. Veel succes!</p>
-			<ul>
-				<?
-					if(isset($content))
-					{
-						$i = 1;
-						foreach($content as $item)
-						{
-							echo "<li><a href='#' name='" . $item['id'] . "'>" . $item['title'] . "</a></li>";
-							$i++;
-						}
-					}
-				?>
+	<div id="profile_container">
+		<img src="<?= base_url(); ?>assets/images/informatie_header.png" alt="Informatie" />
+		<p class="clearfix"></p>
+		<div id="profile_left">
+			<ul class="profile_links">
+				<li><a href="#" name="personal">Tips en technieken</a></li>
+				<li><a href="#" name="school">Studieplanner FAQ</a></li>
 			</ul>
 		</div>
+		
+		<div id="profile_right">
+			<div class="form_profile" style="display: none">
+				<img src="<?= base_url(); ?>assets/images/header_tips.png" alt="Tips en technieken" />
+				<ul id="items_list">
+					<? foreach($content as $item): ?>
+						<li><a href="<?= base_url(); ?>files/<?= $item['content']; ?>"><?= $item['title']; ?></a></li>
+					<? endforeach; ?>
+				</ul>
+			</div>
+			<div class="form_school" style="display: block">
+				<img src="<?= base_url(); ?>assets/images/faq.png" alt="Faq"  style="margin-bottom: 13px; margin-left: -2px"/>
+				
+				<h2 class="faq_header">Wat?</h2>
+				<p class="faq_item">
+					Studieplanner is een leerplatform ontworpen door CLB in samenwerking met Lessius Hogeschool. Op onze website
+					kunnen leerlingen begeleidt worden door leerkrachten of studiebegeleiders binnen hun school. De student kan
+					worden opgevolgd en er wordt een houvast geboden voor leer- en planningproblemen.
+				</p>
+				
+				<h2 class="faq_header">Hoe?</h2>
+				<p class="faq_item">
+					Elke student die aan het platform toegevoegd wordt, wordt automatisch begeleid door een leerkracht van zijn of haar
+					school. De student kan via de Planner huiswerk en deadlines toevoegen. Deze kunnen worden nagekeken door de coach. De 
+					begeleidende leerkracht kan ook taken toevoegen aan de planner, waarvan verwacht wordt dat de student deze uitvoert.
+				</p>
+				<h2 class="faq_header">Wie?</h2>
+				<p class="faq_item">
+					Studieplanner wordt beheerd door mensen van het Centrum voor Leerlingenbegeleiding (CLB), maar voornamelijk door de
+					leerkrachten van je school. Als je vragen hebt, contacteer je plaatselijk CLB of stel ze aan je begeleidende leerkracht!
+				</p>
+			</div>
+		</div>
 	</div>
-	<div class='wysiwyg'>
-	</div>
-	<div id="back_to_main">
-		<a href="#" id="back_link">Terug naar overzicht</a>
-	</div>
-	
-	<div class="clearfix" style="padding-bottom: 15px;"></div>
 </div>
-
-<script type="text/javascript">
-	$(document).ready(function()	{
-		
-		$("#tips_list ul li a").click(function(e)	{
-			var id = $(this).attr('name');
-			var cct = $.cookie('ci_csrf_token');
-			
-			$.ajax({
-				type: "POST",
-				url: "/student/print_info_item",
-				data: { id: id, ci_csrf_token: cct },
-				success: function(data)
-				{
-					$("#tips_list").hide();
-					$(".wysiwyg").html("<h1>" + data['title'] + "</h1>" + data['content']).fadeIn();
-					$("#back_to_main").fadeIn();
-				}
-			});
-			
-			// prevent submit
-			e.preventDefault();
-		});
-		
-		$("#back_link").click(function(e)	{
-			$(".wysiwyg").html("").hide();
-			$("#back_to_main").hide();
-			$("#tips_list").fadeIn();
-			
-			e.preventDefault();
-		})
-	});
-</script>
