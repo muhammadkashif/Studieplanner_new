@@ -49,7 +49,7 @@
 		</div>
 		
 		<div id="profile_right">
-			<div class="users_per_school" style="display: none">
+			<div class="users_per_school">
 				<img src="<?= base_url(); ?>assets/images/mijn_lln.png" alt="Mijn leerlingen" />
 				<p class="uitleg">Hier vindt u een overzicht van alle studenten die u begeleidt.</p>
 				<table class="tbl_students">
@@ -74,7 +74,7 @@
 				</p>
 			</div>
 
-			<div class="taak_plannen" style="display: block">
+			<div class="taak_plannen">
 				<img src="<?= base_url(); ?>assets/images/plan_taak.png" alt="Taak plannen" />
 				<p class="uitleg">Hier kan u een taak plannen voor alle studenten die u begeleidt.</p>
 				<div id="plan_student_task">
@@ -219,7 +219,14 @@
 				data: { title: title, description: description, date: output_date, time_start: start_time, time_end: end_time, ci_csrf_token: cct },
 				success: function(data)
 				{
-					console.log(data);
+					$("#feedback_top").html("<p>" + data['message'] + "</p>").slideDown('slow').delay(2000).slideUp();
+					$("#title").val("");
+					$("#description").val("");
+					$(".output_date").val("");
+					$("#date").val();
+					$(".taak_plannen").fadeOut('fast', function()	{
+						$(".users_per_school").fadeIn();
+					});
 				}	
 			});
 		
