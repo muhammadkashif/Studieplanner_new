@@ -24,6 +24,7 @@
 		<? endforeach; ?>
 	</div>
 	
+	
 	<div data-role="footer" data-position="fixed" data-theme="a" data-id="sticky">
 		<h4><span style="font-size:12px;">Plannen op je best!</span></h4>
 	</div>

@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Planner_model extends CI_Model
 {
@@ -223,6 +223,35 @@ class Planner_model extends CI_Model
 		}
 	}
 	
+	public function get_week_for_user($unique_id)
+	{
+		$day = date('j');
+		$month = date('n');
+		$year = date('Y');
+		$days_in_curr_month = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+		
+		for($i = 1; $i <= 5; $i++)
+		{
+			$data['week'][$day] = $this->get_event_info($day, $month, $year, $unique_id);
+			$day++;
+			if($day > $days_in_curr_month)
+			{
+				$day = 1;
+				if($month == 12)
+				{
+					$month = 1;
+				}
+				else
+				{
+					$month++;
+				}
+			}
+		}		
+		return $data;	
+	}
+	
+	
+	
 /* mobile */
 	public function get_today()
 	{
@@ -260,8 +289,6 @@ class Planner_model extends CI_Model
 		}		
 		return $data;
 	}
-
-	
 /* private functions */
 	
 	private function get_detail_info($day, $month, $year, $end_of_month)
@@ -320,12 +347,19 @@ class Planner_model extends CI_Model
 	}
 	
 	
-	private function get_event_info($day, $month, $year)
+	private function get_event_info($day, $month, $year, $id = '')
 	{
 		// dag maand jaar samenvoegen naar mysql date formaat
 		$date = $year . "-" . $month . "-" . $day;
 		$this->db->where('date', $date);
-		$this->db->where('user_unique_id', $this->session->userdata('unique_id'));	
+		if(empty($id))
+		{
+			$this->db->where('user_unique_id', $this->session->userdata('unique_id'));	
+		}
+		else
+		{
+			$this->db->where('user_unique_id', $id);
+		}
 		$this->db->order_by('time_start', 'asc');
 		$query = $this->db->get('tblEvents');
 	

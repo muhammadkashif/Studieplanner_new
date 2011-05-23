@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Mobile extends CI_Controller
 {
@@ -110,10 +110,11 @@ class Mobile extends CI_Controller
 			$session_data = array(
 									'email'			=>		$this->input->post('email'),
 									'is_logged_in'	=>		TRUE,
-									'role'			=>		$this->db->get_where('tblUsers', array('email'=>$this->input->post('email')))->row()->role,
-									'id'			=> 		$this->db->get_where('tblUsers', array('email'=>$this->input->post('email')))->row()->id,
-									'firstname'		=>		$this->db->get_where('tblUsers', array('email'=>$this->input->post('email')))->row()->firstname
+									'role'			=>		$this->db->get_where('tblStudents', array('email'=>$this->input->post('email')))->row()->role,
+									'firstname'		=>		$this->db->get_where('tblStudents', array('email'=>$this->input->post('email')))->row()->firstname
 							);
+			$session_data['unique_id'] = $this->login_model->get_unique_id($this->input->post('email'), $session_data['role']);
+		
 			$this->session->set_userdata($session_data);
 		
 			$feedback = array(

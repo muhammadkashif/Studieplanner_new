@@ -21,7 +21,7 @@
 			<div class="edit_school">
 				<h2><img src="<?= base_url(); ?>assets/images/school_informatie.png" alt="Informatie scholen" /></h2>
 				<?= form_open('school/edit_school'); ?>
-					<input type="hidden" id="school_id" naam="school_id" value="1" />
+					<input type="hidden" id="school_id" name="school_id" value="1" />
 					<p>
 						<label for="naam">Naam:</label>
 						<input type="text" id="naam" name="naam" disabled="disabled" value="<?= $scholen[0]['naam']; ?>" />

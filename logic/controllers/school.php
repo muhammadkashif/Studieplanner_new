@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class School extends MY_Controller
 {
@@ -11,6 +11,8 @@ class School extends MY_Controller
 		$this->load->model('user_model');
 		$this->load->library('form_validation');
 		$this->load->model('informatie_model');
+		$this->load->model('planner_model');
+		
 		
 	}
 	
@@ -246,7 +248,7 @@ class School extends MY_Controller
 			$data['birthdate'] = "0000-00-00";
 			$data['town'] = NULL;
 			$data['school_id'] = $this->session->userdata('school_id');
-			$data['richting_id'] = 0;
+			$data['richting_id'] = 1;
 			$data['unique_id'] = md5($data['email']);
 			$data['password'] = md5(substr($data['unique_id'], 26));
 					
@@ -284,5 +286,14 @@ class School extends MY_Controller
 				}
 			}
 		}
+	}
+	
+	public function get_student_week()
+	{
+		$id = $this->input->post('id');
+		$data = $this->planner_model->get_week_for_user($id);
+		header('Content-type: applicaiton/json');
+		echo json_encode($data);
+		
 	}
 }

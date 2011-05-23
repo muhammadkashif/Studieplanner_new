@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class School_model extends CI_Model
 {
@@ -145,15 +145,21 @@ class School_model extends CI_Model
 									SELECT t.school_id, shr.richting_id, r.naam 
 									FROM tblTeachers t 
 									INNER JOIN tblSchoolHeeftRichting shr ON(t.school_id = shr.school_id) 
-									INNER JOIN tblStudieRichting r ON (shr.richting_id = r.id)
+									INNER JOIN tblStudierichting r ON (shr.richting_id = r.id)
 									WHERE t.unique_id = '" . $unique_id . "'
-								")
-							->result_array();
-		foreach($query as $richting)
+								");
+							
+		if($query->num_rows() == 0)
+		{
+			$data[0]['naam'] = "nog geen richtingen toegevoegd";
+		}
+		else
+		{
+		foreach($query->result_array() as $richting)
 		{
 			$data[]['naam'] = $richting['naam'];
 		}
-		
+		}
 		return $data;
 	}	
 	

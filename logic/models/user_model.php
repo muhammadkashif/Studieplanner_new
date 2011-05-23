@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User_model extends CI_Model
 {
@@ -98,8 +98,16 @@ class User_model extends CI_Model
 								 FROM tblStudierichting r 
 								 INNER JOIN tblStudents s ON (r.id = s.richting_id)
 								 WHERE s.unique_id = '" . $this->session->userdata('unique_id') . "'");
-		$row = $qry->result_array();
-		$data['richting'] = $row[0];
+		if($qry->num_rows() == 0)
+		{
+			$data['richting']['naam'] = "Vul in";
+			$data['richting']['id'] = "";
+		}
+		else
+		{
+			$row = $qry->result_array();
+			$data['richting'] = $row[0];
+		}
 		
 		return $data;
 	}
@@ -145,7 +153,7 @@ class User_model extends CI_Model
 	
 	public function get_students_for_teacher($unique_id)
 	{
-		$data = $this->db->query("	SELECT s.firstname AS voornaam, s.lastname AS achternaam, s.email AS email, r.naam AS studierichting
+		$data = $this->db->query("	SELECT s.firstname AS voornaam, s.lastname AS achternaam, s.email AS email, s.unique_id AS unique_id, r.naam AS studierichting
 						  		   	FROM tblStudents s 
 						  			INNER JOIN tblTeacherCoachesStudent tcs ON(s.id = tcs.student_id) 
 						  			INNER JOIN tblTeachers t ON (tcs.teacher_id = t.id) 

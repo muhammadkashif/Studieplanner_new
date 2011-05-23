@@ -29,7 +29,7 @@
 				</p>			
 				<p>
 				<label for="userfile">Bestand:</label>
-				<input type="file" name="userfile" size="20" id="userfile" style="float: right"/>
+				<input type="file" name="userfile" id="userfile" style="float: right"/>
 				</p>
 				<p class="clearfix buttons">
 				<input type="submit" value="Uploaden" />

@@ -51,7 +51,7 @@
 		<div id="profile_right">
 			<div class="users_per_school">
 				<img src="<?= base_url(); ?>assets/images/mijn_lln.png" alt="Mijn leerlingen" />
-				<p class="uitleg">Hier vindt u een overzicht van alle studenten die u begeleidt.</p>
+				<p class="uitleg" style="line-height: 1.4em">Hier vindt u een overzicht van alle studenten die u begeleidt. Klik op een naam voor hun planning van <span style="font-weight: bold;">deze week!</span></p>
 				<table class="tbl_students">
 					<tr>
 						<th>Achternaam</th>
@@ -60,7 +60,7 @@
 						<th>Studierichting</th>
 					</tr>
 					<? foreach($leerlingen as $leerling): ?>
-						<tr>
+						<tr class="student_row" id="<?= $leerling['unique_id'] ?>">
 							<td><?= $leerling['achternaam']; ?></td>
 							<td><?= $leerling['voornaam']; ?></td>
 							<td><?= $leerling['email']; ?></td>
@@ -68,10 +68,40 @@
 						</tr>
 					<? endforeach;?>
 				</table>
+				<script type="text/javascript">
+					$(document).ready(function()	{
+						$(".student_row").click(function(e)	{
+							$("#tbl_planning .st_pl").remove();
+							var id = $(this).attr('id');
+							var cct = $.cookie('ci_csrf_token');
+							
+							$.post("/school/get_student_week", { id: id, ci_csrf_token: cct}, function(data)	{
+								$("#tbl_planning").fadeIn();
+								$.each(data['week'], function(key, value)	{
+									var dag = key;
+									$.each(data['week'][key], function(key, value)	{
+										$("#tbl_planning").append("<tr class='st_pl'><td>" + dag + "</td><td>" + value['title'] + "</td><td>" + value['description'] + "</td><td>" + value['type']+"</tr>");
+									});
+								});
+							});
+						});
+					});
+				</script>
 				<p class="clearfix"></p>
 				<p id="add_student_link">
 					<a href="#" id="add_student_click"><img src="<?= base_url(); ?>assets/images/create_event.png" alt="Student toevoegen"/>Student toevoegen</a>
 				</p>
+				
+				<table id="tbl_planning" style="display: none">
+					<tr>
+						<th>Dag</th>
+						<th>Titel</th>
+						<th>Beschrijving</th>
+						<th>Type</th>
+					</tr>
+					
+				</table>
+						
 			</div>
 
 			<div class="taak_plannen">
@@ -212,7 +242,9 @@
 			var start_time = $("#cr_start_time_hrs").val() + ":" + $("#cr_start_time_min").val() + ":" + "00";
 			var end_time = $("#cr_end_time_hrs").val() + ":" + $("#cr_end_time_min").val() + ":" + "00";
 			var cct = $.cookie('ci_csrf_token');
-			
+								$(".taak_plannen").fadeOut('fast', function()	{
+						$(".users_per_school").fadeIn();
+					});
 			$.ajax({
 				type: "POST",
 				url: "/planner/create_student_event",
@@ -224,9 +256,7 @@
 					$("#description").val("");
 					$(".output_date").val("");
 					$("#date").val();
-					$(".taak_plannen").fadeOut('fast', function()	{
-						$(".users_per_school").fadeIn();
-					});
+
 				}	
 			});
 		

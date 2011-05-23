@@ -1,5 +1,4 @@
 @import url('reset.css');
-@import url('wysiwyg.css');
 
 /** general */
 
@@ -1275,4 +1274,10 @@ p.uitleg
 	line-height: 20px;
 	margin-left: 5px;
 	margin-bottom: 10px;
+}
+
+.student_row:hover
+{
+	background-color: #ff0;
+	cursor: pointer;
 }

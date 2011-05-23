@@ -11,15 +11,16 @@
 		</div>
 		
 		<div id="profile_right">
-			<div class="form_profile" style="display: none">
+			<div class="form_profile">
 				<img src="<?= base_url(); ?>assets/images/header_tips.png" alt="Tips en technieken" />
+				<p style="font-size: 1.2em; margin-top: 10px;">Deze tips zijn door leerkrachten ingezonden. Lees ze goed door, ze helpen je bij het studeren!</p>
 				<ul id="items_list">
 					<? foreach($content as $item): ?>
 						<li><a href="<?= base_url(); ?>files/<?= $item['content']; ?>"><?= $item['title']; ?></a></li>
 					<? endforeach; ?>
 				</ul>
 			</div>
-			<div class="form_school" style="display: block">
+			<div class="form_school" style="display: none">
 				<img src="<?= base_url(); ?>assets/images/faq.png" alt="Faq"  style="margin-bottom: 13px; margin-left: -2px"/>
 				
 				<h2 class="faq_header">Wat?</h2>
